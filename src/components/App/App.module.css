@@ -1,0 +1,13 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40px;
+  max-width: 1920px;
+  max-height: 100vh;
+  border: 1px solid red;
+  box-sizing: border-box;
+}
+

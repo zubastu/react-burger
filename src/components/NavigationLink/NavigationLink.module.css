@@ -1,0 +1,17 @@
+.link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-height: 56px;
+    max-width: 207px;
+    border-radius: 40px;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity .6s ease;
+    border: 1px solid green;
+    box-sizing: border-box;
+}
+.link:hover {
+    opacity: .8;
+    transition: opacity .6s ease;
+}

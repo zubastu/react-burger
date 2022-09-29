@@ -1,0 +1,8 @@
+.container {
+    border: 1px solid gold;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    max-height: 912px;
+}
