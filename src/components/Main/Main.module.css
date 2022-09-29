@@ -7,4 +7,5 @@
     width: 100%;
     gap: 40px;
     overflow: hidden;
+    max-height: 600px;
 }

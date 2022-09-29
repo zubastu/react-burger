@@ -1,0 +1,20 @@
+.material {
+    max-height: 208px;
+    max-width: 272px;
+    box-sizing: border-box;
+    border: 1px solid gold;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.material__price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.material__name {
+    height: 48px;
+    text-align: center;
+}
