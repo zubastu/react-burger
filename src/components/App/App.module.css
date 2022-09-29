@@ -6,7 +6,7 @@
   justify-content: flex-start;
   padding: 40px;
   max-width: 1920px;
-  max-height: 100vh;
+  min-height: 768px;
   border: 1px solid red;
   box-sizing: border-box;
 }

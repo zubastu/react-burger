@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import appStyles from "./App.module.css";
 
@@ -9,27 +9,45 @@ import { Routes, Route } from "react-router";
 import Main from "../Main/Main";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
+import { data } from "../../utils/data";
 
 function App() {
+  const [materials, setMaterials] = useState({
+    bun: [],
+    sauces: [],
+    main: [],
+  });
+  const filterData = (data) => {
+    const bun = data.filter(({ type }) => type === "bun");
+    const sauces = data.filter(({ type }) => type === "sauce");
+    const main = data.filter(({ type }) => type === "main");
+    setMaterials({
+      bun: bun,
+      sauces: sauces,
+      main: main,
+    });
+  };
+
+  useEffect(() => {
+    filterData(data);
+  }, []);
+
   return (
     <div className={appStyles.app}>
       <AppHeader />
-      <Main>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Main>
-                <>
-                  <BurgerConstructor></BurgerConstructor>
-                  <BurgerConstructor></BurgerConstructor>
-                  {/*<BurgerIngredients></BurgerIngredients>*/}
-                </>
-              </Main>
-            }
-          />
-        </Routes>
-      </Main>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Main>
+              <>
+                <BurgerConstructor materials={materials} />
+                <BurgerIngredients></BurgerIngredients>
+              </>
+            </Main>
+          }
+        />
+      </Routes>
     </div>
   );
 }
