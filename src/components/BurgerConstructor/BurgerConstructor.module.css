@@ -1,12 +1,14 @@
 .container {
-    border: 1px solid gold;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
     overflow-y: scroll;
-    max-height: 600px;
+    height: 100%;
+    max-width: 600px;
+    min-width: 600px;
+    box-sizing: border-box;
 }
 .material_container {
-    border: 1px solid white;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 32px 24px;

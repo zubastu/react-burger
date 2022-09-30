@@ -3,9 +3,15 @@ import burgerConstructorStyles from "./BurgerConstructor.module.css";
 import MyTab from "../MyTab/MyTab";
 import MaterialItem from "../MaterialItem/MaterialItem";
 
-const BurgerConstructor = ({ materials }) => {
-  const { bun, sauces, main } = materials;
-  console.log(bun, sauces, main);
+const BurgerConstructor = ({
+  bun,
+  sauces,
+  main,
+  selectBun,
+  selectIngredient,
+  selectedBun,
+  selectedIngredients,
+}) => {
   return (
     <section className={`${burgerConstructorStyles.container} custom-scroll`}>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
@@ -16,7 +22,12 @@ const BurgerConstructor = ({ materials }) => {
       >
         {bun &&
           bun.map((bunItem) => (
-            <MaterialItem material={bunItem} key={bunItem._id} />
+            <MaterialItem
+              selectedBun={selectedBun}
+              material={bunItem}
+              key={bunItem._id}
+              onSelect={selectBun}
+            />
           ))}
       </div>
       <h2 className="text text_type_main-medium mt-10">Соусы</h2>
@@ -25,7 +36,12 @@ const BurgerConstructor = ({ materials }) => {
       >
         {sauces &&
           sauces.map((sauce) => (
-            <MaterialItem material={sauce} key={sauce._id} />
+            <MaterialItem
+              selectedIngredients={selectedIngredients}
+              material={sauce}
+              key={sauce._id}
+              onSelect={selectIngredient}
+            />
           ))}
       </div>
       <h2 className="text text_type_main-medium mt-10">Начинки</h2>
@@ -34,7 +50,12 @@ const BurgerConstructor = ({ materials }) => {
       >
         {main &&
           main.map((mainItem) => (
-            <MaterialItem material={mainItem} key={mainItem._id} />
+            <MaterialItem
+              selectedIngredients={selectedIngredients}
+              material={mainItem}
+              key={mainItem._id}
+              onSelect={selectIngredient}
+            />
           ))}
       </div>
     </section>

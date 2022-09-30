@@ -6,8 +6,12 @@
   justify-content: flex-start;
   padding: 40px;
   max-width: 1920px;
-  min-height: 768px;
-  border: 1px solid red;
   box-sizing: border-box;
+  height: 100vh;
 }
 
+.constructor{
+  max-height: 80px;
+  box-sizing: border-box;
+  max-width: 536px;
+}
