@@ -112,13 +112,13 @@ function App() {
                       />
                     </div>
                   )}
-                  {selectedIngredients.map((item) => (
+                  {selectedIngredients.map((item, index) => (
                     <MaterialInCart
                       image={item.image}
                       price={item.price}
                       name={item.name}
                       _id={item._id}
-                      key={uuidv1()}
+                      key={index}
                       onDelete={removeIngredient}
                     />
                   ))}
