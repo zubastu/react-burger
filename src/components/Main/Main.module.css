@@ -1,0 +1,11 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    gap: 40px;
+    overflow: hidden;
+    height: 100%;
+}

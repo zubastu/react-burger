@@ -1,0 +1,17 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 40px;
+  max-width: 1920px;
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+.constructor{
+  max-height: 80px;
+  box-sizing: border-box;
+  max-width: 536px;
+}

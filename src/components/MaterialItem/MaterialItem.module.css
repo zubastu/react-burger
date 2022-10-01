@@ -1,0 +1,35 @@
+.material {
+    max-height: 208px;
+    max-width: 272px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    position: relative;
+    cursor: pointer;
+    transition: opacity .7s ease;
+}
+.material:hover{
+    opacity: .7;
+    transition: opacity .7s ease;
+}
+.material__price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 8px;
+}
+.material__name {
+    height: 48px;
+    text-align: center;
+}
+.material__counter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    box-sizing: border-box;
+}

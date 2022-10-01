@@ -1,0 +1,10 @@
+.constructor{
+    max-height: 80px;
+    box-sizing: border-box;
+    max-width: 536px;
+}
+.container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
