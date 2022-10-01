@@ -7,8 +7,6 @@ import {
 import PropTypes from "prop-types";
 
 const BurgerIngredients = ({ children, totalPrice }) => {
-  console.log(typeof children);
-  console.log(children[0]);
   return (
     <section className={`${burgerIngredientsStyles.container} `}>
       <div
