@@ -7,6 +7,12 @@
     justify-content: flex-start;
     flex-direction: column;
     position: relative;
+    cursor: pointer;
+    transition: opacity .7s ease;
+}
+.material:hover{
+    opacity: .7;
+    transition: opacity .7s ease;
 }
 .material__price {
     display: flex;

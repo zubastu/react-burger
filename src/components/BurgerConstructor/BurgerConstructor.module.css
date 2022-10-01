@@ -1,12 +1,15 @@
 .container {
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
-    overflow-y: scroll;
     height: 100%;
     max-width: 600px;
     min-width: 600px;
     box-sizing: border-box;
+}
+.scroll {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100%;
 }
 .material_container {
     display: grid;
