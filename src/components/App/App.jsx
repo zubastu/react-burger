@@ -10,7 +10,6 @@ import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import { data } from "../../utils/data";
 import MaterialInCart from "../MaterialInCart/MaterialInCart";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { v1 as uuidv1 } from "uuid";
 
 function App() {
   const [state, setState] = useState({
@@ -22,6 +21,7 @@ function App() {
     isSelectedBun: false,
     totalPrice: 0,
   });
+
   const {
     bun,
     sauces,
@@ -31,6 +31,7 @@ function App() {
     isSelectedBun,
     totalPrice,
   } = state;
+
   const filterData = (data) => {
     const bun = data.filter(({ type }) => type === "bun");
     const sauces = data.filter(({ type }) => type === "sauce");

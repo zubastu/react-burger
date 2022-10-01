@@ -2,6 +2,8 @@ import React from "react";
 import burgerConstructorStyles from "./BurgerConstructor.module.css";
 import MyTab from "../MyTab/MyTab";
 import MaterialItem from "../MaterialItem/MaterialItem";
+import PropTypes from "prop-types";
+import { INGREDIENT_TYPES } from "../../utils/constants";
 
 const BurgerConstructor = ({
   bun,
@@ -60,6 +62,16 @@ const BurgerConstructor = ({
       </div>
     </section>
   );
+};
+
+BurgerConstructor.propTypes = {
+  bun: PropTypes.array.isRequired,
+  sauces: PropTypes.array.isRequired,
+  main: PropTypes.array.isRequired,
+  selectBun: PropTypes.func.isRequired,
+  selectIngredient: PropTypes.func.isRequired,
+  selectedBun: INGREDIENT_TYPES.isRequired,
+  selectedIngredients: PropTypes.arrayOf(INGREDIENT_TYPES).isRequired,
 };
 
 export default BurgerConstructor;
