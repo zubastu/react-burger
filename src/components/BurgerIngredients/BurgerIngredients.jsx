@@ -4,8 +4,11 @@ import {
   Button,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
 
 const BurgerIngredients = ({ children, totalPrice }) => {
+  console.log(typeof children);
+  console.log(children[0]);
   return (
     <section className={`${burgerIngredientsStyles.container} `}>
       <div
@@ -27,6 +30,11 @@ const BurgerIngredients = ({ children, totalPrice }) => {
       </div>
     </section>
   );
+};
+
+BurgerIngredients.propTypes = {
+  totalPrice: PropTypes.number,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.elementType]),
 };
 
 export default BurgerIngredients;

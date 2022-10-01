@@ -43,6 +43,7 @@ function App() {
       main: main,
     });
   };
+
   const selectBun = (bun) => {
     setState({
       ...state,
@@ -50,6 +51,7 @@ function App() {
       isSelectedBun: bun.name !== selectedBun.name,
     });
   };
+
   const selectIngredient = (ingredient) => {
     setState({
       ...state,
@@ -71,6 +73,7 @@ function App() {
       ),
     });
   };
+
   useEffect(() => {
     setState({
       ...state,
