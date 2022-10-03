@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
-
 import appStyles from "./App.module.css";
-
 import AppHeader from "../AppHeader/AppHeader";
 import { Routes, Route } from "react-router";
 import Main from "../Main/Main";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
-import { data } from "../../utils/data";
 import MaterialInCart from "../MaterialInCart/MaterialInCart";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  API_URL,
+  TYPE_BUN,
+  TYPE_MAIN,
+  TYPE_SAUCE,
+} from "../../utils/constants";
 
 function App() {
   const [state, setState] = useState({
@@ -33,9 +36,9 @@ function App() {
   } = state;
 
   const filterData = (data) => {
-    const bun = data.filter(({ type }) => type === "bun");
-    const sauces = data.filter(({ type }) => type === "sauce");
-    const main = data.filter(({ type }) => type === "main");
+    const bun = data.filter(({ type }) => type === TYPE_BUN);
+    const sauces = data.filter(({ type }) => type === TYPE_SAUCE);
+    const main = data.filter(({ type }) => type === TYPE_MAIN);
     setState({
       ...state,
       bun: bun,
@@ -82,7 +85,15 @@ function App() {
   }, [selectedIngredients, selectedBun]);
 
   useEffect(() => {
-    filterData(data);
+    const fetchData = () => {
+      fetch(API_URL)
+        .then((res) =>
+          res.ok ? res.json() : Promise.reject("Ошибка запроса к серверу")
+        )
+        .then(({ data }) => filterData(data))
+        .catch((e) => console.log(e));
+    };
+    fetchData();
   }, []);
 
   return (
