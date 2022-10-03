@@ -13,6 +13,8 @@ import {
   TYPE_MAIN,
   TYPE_SAUCE,
 } from "../../utils/constants";
+import OrderDetails from "../OrderDetails/OrderDetails";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
 
 function App() {
   const [state, setState] = useState({
@@ -23,6 +25,8 @@ function App() {
     selectedIngredients: [],
     isSelectedBun: false,
     totalPrice: 0,
+    isOpenIngredientDetails: false,
+    isOpenOrderDetails: false,
   });
 
   const {
@@ -33,6 +37,8 @@ function App() {
     selectedIngredients,
     isSelectedBun,
     totalPrice,
+    isOpenIngredientDetails,
+    isOpenOrderDetails,
   } = state;
 
   const filterData = (data) => {
@@ -77,6 +83,14 @@ function App() {
     });
   };
 
+  const openIngredientInfo = (ingredient) => {
+    console.log(ingredient);
+  };
+
+  const openOrderInfo = () => {
+    console.log("Order is opened");
+  };
+
   useEffect(() => {
     setState({
       ...state,
@@ -99,6 +113,8 @@ function App() {
   return (
     <div className={appStyles.app}>
       <AppHeader />
+      <OrderDetails isOpen={isOpenOrderDetails} />
+      <IngredientDetails isOpen={isOpenIngredientDetails} />
       <Routes>
         <Route
           path="/"
@@ -115,9 +131,15 @@ function App() {
                   selectIngredient={selectIngredient}
                 />
 
-                <BurgerIngredients totalPrice={totalPrice}>
+                <BurgerIngredients
+                  totalPrice={totalPrice}
+                  openOrderInfo={openOrderInfo}
+                >
                   {isSelectedBun && (
-                    <div className={`${appStyles.constructor} ml-8`}>
+                    <div
+                      className={`${appStyles.constructor} ml-8`}
+                      onClick={() => openIngredientInfo(selectedBun)}
+                    >
                       <ConstructorElement
                         price={selectedBun.price / 2}
                         text={`${selectedBun.name} (верх)`}
@@ -134,11 +156,16 @@ function App() {
                       name={item.name}
                       _id={item._id}
                       key={index}
+                      product={item}
                       onDelete={removeIngredient}
+                      showInfo={openIngredientInfo}
                     />
                   ))}
                   {isSelectedBun && (
-                    <div className={`${appStyles.constructor} ml-8`}>
+                    <div
+                      className={`${appStyles.constructor} ml-8`}
+                      onClick={() => openIngredientInfo(selectedBun)}
+                    >
                       <ConstructorElement
                         price={selectedBun.price / 2}
                         text={`${selectedBun.name} (низ)`}

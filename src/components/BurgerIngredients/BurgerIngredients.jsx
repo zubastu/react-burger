@@ -6,7 +6,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 
-const BurgerIngredients = ({ children, totalPrice }) => {
+const BurgerIngredients = ({ children, totalPrice, openOrderInfo }) => {
   return (
     <section className={`${burgerIngredientsStyles.container}`}>
       <div
@@ -22,6 +22,7 @@ const BurgerIngredients = ({ children, totalPrice }) => {
           type="primary"
           size="medium"
           extraClass={`${burgerIngredientsStyles.buyBtn} ml-10 mr-4`}
+          onClick={() => openOrderInfo()}
         >
           Оформить заказ
         </Button>

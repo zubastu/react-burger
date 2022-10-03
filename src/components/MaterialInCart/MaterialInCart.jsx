@@ -5,9 +5,20 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import materialInCartStyles from "./MaterialInCart.module.css";
 
-const MaterialInCart = ({ image, name, price, _id, onDelete }) => {
+const MaterialInCart = ({
+  image,
+  name,
+  price,
+  _id,
+  onDelete,
+  showInfo,
+  product,
+}) => {
   return (
-    <div className={materialInCartStyles.container}>
+    <div
+      className={materialInCartStyles.container}
+      onClick={() => showInfo(product)}
+    >
       <DragIcon type="primary" />
       <ConstructorElement
         isLocked={false}
