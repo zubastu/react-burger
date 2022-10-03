@@ -8,9 +8,9 @@ import PropTypes from "prop-types";
 
 const BurgerIngredients = ({ children, totalPrice }) => {
   return (
-    <section className={`${burgerIngredientsStyles.container} `}>
+    <section className={`${burgerIngredientsStyles.container}`}>
       <div
-        className={`${burgerIngredientsStyles.materials} custom-scroll mt-25 pl-4 pr-4 `}
+        className={`${burgerIngredientsStyles.materials} custom-scroll mt-25 pl-4 pr-2`}
       >
         {children}
       </div>
@@ -21,7 +21,7 @@ const BurgerIngredients = ({ children, totalPrice }) => {
           htmlType={"button"}
           type="primary"
           size="medium"
-          extraClass={`${burgerIngredientsStyles.buyBtn} ml-10`}
+          extraClass={`${burgerIngredientsStyles.buyBtn} ml-10 mr-4`}
         >
           Оформить заказ
         </Button>
