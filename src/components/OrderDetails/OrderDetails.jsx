@@ -2,6 +2,7 @@ import React from "react";
 import orderDetailsStyles from "./OrderDetails.module.css";
 import Modal from "../Modal/Modal";
 import successImage from "../../images/done.svg";
+import PropTypes from "prop-types";
 
 const OrderDetails = ({ isOpen, onClose }) => {
   const data = {
@@ -40,6 +41,11 @@ const OrderDetails = ({ isOpen, onClose }) => {
       )}
     </>
   );
+};
+
+OrderDetails.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default OrderDetails;
