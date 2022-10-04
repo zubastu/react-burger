@@ -188,7 +188,7 @@ function App() {
                       price={item.price}
                       name={item.name}
                       _id={item._id}
-                      key={index}
+                      key={item._id}
                       product={item}
                       onDelete={removeIngredient}
                       showInfo={openIngredientInfo}
