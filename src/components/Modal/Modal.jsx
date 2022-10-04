@@ -7,6 +7,7 @@ import {
   reactModalRootElementActive,
 } from "../../utils/constants";
 import ModalHeader from "../ModalHeader/ModalHeader";
+import PropTypes from "prop-types";
 
 const Modal = ({
   children,
@@ -19,6 +20,8 @@ const Modal = ({
     onClose();
     reactModalRootElement.classList.remove(reactModalRootElementActive);
   };
+
+  console.log(children);
 
   useEffect(() => {
     isOpen && reactModalRootElement.classList.add(reactModalRootElementActive);
@@ -38,6 +41,14 @@ const Modal = ({
     </div>,
     modalRoot
   );
+};
+
+Modal.propTypes = {
+  children: PropTypes.elementType.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  text: PropTypes.oneOf([PropTypes.string, null]).isRequired,
+  extraClassName: PropTypes.string,
 };
 
 export default Modal;
