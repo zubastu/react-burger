@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import modalStyles from "./Modal.module.css";
-import {
-  modalRoot,
-  reactModalRootElement,
-  reactModalRootElementActive,
-} from "../../utils/constants";
+import { modalRoot } from "../../utils/constants";
 import ModalHeader from "../ModalHeader/ModalHeader";
 import PropTypes from "prop-types";
 
@@ -18,13 +14,20 @@ const Modal = ({
 }) => {
   const handleClose = () => {
     onClose();
-    reactModalRootElement.classList.remove(reactModalRootElementActive);
   };
-  useEffect(() => {
-    isOpen && reactModalRootElement.classList.add(reactModalRootElementActive);
 
-    return () => {};
-  }, [isOpen]);
+  useEffect(() => {
+    if (!isOpen) return;
+    const closeOnEscapeKey = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    document.addEventListener("keyup", closeOnEscapeKey);
+    return () => {
+      document.removeEventListener("keyup", closeOnEscapeKey);
+    };
+  }, [isOpen, onClose]);
 
   return createPortal(
     <div className={modalStyles.container}>
