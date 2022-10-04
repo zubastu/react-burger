@@ -18,7 +18,9 @@ const BurgerIngredients = ({
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
       <MyTab />
       <div className={`${burgerConstructorStyles.scroll} custom-scroll mt-10`}>
-        <h2 className="text text_type_main-medium">Булки</h2>
+        <h2 id="one" className="text text_type_main-medium">
+          Булки
+        </h2>
         <div
           className={`${burgerConstructorStyles.material_container} pt-6 pl-4 pr-4`}
         >
@@ -32,7 +34,9 @@ const BurgerIngredients = ({
               />
             ))}
         </div>
-        <h2 className="text text_type_main-medium mt-10">Соусы</h2>
+        <h2 id="two" className="text text_type_main-medium mt-10">
+          Соусы
+        </h2>
         <div
           className={`${burgerConstructorStyles.material_container} pt-6 pl-4 pr-4`}
         >
@@ -46,7 +50,9 @@ const BurgerIngredients = ({
               />
             ))}
         </div>
-        <h2 className="text text_type_main-medium mt-10">Начинки</h2>
+        <h2 id="three" className="text text_type_main-medium mt-10">
+          Начинки
+        </h2>
         <div
           className={`${burgerConstructorStyles.material_container} pt-6 pl-4 pr-4`}
         >
