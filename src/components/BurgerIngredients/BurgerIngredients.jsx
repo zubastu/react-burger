@@ -1,40 +1,78 @@
 import React from "react";
-import burgerIngredientsStyles from "./BurgerIngredients.module.css";
-import {
-  Button,
-  CurrencyIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import burgerConstructorStyles from "./BurgerIngredients.module.css";
+import MyTab from "../MyTab/MyTab";
+import MaterialItem from "../MaterialItem/MaterialItem";
 import PropTypes from "prop-types";
+import { INGREDIENT_TYPES } from "../../utils/constants";
 
-const BurgerIngredients = ({ children, totalPrice, openOrderInfo }) => {
+const BurgerIngredients = ({
+  bun,
+  sauces,
+  main,
+  selectIngredient,
+  selectedBun,
+  selectedIngredients,
+}) => {
   return (
-    <section className={`${burgerIngredientsStyles.container}`}>
-      <div
-        className={`${burgerIngredientsStyles.materials} custom-scroll mt-25 pl-4 pr-2`}
-      >
-        {children}
-      </div>
-      <div className={`${burgerIngredientsStyles.total} mt-10`}>
-        <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
-        <CurrencyIcon type="primary" />
-        <Button
-          htmlType={"button"}
-          type="primary"
-          size="medium"
-          extraClass={`${burgerIngredientsStyles.buyBtn} ml-10 mr-4`}
-          onClick={() => openOrderInfo()}
+    <section className={`${burgerConstructorStyles.container} `}>
+      <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
+      <MyTab />
+      <div className={`${burgerConstructorStyles.scroll} custom-scroll mt-10`}>
+        <h2 className="text text_type_main-medium">Булки</h2>
+        <div
+          className={`${burgerConstructorStyles.material_container} pt-6 pl-4 pr-4`}
         >
-          Оформить заказ
-        </Button>
+          {bun &&
+            bun.map((bunItem) => (
+              <MaterialItem
+                selectedBun={selectedBun}
+                material={bunItem}
+                key={bunItem._id}
+                onSelect={selectIngredient}
+              />
+            ))}
+        </div>
+        <h2 className="text text_type_main-medium mt-10">Соусы</h2>
+        <div
+          className={`${burgerConstructorStyles.material_container} pt-6 pl-4 pr-4`}
+        >
+          {sauces &&
+            sauces.map((sauce) => (
+              <MaterialItem
+                selectedIngredients={selectedIngredients}
+                material={sauce}
+                key={sauce._id}
+                onSelect={selectIngredient}
+              />
+            ))}
+        </div>
+        <h2 className="text text_type_main-medium mt-10">Начинки</h2>
+        <div
+          className={`${burgerConstructorStyles.material_container} pt-6 pl-4 pr-4`}
+        >
+          {main &&
+            main.map((mainItem) => (
+              <MaterialItem
+                selectedIngredients={selectedIngredients}
+                material={mainItem}
+                key={mainItem._id}
+                onSelect={selectIngredient}
+              />
+            ))}
+        </div>
       </div>
     </section>
   );
 };
 
 BurgerIngredients.propTypes = {
-  totalPrice: PropTypes.number,
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.elementType]),
-  openOrderInfo: PropTypes.func,
+  bun: PropTypes.array.isRequired,
+  sauces: PropTypes.array.isRequired,
+  main: PropTypes.array.isRequired,
+  selectBun: PropTypes.func.isRequired,
+  selectIngredient: PropTypes.func.isRequired,
+  selectedBun: INGREDIENT_TYPES.isRequired,
+  selectedIngredients: PropTypes.arrayOf(INGREDIENT_TYPES).isRequired,
 };
 
 export default BurgerIngredients;

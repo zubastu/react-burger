@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import appStyles from "./App.module.css";
 import AppHeader from "../AppHeader/AppHeader";
 import Main from "../Main/Main";
-import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
+import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import MaterialInCart from "../MaterialInCart/MaterialInCart";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import {
@@ -159,25 +159,22 @@ function App() {
       <AppHeader />
       <Main>
         <>
-          <BurgerConstructor
+          <BurgerIngredients
             bun={bun}
             sauces={sauces}
             main={main}
             selectedBun={selectedBun}
             selectedIngredients={selectedIngredients}
             selectBun={selectBun}
-            selectIngredient={selectIngredient}
+            selectIngredient={openIngredientInfo}
           />
 
-          <BurgerIngredients
+          <BurgerConstructor
             totalPrice={totalPrice}
             openOrderInfo={openOrderInfo}
           >
             {isSelectedBun && (
-              <div
-                className={`${appStyles.constructor} ml-8`}
-                onClick={() => openIngredientInfo(selectedBun)}
-              >
+              <div className={`${appStyles.constructor} ml-8`}>
                 <ConstructorElement
                   price={selectedBun.price / 2}
                   text={`${selectedBun.name} (верх)`}
@@ -200,10 +197,7 @@ function App() {
               />
             ))}
             {isSelectedBun && (
-              <div
-                className={`${appStyles.constructor} ml-8`}
-                onClick={() => openIngredientInfo(selectedBun)}
-              >
+              <div className={`${appStyles.constructor} ml-8`}>
                 <ConstructorElement
                   price={selectedBun.price / 2}
                   text={`${selectedBun.name} (низ)`}
@@ -213,7 +207,7 @@ function App() {
                 />
               </div>
             )}
-          </BurgerIngredients>
+          </BurgerConstructor>
         </>
       </Main>
     </div>
