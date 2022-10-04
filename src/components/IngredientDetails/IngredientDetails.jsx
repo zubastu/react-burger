@@ -14,7 +14,11 @@ const IngredientDetails = ({ ingredient }) => {
           src={image_large}
           alt={name}
         />
-        <h3 className="text text_type_main-medium mb-8">{name}</h3>
+        <h3
+          className={`${ingredientDetailsStyles.heading} text text_type_main-medium mb-8`}
+        >
+          {name}
+        </h3>
         <ul className={ingredientDetailsStyles.list}>
           <li className={ingredientDetailsStyles.list__item}>
             <p className="text text_type_main-small text_color_inactive">
