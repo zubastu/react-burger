@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import appStyles from "./App.module.css";
 import AppHeader from "../AppHeader/AppHeader";
-import { Routes, Route } from "react-router";
 import Main from "../Main/Main";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
@@ -148,72 +147,65 @@ function App() {
       )}
 
       <AppHeader />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Main>
-              <>
-                <BurgerConstructor
-                  bun={bun}
-                  sauces={sauces}
-                  main={main}
-                  selectedBun={selectedBun}
-                  selectedIngredients={selectedIngredients}
-                  selectBun={selectBun}
-                  selectIngredient={selectIngredient}
-                />
+      <Main>
+        <>
+          <BurgerConstructor
+            bun={bun}
+            sauces={sauces}
+            main={main}
+            selectedBun={selectedBun}
+            selectedIngredients={selectedIngredients}
+            selectBun={selectBun}
+            selectIngredient={selectIngredient}
+          />
 
-                <BurgerIngredients
-                  totalPrice={totalPrice}
-                  openOrderInfo={openOrderInfo}
-                >
-                  {isSelectedBun && (
-                    <div
-                      className={`${appStyles.constructor} ml-8`}
-                      onClick={() => openIngredientInfo(selectedBun)}
-                    >
-                      <ConstructorElement
-                        price={selectedBun.price / 2}
-                        text={`${selectedBun.name} (верх)`}
-                        thumbnail={selectedBun.image}
-                        isLocked={true}
-                        type="top"
-                      />
-                    </div>
-                  )}
-                  {selectedIngredients.map((item, index) => (
-                    <MaterialInCart
-                      image={item.image}
-                      price={item.price}
-                      name={item.name}
-                      _id={item._id}
-                      key={item._id}
-                      product={item}
-                      onDelete={removeIngredient}
-                      showInfo={openIngredientInfo}
-                    />
-                  ))}
-                  {isSelectedBun && (
-                    <div
-                      className={`${appStyles.constructor} ml-8`}
-                      onClick={() => openIngredientInfo(selectedBun)}
-                    >
-                      <ConstructorElement
-                        price={selectedBun.price / 2}
-                        text={`${selectedBun.name} (низ)`}
-                        thumbnail={selectedBun.image}
-                        isLocked={true}
-                        type="bottom"
-                      />
-                    </div>
-                  )}
-                </BurgerIngredients>
-              </>
-            </Main>
-          }
-        />
-      </Routes>
+          <BurgerIngredients
+            totalPrice={totalPrice}
+            openOrderInfo={openOrderInfo}
+          >
+            {isSelectedBun && (
+              <div
+                className={`${appStyles.constructor} ml-8`}
+                onClick={() => openIngredientInfo(selectedBun)}
+              >
+                <ConstructorElement
+                  price={selectedBun.price / 2}
+                  text={`${selectedBun.name} (верх)`}
+                  thumbnail={selectedBun.image}
+                  isLocked={true}
+                  type="top"
+                />
+              </div>
+            )}
+            {selectedIngredients.map((item, index) => (
+              <MaterialInCart
+                image={item.image}
+                price={item.price}
+                name={item.name}
+                _id={item._id}
+                key={item._id}
+                product={item}
+                onDelete={removeIngredient}
+                showInfo={openIngredientInfo}
+              />
+            ))}
+            {isSelectedBun && (
+              <div
+                className={`${appStyles.constructor} ml-8`}
+                onClick={() => openIngredientInfo(selectedBun)}
+              >
+                <ConstructorElement
+                  price={selectedBun.price / 2}
+                  text={`${selectedBun.name} (низ)`}
+                  thumbnail={selectedBun.image}
+                  isLocked={true}
+                  type="bottom"
+                />
+              </div>
+            )}
+          </BurgerIngredients>
+        </>
+      </Main>
     </div>
   );
 }
