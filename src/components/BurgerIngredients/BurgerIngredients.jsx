@@ -34,6 +34,7 @@ const BurgerIngredients = ({ children, totalPrice, openOrderInfo }) => {
 BurgerIngredients.propTypes = {
   totalPrice: PropTypes.number,
   children: PropTypes.oneOfType([PropTypes.array, PropTypes.elementType]),
+  openOrderInfo: PropTypes.func,
 };
 
 export default BurgerIngredients;
