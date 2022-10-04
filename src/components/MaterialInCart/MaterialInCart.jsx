@@ -14,6 +14,10 @@ const MaterialInCart = ({
   showInfo,
   product,
 }) => {
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    onDelete(_id);
+  };
   return (
     <div
       className={materialInCartStyles.container}
@@ -22,7 +26,7 @@ const MaterialInCart = ({
       <DragIcon type="primary" />
       <ConstructorElement
         isLocked={false}
-        handleClose={() => onDelete(_id)}
+        handleClose={handleDelete}
         extraClass={materialInCartStyles.constructor}
         thumbnail={image}
         text={name}

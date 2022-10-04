@@ -27,6 +27,7 @@ function App() {
     totalPrice: 0,
     isOpenIngredientDetails: false,
     isOpenOrderDetails: false,
+    selectedMaterialItem: {},
   });
 
   const {
@@ -39,6 +40,7 @@ function App() {
     totalPrice,
     isOpenIngredientDetails,
     isOpenOrderDetails,
+    selectedMaterialItem,
   } = state;
 
   const filterData = (data) => {
@@ -85,10 +87,33 @@ function App() {
 
   const openIngredientInfo = (ingredient) => {
     console.log(ingredient);
+    setState({
+      ...state,
+      selectedMaterialItem: ingredient,
+      isOpenIngredientDetails: true,
+    });
   };
 
   const openOrderInfo = () => {
-    console.log("Order is opened");
+    setState({
+      ...state,
+      isOpenOrderDetails: true,
+    });
+  };
+
+  const closeOrderInfo = () => {
+    setState({
+      ...state,
+      isOpenOrderDetails: false,
+    });
+  };
+
+  const closeIngredientDetails = () => {
+    setState({
+      ...state,
+      selectedMaterialItem: {},
+      isOpenIngredientDetails: false,
+    });
   };
 
   useEffect(() => {
@@ -112,9 +137,18 @@ function App() {
 
   return (
     <div className={appStyles.app}>
+      {isOpenOrderDetails && (
+        <OrderDetails isOpen={isOpenOrderDetails} onClose={closeOrderInfo} />
+      )}
+      {isOpenIngredientDetails && (
+        <IngredientDetails
+          ingredient={selectedMaterialItem}
+          isOpen={isOpenIngredientDetails}
+          onClose={closeIngredientDetails}
+        />
+      )}
+
       <AppHeader />
-      <OrderDetails isOpen={isOpenOrderDetails} />
-      <IngredientDetails isOpen={isOpenIngredientDetails} />
       <Routes>
         <Route
           path="/"
