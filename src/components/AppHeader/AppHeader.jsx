@@ -15,11 +15,11 @@ const AppHeader = () => {
       <nav className={appHeaderStyles.nav}>
         <div className={appHeaderStyles.nav__item}>
           <NavigationLink path="/" text="Конструктор" styles="mr-2">
-            {<BurgerIcon type="secondary" />}
+            <BurgerIcon type="secondary" />
           </NavigationLink>
 
           <NavigationLink path="/" text="Лента заказов">
-            {<ListIcon type="secondary" />}
+            <ListIcon type="secondary" />
           </NavigationLink>
         </div>
         <NavLink to="#" className={appHeaderStyles.nav__item}>
@@ -27,7 +27,7 @@ const AppHeader = () => {
         </NavLink>
         <div className={appHeaderStyles.nav__item}>
           <NavigationLink path="/" text="Личный кабинет">
-            {<ProfileIcon type="secondary" />}
+            <ProfileIcon type="secondary" />
           </NavigationLink>
         </div>
       </nav>

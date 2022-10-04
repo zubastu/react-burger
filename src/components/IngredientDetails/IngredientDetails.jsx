@@ -1,6 +1,8 @@
 import ingredientDetailsStyles from "./IngredientDetails.module.css";
 import React from "react";
 import Modal from "../Modal/Modal";
+import PropTypes from "prop-types";
+import { INGREDIENT_TYPES } from "../../utils/constants";
 
 const IngredientDetails = ({ isOpen, onClose, ingredient }) => {
   const { image_large, name, calories, fat, carbohydrates, proteins } =
@@ -60,6 +62,12 @@ const IngredientDetails = ({ isOpen, onClose, ingredient }) => {
       )}
     </>
   );
+};
+
+IngredientDetails.propTypes = {
+  ingredient: INGREDIENT_TYPES,
+  IsOpen: PropTypes.bool,
+  onClose: PropTypes.func,
 };
 
 export default IngredientDetails;

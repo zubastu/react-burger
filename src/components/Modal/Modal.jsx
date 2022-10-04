@@ -20,9 +20,6 @@ const Modal = ({
     onClose();
     reactModalRootElement.classList.remove(reactModalRootElementActive);
   };
-
-  console.log(children);
-
   useEffect(() => {
     isOpen && reactModalRootElement.classList.add(reactModalRootElementActive);
 
@@ -44,10 +41,10 @@ const Modal = ({
 };
 
 Modal.propTypes = {
-  children: PropTypes.elementType.isRequired,
+  children: PropTypes.shape(PropTypes.elementType.isRequired).isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  text: PropTypes.oneOf([PropTypes.string, null]).isRequired,
+  text: PropTypes.string,
   extraClassName: PropTypes.string,
 };
 

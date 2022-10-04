@@ -86,7 +86,6 @@ function App() {
   };
 
   const openIngredientInfo = (ingredient) => {
-    console.log(ingredient);
     setState({
       ...state,
       selectedMaterialItem: ingredient,
