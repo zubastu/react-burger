@@ -14,6 +14,7 @@ import {
 } from "../../utils/constants";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import Modal from "../Modal/Modal";
 
 function App() {
   const [state, setState] = useState({
@@ -136,14 +137,23 @@ function App() {
   return (
     <div className={appStyles.app}>
       {isOpenOrderDetails && (
-        <OrderDetails isOpen={isOpenOrderDetails} onClose={closeOrderInfo} />
+        <Modal
+          isOpen={isOpenOrderDetails}
+          onClose={closeOrderInfo}
+          extraClassName="pb-30"
+        >
+          <OrderDetails />
+        </Modal>
       )}
       {isOpenIngredientDetails && (
-        <IngredientDetails
-          ingredient={selectedMaterialItem}
+        <Modal
           isOpen={isOpenIngredientDetails}
           onClose={closeIngredientDetails}
-        />
+          text="Детали ингредиента"
+          extraClassName="pb-15"
+        >
+          <IngredientDetails ingredient={selectedMaterialItem} />
+        </Modal>
       )}
 
       <AppHeader />
