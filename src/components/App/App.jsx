@@ -15,6 +15,7 @@ import {
 import OrderDetails from "../OrderDetails/OrderDetails";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import Modal from "../Modal/Modal";
+import ModalAnimationLayout from "../ModalAnimationLayout/ModalAnimationLayout";
 
 function App() {
   const [state, setState] = useState({
@@ -110,7 +111,6 @@ function App() {
   const closeIngredientDetails = () => {
     setState({
       ...state,
-      selectedMaterialItem: {},
       isOpenIngredientDetails: false,
     });
   };
@@ -136,25 +136,22 @@ function App() {
 
   return (
     <div className={appStyles.app}>
-      {isOpenOrderDetails && (
-        <Modal
-          isOpen={isOpenOrderDetails}
-          onClose={closeOrderInfo}
-          extraClassName="pb-30"
-        >
-          <OrderDetails />
-        </Modal>
-      )}
-      {isOpenIngredientDetails && (
-        <Modal
-          isOpen={isOpenIngredientDetails}
-          onClose={closeIngredientDetails}
-          text="Детали ингредиента"
-          extraClassName="pb-15"
-        >
-          <IngredientDetails ingredient={selectedMaterialItem} />
-        </Modal>
-      )}
+      <ModalAnimationLayout
+        isOpen={isOpenOrderDetails}
+        onClose={closeOrderInfo}
+        extraClassName="pb-30"
+      >
+        <OrderDetails />
+      </ModalAnimationLayout>
+
+      <ModalAnimationLayout
+        isOpen={isOpenIngredientDetails}
+        onClose={closeIngredientDetails}
+        text="Детали ингредиента"
+        extraClassName="pb-15"
+      >
+        <IngredientDetails ingredient={selectedMaterialItem} />
+      </ModalAnimationLayout>
 
       <AppHeader />
       <Main>

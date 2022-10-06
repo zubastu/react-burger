@@ -8,6 +8,8 @@ export const TYPE_MAIN = "main";
 export const reactModalRootElement = document.querySelector(".react-modals");
 export const reactModalRootElementActive = "react-modals_active";
 
+export const ANIMATION_TIME = 300;
+
 export const modalRoot = document.getElementById("react-modals");
 
 export const INGREDIENT_TYPES = PropTypes.shape({

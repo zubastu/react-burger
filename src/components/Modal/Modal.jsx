@@ -1,9 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import modalStyles from "./Modal.module.css";
-import { modalRoot } from "../../utils/constants";
+import { ANIMATION_TIME, reactModalRootElement } from "../../utils/constants";
 import ModalHeader from "../ModalHeader/ModalHeader";
 import PropTypes from "prop-types";
+import { CSSTransition } from "react-transition-group";
+import { useMount } from "../../hoocs/useMount";
+
+const contentAnimation = {
+  enter: modalStyles.contentEnter,
+  enterActive: modalStyles.contentEnterActive,
+  exit: modalStyles.contentExit,
+  exitActive: modalStyles.contentExitActive,
+};
+
+const overlayAnimation = {
+  enter: modalStyles.overlayEnter,
+  enterActive: modalStyles.overlayEnterActive,
+  exit: modalStyles.overlayExit,
+  exitActive: modalStyles.overlayExitActive,
+};
 
 const Modal = ({
   children,
@@ -12,9 +28,14 @@ const Modal = ({
   text = null,
   extraClassName,
 }) => {
-  const handleClose = () => {
-    onClose();
-  };
+  const [animationIn, setAnimationIn] = useState(false);
+
+  const overlayRef = useRef();
+  const contentRef = useRef();
+
+  useEffect(() => {
+    setAnimationIn(isOpen);
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -31,15 +52,38 @@ const Modal = ({
 
   return createPortal(
     <div className={modalStyles.container}>
-      <div
-        className={`${modalStyles.modal} pt-10 pl-10 pr-10 ${extraClassName}`}
+      <CSSTransition
+        in={animationIn}
+        nodeRef={overlayRef}
+        timeout={ANIMATION_TIME}
+        mountOnEnter
+        unmountOnExit
+        classNames={overlayAnimation}
       >
-        <ModalHeader text={text} onClose={handleClose} />
-        {children}
-      </div>
-      <div className={modalStyles.overlay} onClick={() => handleClose()}></div>
+        <div
+          ref={overlayRef}
+          className={modalStyles.overlay}
+          onClick={() => onClose()}
+        />
+      </CSSTransition>
+      <CSSTransition
+        in={animationIn}
+        nodeRef={contentRef}
+        timeout={ANIMATION_TIME}
+        mountOnEnter
+        unmountOnExit
+        classNames={contentAnimation}
+      >
+        <div
+          ref={contentRef}
+          className={`${modalStyles.modal} pt-10 pl-10 pr-10 ${extraClassName}`}
+        >
+          <ModalHeader text={text} onClose={onClose} />
+          {children}
+        </div>
+      </CSSTransition>
     </div>,
-    modalRoot
+    reactModalRootElement
   );
 };
 
