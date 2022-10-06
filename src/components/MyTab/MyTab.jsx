@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
 const MyTab = () => {
   const [current, setCurrent] = useState("one");
+
+  useEffect(() => {
+    const element = document.getElementById(current);
+    element.scrollIntoView({ behavior: "smooth" });
+  }, [current]);
+
   return (
     <div style={{ display: "flex" }}>
       <Tab value="one" active={current === "one"} onClick={setCurrent}>

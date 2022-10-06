@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
-
 import appStyles from "./App.module.css";
-
 import AppHeader from "../AppHeader/AppHeader";
-import { Routes, Route } from "react-router";
 import Main from "../Main/Main";
-import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
-import { data } from "../../utils/data";
+import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import MaterialInCart from "../MaterialInCart/MaterialInCart";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  API_URL,
+  TYPE_BUN,
+  TYPE_MAIN,
+  TYPE_SAUCE,
+} from "../../utils/constants";
+import OrderDetails from "../OrderDetails/OrderDetails";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import Modal from "../Modal/Modal";
+import ModalAnimationLayout from "../ModalAnimationLayout/ModalAnimationLayout";
 
 function App() {
   const [state, setState] = useState({
@@ -20,6 +26,9 @@ function App() {
     selectedIngredients: [],
     isSelectedBun: false,
     totalPrice: 0,
+    isOpenIngredientDetails: false,
+    isOpenOrderDetails: false,
+    selectedMaterialItem: {},
   });
 
   const {
@@ -30,12 +39,15 @@ function App() {
     selectedIngredients,
     isSelectedBun,
     totalPrice,
+    isOpenIngredientDetails,
+    isOpenOrderDetails,
+    selectedMaterialItem,
   } = state;
 
   const filterData = (data) => {
-    const bun = data.filter(({ type }) => type === "bun");
-    const sauces = data.filter(({ type }) => type === "sauce");
-    const main = data.filter(({ type }) => type === "main");
+    const bun = data.filter(({ type }) => type === TYPE_BUN);
+    const sauces = data.filter(({ type }) => type === TYPE_SAUCE);
+    const main = data.filter(({ type }) => type === TYPE_MAIN);
     setState({
       ...state,
       bun: bun,
@@ -74,6 +86,35 @@ function App() {
     });
   };
 
+  const openIngredientInfo = (ingredient) => {
+    setState({
+      ...state,
+      selectedMaterialItem: ingredient,
+      isOpenIngredientDetails: true,
+    });
+  };
+
+  const openOrderInfo = () => {
+    setState({
+      ...state,
+      isOpenOrderDetails: true,
+    });
+  };
+
+  const closeOrderInfo = () => {
+    setState({
+      ...state,
+      isOpenOrderDetails: false,
+    });
+  };
+
+  const closeIngredientDetails = () => {
+    setState({
+      ...state,
+      isOpenIngredientDetails: false,
+    });
+  };
+
   useEffect(() => {
     setState({
       ...state,
@@ -82,67 +123,90 @@ function App() {
   }, [selectedIngredients, selectedBun]);
 
   useEffect(() => {
-    filterData(data);
+    const fetchData = () => {
+      fetch(API_URL)
+        .then((res) =>
+          res.ok ? res.json() : Promise.reject("Ошибка запроса к серверу")
+        )
+        .then(({ data }) => filterData(data))
+        .catch((e) => console.log(e));
+    };
+    fetchData();
   }, []);
 
   return (
     <div className={appStyles.app}>
-      <AppHeader />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Main>
-              <>
-                <BurgerConstructor
-                  bun={bun}
-                  sauces={sauces}
-                  main={main}
-                  selectedBun={selectedBun}
-                  selectedIngredients={selectedIngredients}
-                  selectBun={selectBun}
-                  selectIngredient={selectIngredient}
-                />
+      <ModalAnimationLayout
+        isOpen={isOpenOrderDetails}
+        onClose={closeOrderInfo}
+        extraClassName="pb-30"
+      >
+        <OrderDetails />
+      </ModalAnimationLayout>
 
-                <BurgerIngredients totalPrice={totalPrice}>
-                  {isSelectedBun && (
-                    <div className={`${appStyles.constructor} ml-8`}>
-                      <ConstructorElement
-                        price={selectedBun.price / 2}
-                        text={`${selectedBun.name} (верх)`}
-                        thumbnail={selectedBun.image}
-                        isLocked={true}
-                        type="top"
-                      />
-                    </div>
-                  )}
-                  {selectedIngredients.map((item, index) => (
-                    <MaterialInCart
-                      image={item.image}
-                      price={item.price}
-                      name={item.name}
-                      _id={item._id}
-                      key={index}
-                      onDelete={removeIngredient}
-                    />
-                  ))}
-                  {isSelectedBun && (
-                    <div className={`${appStyles.constructor} ml-8`}>
-                      <ConstructorElement
-                        price={selectedBun.price / 2}
-                        text={`${selectedBun.name} (низ)`}
-                        thumbnail={selectedBun.image}
-                        isLocked={true}
-                        type="bottom"
-                      />
-                    </div>
-                  )}
-                </BurgerIngredients>
-              </>
-            </Main>
-          }
-        />
-      </Routes>
+      <ModalAnimationLayout
+        isOpen={isOpenIngredientDetails}
+        onClose={closeIngredientDetails}
+        text="Детали ингредиента"
+        extraClassName="pb-15"
+      >
+        <IngredientDetails ingredient={selectedMaterialItem} />
+      </ModalAnimationLayout>
+
+      <AppHeader />
+      <Main>
+        <>
+          <BurgerIngredients
+            bun={bun}
+            sauces={sauces}
+            main={main}
+            selectedBun={selectedBun}
+            selectedIngredients={selectedIngredients}
+            selectBun={selectBun}
+            selectIngredient={openIngredientInfo}
+          />
+
+          <BurgerConstructor
+            totalPrice={totalPrice}
+            openOrderInfo={openOrderInfo}
+          >
+            {isSelectedBun && (
+              <div className={`${appStyles.constructor} ml-8`}>
+                <ConstructorElement
+                  price={selectedBun.price / 2}
+                  text={`${selectedBun.name} (верх)`}
+                  thumbnail={selectedBun.image}
+                  isLocked={true}
+                  type="top"
+                />
+              </div>
+            )}
+            {selectedIngredients.map((item, index) => (
+              <MaterialInCart
+                image={item.image}
+                price={item.price}
+                name={item.name}
+                _id={item._id}
+                key={item._id}
+                product={item}
+                onDelete={removeIngredient}
+                showInfo={openIngredientInfo}
+              />
+            ))}
+            {isSelectedBun && (
+              <div className={`${appStyles.constructor} ml-8`}>
+                <ConstructorElement
+                  price={selectedBun.price / 2}
+                  text={`${selectedBun.name} (низ)`}
+                  thumbnail={selectedBun.image}
+                  isLocked={true}
+                  type="bottom"
+                />
+              </div>
+            )}
+          </BurgerConstructor>
+        </>
+      </Main>
     </div>
   );
 }
