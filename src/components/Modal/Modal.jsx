@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import modalStyles from "./Modal.module.css";
 import { ANIMATION_TIME, reactModalRootElement } from "../../utils/constants";
 import ModalHeader from "../ModalHeader/ModalHeader";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
-import { useMount } from "../../hoocs/useMount";
+import Overlay from "../Overlay/Overlay";
 
 const contentAnimation = {
   enter: modalStyles.contentEnter,
@@ -60,11 +60,7 @@ const Modal = ({
         unmountOnExit
         classNames={overlayAnimation}
       >
-        <div
-          ref={overlayRef}
-          className={modalStyles.overlay}
-          onClick={() => onClose()}
-        />
+        <Overlay ref={overlayRef} onClick={onClose} />
       </CSSTransition>
       <CSSTransition
         in={animationIn}
