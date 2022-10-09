@@ -16,7 +16,7 @@ const MaterialInCart = ({ image, name, price, _id, onDelete }) => {
       <DragIcon type="primary" />
       <ConstructorElement
         isLocked={false}
-        handleClose={() => handleDelete()}
+        handleClose={handleDelete}
         extraClass={materialInCartStyles.constructor}
         thumbnail={image}
         text={name}
