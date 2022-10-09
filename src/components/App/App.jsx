@@ -4,8 +4,7 @@ import AppHeader from "../AppHeader/AppHeader";
 import Main from "../Main/Main";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
-import MaterialInCart from "../MaterialInCart/MaterialInCart";
-import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+
 import {
   INGREDIENTS_URL,
   TYPE_BUN,
@@ -139,7 +138,7 @@ function App() {
     const fetchData = () => {
       fetchGet(INGREDIENTS_URL)
         .then(({ data }) => filterData(data))
-        .catch((e) => alert("Ошибка при запросе получения ингредиентов"));
+        .catch(() => alert("Ошибка при запросе получения ингредиентов"));
     };
     fetchData();
   }, []);
@@ -182,41 +181,11 @@ function App() {
               selectedIngredients,
             }}
           >
-            <BurgerConstructor openOrderInfo={openOrderInfo}>
-              {isSelectedBun && (
-                <div className={`${appStyles.constructor} ml-8`}>
-                  <ConstructorElement
-                    price={selectedBun.price}
-                    text={`${selectedBun.name} (верх)`}
-                    thumbnail={selectedBun.image}
-                    isLocked={true}
-                    type="top"
-                  />
-                </div>
-              )}
-              {selectedIngredients.map((item, index) => (
-                <MaterialInCart
-                  image={item.image}
-                  price={item.price}
-                  name={item.name}
-                  _id={item._id}
-                  key={item._id}
-                  product={item}
-                  onDelete={removeIngredient}
-                />
-              ))}
-              {isSelectedBun && (
-                <div className={`${appStyles.constructor} ml-8`}>
-                  <ConstructorElement
-                    price={selectedBun.price}
-                    text={`${selectedBun.name} (низ)`}
-                    thumbnail={selectedBun.image}
-                    isLocked={true}
-                    type="bottom"
-                  />
-                </div>
-              )}
-            </BurgerConstructor>
+            <BurgerConstructor
+              openOrderInfo={openOrderInfo}
+              isSelectedBun={isSelectedBun}
+              removeIngredient={removeIngredient}
+            />
           </burgerConstructorContext.Provider>
         </>
       </Main>
