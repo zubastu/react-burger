@@ -139,7 +139,7 @@ function App() {
     const fetchData = () => {
       fetchGet(INGREDIENTS_URL)
         .then(({ data }) => filterData(data))
-        .catch((e) => console.log(e));
+        .catch((e) => alert("Ошибка при запросе получения ингредиентов"));
     };
     fetchData();
   }, []);

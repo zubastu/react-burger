@@ -17,12 +17,14 @@ const BurgerConstructor = ({ children, openOrderInfo }) => {
 
   const postOrderDetails = () => {
     const productIds = selectedIngredients.map((i) => i._id);
-    const productData = { ingredients: [selectedBun._id, ...productIds] };
+    const productData = {
+      ingredients: [selectedBun._id, ...productIds, selectedBun._id],
+    };
     fetchPost(productData)
       .then((data) => {
         openOrderInfo(data);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => alert("Ошибка при запросе создания заказа"));
   };
   return (
     <section className={`${burgerIngredientsStyles.container}`}>
