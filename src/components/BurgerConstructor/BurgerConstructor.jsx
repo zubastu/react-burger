@@ -29,7 +29,7 @@ const BurgerConstructor = ({
     };
     fetchPost(productData)
       .then((data) => {
-        openOrderInfo(data);
+        data && data.success && openOrderInfo(data);
       })
       .catch(() => alert("Ошибка при запросе создания заказа"));
   };
