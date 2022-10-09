@@ -41,7 +41,7 @@ const BurgerConstructor = ({ children, openOrderInfo }) => {
           type="primary"
           size="medium"
           extraClass={`${burgerIngredientsStyles.buyBtn} ml-10 mr-4`}
-          onClick={() => postOrderDetails()}
+          onClick={postOrderDetails}
         >
           Оформить заказ
         </Button>
