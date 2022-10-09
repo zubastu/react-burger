@@ -4,7 +4,6 @@ import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { v1 as uuidv1 } from "uuid";
 
 const MaterialItem = ({
   material,
@@ -32,11 +31,7 @@ const MaterialItem = ({
     <div
       className={materialItemStyles.material}
       onClick={() => {
-        const newMaterial = {
-          ...material,
-          _id: uuidv1(),
-        };
-        onSelect(newMaterial);
+        onSelect(material);
       }}
     >
       {counter > 0 && (

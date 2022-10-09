@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import burgerIngredientsStyles from "./BurgerConstructor.module.css";
 import {
   Button,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
+import { BurgerConstructorContext } from "../../cotexts/BurgerConstructorContext";
+import { BACKEND_API } from "../../utils/constants";
+import { api } from "../../utils/api";
 
-const BurgerConstructor = ({ children, totalPrice, openOrderInfo }) => {
+const BurgerConstructor = ({ children, openOrderInfo }) => {
+  const { totalPrice, selectedBun, selectedIngredients } = useContext(
+    BurgerConstructorContext
+  );
+  const { fetchPost } = api(BACKEND_API);
+
+  const postOrderDetails = () => {
+    const productIds = selectedIngredients.map((i) => i._id);
+    const productData = { ingredients: [selectedBun._id, ...productIds] };
+    fetchPost(productData)
+      .then((data) => {
+        openOrderInfo(data);
+      })
+      .catch((e) => console.log(e));
+  };
   return (
     <section className={`${burgerIngredientsStyles.container}`}>
       <div
@@ -22,7 +39,7 @@ const BurgerConstructor = ({ children, totalPrice, openOrderInfo }) => {
           type="primary"
           size="medium"
           extraClass={`${burgerIngredientsStyles.buyBtn} ml-10 mr-4`}
-          onClick={() => openOrderInfo()}
+          onClick={() => postOrderDetails()}
         >
           Оформить заказ
         </Button>
@@ -32,7 +49,6 @@ const BurgerConstructor = ({ children, totalPrice, openOrderInfo }) => {
 };
 
 BurgerConstructor.propTypes = {
-  totalPrice: PropTypes.number,
   children: PropTypes.oneOfType([PropTypes.array, PropTypes.elementType]),
   openOrderInfo: PropTypes.func,
 };

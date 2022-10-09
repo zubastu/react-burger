@@ -12,6 +12,7 @@ const BurgerIngredients = ({
   selectIngredient,
   selectedBun,
   selectedIngredients,
+  selectBun = null,
 }) => {
   return (
     <section className={`${burgerConstructorStyles.container} `}>
@@ -30,7 +31,7 @@ const BurgerIngredients = ({
                 selectedBun={selectedBun}
                 material={bunItem}
                 key={bunItem._id}
-                onSelect={selectIngredient}
+                onSelect={selectBun}
               />
             ))}
         </div>
@@ -75,7 +76,6 @@ BurgerIngredients.propTypes = {
   bun: PropTypes.array.isRequired,
   sauces: PropTypes.array.isRequired,
   main: PropTypes.array.isRequired,
-  selectBun: PropTypes.func.isRequired,
   selectIngredient: PropTypes.func.isRequired,
   selectedBun: INGREDIENT_TYPES.isRequired,
   selectedIngredients: PropTypes.arrayOf(INGREDIENT_TYPES).isRequired,

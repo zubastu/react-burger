@@ -2,27 +2,24 @@ import React from "react";
 import orderDetailsStyles from "./OrderDetails.module.css";
 import successImage from "../../images/done.svg";
 
-const OrderDetails = () => {
-  const data = {
-    orderNumber: Math.ceil(Math.random() * 1000000),
-    orderInfo: "идентификатор заказа",
-    success: true,
-  };
+const OrderDetails = ({ orderResponseInfo }) => {
+  const { name, order, success } = orderResponseInfo;
+  const { number } = order;
   return (
     <>
       <div className={orderDetailsStyles.content}>
         <h2
           className={`${orderDetailsStyles.order} text text_type_digits-large mt-4 mb-8`}
         >
-          {data.orderNumber}
+          {number}
         </h2>
-        <p className="text text_type_main-medium mb-15">{data.orderInfo}</p>
+        <p className="text text_type_main-medium mb-15">{name}</p>
         <img
           className={orderDetailsStyles.image}
-          src={data.success && successImage}
-          alt={data.success ? "Успешно" : "Ошибка"}
+          src={success && successImage}
+          alt={success ? "Успешно" : "Ошибка"}
         />
-        {data.success && (
+        {success && (
           <>
             <p className="text text_type_main-default mt-15 mb-2">
               Ваш заказ начали готовить
