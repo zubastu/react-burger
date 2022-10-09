@@ -15,7 +15,7 @@ import {
 import OrderDetails from "../OrderDetails/OrderDetails";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import ModalAnimationLayout from "../ModalAnimationLayout/ModalAnimationLayout";
-import { BurgerConstructorContext } from "../../cotexts/BurgerConstructorContext";
+import { burgerConstructorContext } from "../../cotexts/burgerConstructorContext";
 import { api } from "../../utils/api";
 
 function App() {
@@ -175,7 +175,7 @@ function App() {
             selectIngredient={openIngredientInfo /*selectIngredient*/} //Для проверки работоспособности корзины
             selectBun={selectBun}
           />
-          <BurgerConstructorContext.Provider
+          <burgerConstructorContext.Provider
             value={{
               totalPrice,
               selectedBun,
@@ -217,7 +217,7 @@ function App() {
                 </div>
               )}
             </BurgerConstructor>
-          </BurgerConstructorContext.Provider>
+          </burgerConstructorContext.Provider>
         </>
       </Main>
     </div>

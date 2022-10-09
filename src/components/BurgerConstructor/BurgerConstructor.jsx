@@ -5,13 +5,13 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import { BurgerConstructorContext } from "../../cotexts/BurgerConstructorContext";
+import { burgerConstructorContext } from "../../cotexts/burgerConstructorContext";
 import { ORDERS_URL } from "../../utils/constants";
 import { api } from "../../utils/api";
 
 const BurgerConstructor = ({ children, openOrderInfo }) => {
   const { totalPrice, selectedBun, selectedIngredients } = useContext(
-    BurgerConstructorContext
+    burgerConstructorContext
   );
   const { fetchPost } = api(ORDERS_URL);
 
