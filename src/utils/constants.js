@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 
-export const API_URL = "https://norma.nomoreparties.space/api/ingredients";
-export const BACKEND_API = "https://norma.nomoreparties.space/api/orders";
+const BASE_URL = "https://norma.nomoreparties.space/";
+export const INGREDIENTS_URL = `${BASE_URL}api/ingredients`;
+export const ORDERS_URL = `${BASE_URL}api/orders`;
 export const TYPE_BUN = "bun";
 export const TYPE_SAUCE = "sauce";
 export const TYPE_MAIN = "main";

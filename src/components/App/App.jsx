@@ -7,7 +7,7 @@ import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import MaterialInCart from "../MaterialInCart/MaterialInCart";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import {
-  API_URL,
+  INGREDIENTS_URL,
   TYPE_BUN,
   TYPE_MAIN,
   TYPE_SAUCE,
@@ -59,7 +59,7 @@ function App() {
     });
   };
 
-  const { fetchGet } = api(API_URL);
+  const { fetchGet } = api(INGREDIENTS_URL);
 
   const selectBun = (bun) => {
     setState({
@@ -137,7 +137,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = () => {
-      fetchGet(API_URL)
+      fetchGet(INGREDIENTS_URL)
         .then(({ data }) => filterData(data))
         .catch((e) => console.log(e));
     };

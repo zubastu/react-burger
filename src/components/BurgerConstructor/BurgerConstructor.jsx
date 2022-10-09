@@ -6,14 +6,14 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import { BurgerConstructorContext } from "../../cotexts/BurgerConstructorContext";
-import { BACKEND_API } from "../../utils/constants";
+import { ORDERS_URL } from "../../utils/constants";
 import { api } from "../../utils/api";
 
 const BurgerConstructor = ({ children, openOrderInfo }) => {
   const { totalPrice, selectedBun, selectedIngredients } = useContext(
     BurgerConstructorContext
   );
-  const { fetchPost } = api(BACKEND_API);
+  const { fetchPost } = api(ORDERS_URL);
 
   const postOrderDetails = () => {
     const productIds = selectedIngredients.map((i) => i._id);
