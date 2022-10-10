@@ -51,10 +51,6 @@ const BurgerConstructor = ({
         )}
         {selectedIngredients.map((item) => (
           <MaterialInCart
-            image={item.image}
-            price={item.price}
-            name={item.name}
-            _id={item._id}
             key={item._id}
             product={item}
             onDelete={removeIngredient}
