@@ -1,18 +1,72 @@
-import React from "react";
+import React, { useContext } from "react";
 import burgerIngredientsStyles from "./BurgerConstructor.module.css";
 import {
   Button,
+  ConstructorElement,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
+import { BurgerConstructorContext } from "../../cotexts/BurgerConstructorContext";
+import { ORDERS_URL } from "../../utils/constants";
+import { api } from "../../utils/api";
+import appStyles from "../App/App.module.css";
+import MaterialInCart from "../MaterialInCart/MaterialInCart";
 
-const BurgerConstructor = ({ children, totalPrice, openOrderInfo }) => {
+const BurgerConstructor = ({
+  openOrderInfo,
+  isSelectedBun,
+  removeIngredient,
+}) => {
+  const { totalPrice, selectedBun, selectedIngredients } = useContext(
+    BurgerConstructorContext
+  );
+  const { fetchPost } = api(ORDERS_URL);
+
+  const postOrderDetails = () => {
+    const productIds = selectedIngredients.map((i) => i._id);
+    const productData = {
+      ingredients: [selectedBun._id, ...productIds, selectedBun._id],
+    };
+    fetchPost(productData)
+      .then((data) => {
+        data && data.success && openOrderInfo(data);
+      })
+      .catch(() => alert("Ошибка при запросе создания заказа"));
+  };
   return (
     <section className={`${burgerIngredientsStyles.container}`}>
       <div
         className={`${burgerIngredientsStyles.materials} custom-scroll mt-25 pl-4 pr-2`}
       >
-        {children}
+        {isSelectedBun && (
+          <div className={`${appStyles.constructor} ml-8`}>
+            <ConstructorElement
+              price={selectedBun.price}
+              text={`${selectedBun.name} (верх)`}
+              thumbnail={selectedBun.image}
+              isLocked={true}
+              type="top"
+            />
+          </div>
+        )}
+        {selectedIngredients.map((item) => (
+          <MaterialInCart
+            key={item._id}
+            product={item}
+            onDelete={removeIngredient}
+          />
+        ))}
+        {isSelectedBun && (
+          <div className={`${appStyles.constructor} ml-8`}>
+            <ConstructorElement
+              price={selectedBun.price}
+              text={`${selectedBun.name} (низ)`}
+              thumbnail={selectedBun.image}
+              isLocked={true}
+              type="bottom"
+            />
+          </div>
+        )}
       </div>
       <div className={`${burgerIngredientsStyles.total} mt-10`}>
         <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
@@ -22,7 +76,7 @@ const BurgerConstructor = ({ children, totalPrice, openOrderInfo }) => {
           type="primary"
           size="medium"
           extraClass={`${burgerIngredientsStyles.buyBtn} ml-10 mr-4`}
-          onClick={() => openOrderInfo()}
+          onClick={postOrderDetails}
         >
           Оформить заказ
         </Button>
@@ -32,7 +86,6 @@ const BurgerConstructor = ({ children, totalPrice, openOrderInfo }) => {
 };
 
 BurgerConstructor.propTypes = {
-  totalPrice: PropTypes.number,
   children: PropTypes.oneOfType([PropTypes.array, PropTypes.elementType]),
   openOrderInfo: PropTypes.func,
 };

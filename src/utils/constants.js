@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 
-export const API_URL = "https://norma.nomoreparties.space/api/ingredients";
+const BASE_URL = "https://norma.nomoreparties.space/";
+export const INGREDIENTS_URL = `${BASE_URL}api/ingredients`;
+export const ORDERS_URL = `${BASE_URL}api/orders`;
 export const TYPE_BUN = "bun";
 export const TYPE_SAUCE = "sauce";
 export const TYPE_MAIN = "main";
 
 export const reactModalRootElement = document.querySelector(".react-modals");
-export const reactModalRootElementActive = "react-modals_active";
 
 export const ANIMATION_TIME = 300;
 
