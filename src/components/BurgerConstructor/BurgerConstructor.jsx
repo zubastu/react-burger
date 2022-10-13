@@ -24,9 +24,11 @@ const BurgerConstructor = ({
 
   const postOrderDetails = () => {
     const productIds = selectedIngredients.map((i) => i._id);
+
     const productData = {
       ingredients: [selectedBun._id, ...productIds, selectedBun._id],
     };
+
     fetchPost(productData)
       .then((data) => {
         data && data.success && openOrderInfo(data);
