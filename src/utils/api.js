@@ -23,7 +23,6 @@ export const api = (url) => {
       headers,
       body: JSON.stringify(data),
     });
-
     return checkPromise(promise);
   };
   return {
