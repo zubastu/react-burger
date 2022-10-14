@@ -13,7 +13,6 @@ import {
 } from "../../utils/constants";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import ModalAnimationLayout from "../ModalAnimationLayout/ModalAnimationLayout";
 import { BurgerConstructorContext } from "../../cotexts/BurgerConstructorContext";
 import { api } from "../../utils/api";
 
@@ -145,22 +144,11 @@ function App() {
 
   return (
     <div className={appStyles.app}>
-      <ModalAnimationLayout
-        isOpen={isOpenOrderDetails}
-        onClose={closeOrderInfo}
-        extraClassName="pb-30"
-      >
-        <OrderDetails orderResponseInfo={orderResponseInfo} />
-      </ModalAnimationLayout>
-
-      <ModalAnimationLayout
-        isOpen={isOpenIngredientDetails}
-        onClose={closeIngredientDetails}
+      {/* <IngredientDetails
+        ingredient={selectedMaterialItem}
         text="Детали ингредиента"
         extraClassName="pb-15"
-      >
-        <IngredientDetails ingredient={selectedMaterialItem} />
-      </ModalAnimationLayout>
+      />*/}
 
       <AppHeader />
       <Main>

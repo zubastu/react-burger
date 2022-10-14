@@ -7,36 +7,36 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import { BurgerConstructorContext } from "../../cotexts/BurgerConstructorContext";
-import { ORDERS_URL } from "../../utils/constants";
-import { api } from "../../utils/api";
 import appStyles from "../App/App.module.css";
 import MaterialInCart from "../MaterialInCart/MaterialInCart";
+import OrderDetails from "../OrderDetails/OrderDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { postOrderDetails } from "../../services/asyncActions/order";
+import Modal from "../Modal/Modal";
 
-const BurgerConstructor = ({
-  openOrderInfo,
-  isSelectedBun,
-  removeIngredient,
-}) => {
+const BurgerConstructor = ({ isSelectedBun, removeIngredient }) => {
+  const dispatch = useDispatch();
+  const { isOpenOrderModal } = useSelector((store) => store.order);
+
   const { totalPrice, selectedBun, selectedIngredients } = useContext(
     BurgerConstructorContext
   );
-  const { fetchPost } = api(ORDERS_URL);
 
-  const postOrderDetails = () => {
+  const postOrder = () => {
     const productIds = selectedIngredients.map((i) => i._id);
 
     const productData = {
       ingredients: [selectedBun._id, ...productIds, selectedBun._id],
     };
-
-    fetchPost(productData)
-      .then((data) => {
-        data && data.success && openOrderInfo(data);
-      })
-      .catch(() => alert("Ошибка при запросе создания заказа"));
+    dispatch(postOrderDetails(productData));
   };
   return (
     <section className={`${burgerIngredientsStyles.container}`}>
+      {isOpenOrderModal && (
+        <Modal extraClassName="pb-30" type="orderModal">
+          <OrderDetails />
+        </Modal>
+      )}
       <div
         className={`${burgerIngredientsStyles.materials} custom-scroll mt-25 pl-4 pr-2`}
       >
@@ -82,7 +82,7 @@ const BurgerConstructor = ({
           type="primary"
           size="medium"
           extraClass={`${burgerIngredientsStyles.buyBtn} ml-10 mr-4`}
-          onClick={postOrderDetails}
+          onClick={postOrder}
         >
           Оформить заказ
         </Button>

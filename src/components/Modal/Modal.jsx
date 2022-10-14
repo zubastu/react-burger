@@ -1,44 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import modalStyles from "./Modal.module.css";
-import { ANIMATION_TIME, reactModalRootElement } from "../../utils/constants";
+import { reactModalRootElement } from "../../utils/constants";
 import ModalHeader from "../ModalHeader/ModalHeader";
 import PropTypes from "prop-types";
-import { CSSTransition } from "react-transition-group";
 import Overlay from "../Overlay/Overlay";
+import { useDispatch } from "react-redux";
+import { CLOSE_ORDER_MODAL } from "../../services/actions/order";
 
-const contentAnimation = {
-  enter: modalStyles.contentEnter,
-  enterActive: modalStyles.contentEnterActive,
-  exit: modalStyles.contentExit,
-  exitActive: modalStyles.contentExitActive,
-};
-
-const overlayAnimation = {
-  enter: modalStyles.overlayEnter,
-  enterActive: modalStyles.overlayEnterActive,
-  exit: modalStyles.overlayExit,
-  exitActive: modalStyles.overlayExitActive,
-};
-
-const Modal = ({
-  children,
-  isOpen = false,
-  onClose,
-  text = null,
-  extraClassName,
-}) => {
-  const [animationIn, setAnimationIn] = useState(false);
-
-  const overlayRef = useRef();
-  const contentRef = useRef();
+const Modal = ({ children, type, text = null, extraClassName }) => {
+  const dispatch = useDispatch();
+  const onClose = () => {
+    if (type === "orderModal") {
+      dispatch({ type: CLOSE_ORDER_MODAL });
+    }
+  };
 
   useEffect(() => {
-    setAnimationIn(isOpen);
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (!isOpen) return;
     const closeOnEscapeKey = (e) => {
       if (e.key === "Escape") {
         onClose();
@@ -48,36 +26,18 @@ const Modal = ({
     return () => {
       document.removeEventListener("keyup", closeOnEscapeKey);
     };
-  }, [isOpen, onClose]);
+  }, [onClose]);
 
   return createPortal(
     <div className={modalStyles.container}>
-      <CSSTransition
-        in={animationIn}
-        nodeRef={overlayRef}
-        timeout={ANIMATION_TIME}
-        mountOnEnter
-        unmountOnExit
-        classNames={overlayAnimation}
+      <Overlay onClick={onClose} />
+
+      <div
+        className={`${modalStyles.modal} pt-10 pl-10 pr-10 ${extraClassName}`}
       >
-        <Overlay ref={overlayRef} onClick={onClose} />
-      </CSSTransition>
-      <CSSTransition
-        in={animationIn}
-        nodeRef={contentRef}
-        timeout={ANIMATION_TIME}
-        mountOnEnter
-        unmountOnExit
-        classNames={contentAnimation}
-      >
-        <div
-          ref={contentRef}
-          className={`${modalStyles.modal} pt-10 pl-10 pr-10 ${extraClassName}`}
-        >
-          <ModalHeader text={text} onClose={onClose} />
-          {children}
-        </div>
-      </CSSTransition>
+        <ModalHeader text={text} onClose={onClose} />
+        {children}
+      </div>
     </div>,
     reactModalRootElement
   );
@@ -85,8 +45,7 @@ const Modal = ({
 
 Modal.propTypes = {
   children: PropTypes.shape(PropTypes.elementType.isRequired).isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
   text: PropTypes.string,
   extraClassName: PropTypes.string,
 };

@@ -13,7 +13,7 @@ export const postOrderDetails = (data) => (dispatch) => {
   fetchPost(data)
     .then((response) =>
       response && response.success
-        ? dispatch({ type: SUCCESS_ORDER_POST, payload: response.data })
+        ? dispatch({ type: SUCCESS_ORDER_POST, payload: response })
         : dispatch({ type: ERROR_ORDER_POST })
     )
     .catch((err) => dispatch({ type: ERROR_ORDER_POST }));
