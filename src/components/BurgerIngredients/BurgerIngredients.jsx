@@ -25,8 +25,6 @@ const BurgerIngredients = ({
   let observerSauces = useObserver(sauceRef);
   let observerMain = useObserver(mainRef);
 
-  console.log(observerMain);
-
   useEffect(() => {
     const element = document.getElementById(current);
     element.scrollIntoView({ behavior: "smooth" });
