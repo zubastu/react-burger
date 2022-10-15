@@ -4,39 +4,31 @@ import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useDispatch, useSelector } from "react-redux";
+import { OPEN_INGREDIENT_DETAILS } from "../../services/actions/ingredients";
+import { INGREDIENT_TYPES } from "../../utils/constants";
 
-const MaterialItem = ({
-  material,
-  onSelect,
-  selectedBun = null,
-  selectedIngredients = null,
-}) => {
+const MaterialItem = ({ material }) => {
+  const dispatch = useDispatch();
+  const { selectedIngredients } = useSelector((store) => store.ingredients);
+
+  const handleClick = () =>
+    dispatch({ type: OPEN_INGREDIENT_DETAILS, payload: material });
+
   const { name, image, price } = material;
-  const [counter, setCounter] = useState(0);
 
-  const findCountMaterials = (materials) => {
-    const materialsArr = materials.filter((item) => item.name === name);
+  const findCountMaterials = () => {
+    const materialsArr = selectedIngredients.filter(
+      (item) => item.name === name
+    );
     return materialsArr.length;
   };
 
-  useEffect(() => {
-    selectedBun && selectedBun.name === name ? setCounter(1) : setCounter(0);
-  }, [selectedBun]);
-
-  useEffect(() => {
-    selectedIngredients && setCounter(findCountMaterials(selectedIngredients));
-  }, [selectedIngredients]);
-
   return (
-    <div
-      className={materialItemStyles.material}
-      onClick={() => {
-        onSelect(material);
-      }}
-    >
-      {counter > 0 && (
+    <div className={materialItemStyles.material} onClick={handleClick}>
+      {findCountMaterials() > 0 && (
         <Counter
-          count={counter}
+          count={findCountMaterials()}
           size="small"
           extraClass={materialItemStyles.material__counter}
         />
@@ -54,6 +46,10 @@ const MaterialItem = ({
       </p>
     </div>
   );
+};
+
+MaterialItem.propTypes = {
+  material: INGREDIENT_TYPES,
 };
 
 export default MaterialItem;

@@ -1,20 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import burgerConstructorStyles from "./BurgerIngredients.module.css";
 import MaterialItem from "../MaterialItem/MaterialItem";
-import PropTypes from "prop-types";
-import { INGREDIENT_TYPES } from "../../utils/constants";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useObserver } from "../../hoocs/useObserver";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import Modal from "../Modal/Modal";
+import { useDispatch, useSelector } from "react-redux";
 
-const BurgerIngredients = ({
-  bun,
-  sauces,
-  main,
-  selectIngredient,
-  selectedBun,
-  selectedIngredients,
-  selectBun = null,
-}) => {
+const BurgerIngredients = () => {
+  //Логика табов
   const [current, setCurrent] = useState("one");
 
   const sauceRef = useRef();
@@ -30,11 +24,26 @@ const BurgerIngredients = ({
     element.scrollIntoView({ behavior: "smooth" });
   }, [current]);
 
+  // Логика ингредиентов
+  const { bun, sauces, main, isModalIngredientOpen } = useSelector(
+    (store) => store.ingredients
+  );
+
   return (
     <section
       id="ingredients-container"
       className={`${burgerConstructorStyles.container} `}
     >
+      {isModalIngredientOpen && (
+        <Modal
+          text="Детали ингредиента"
+          extraClassName="pb-15"
+          type="ingredient-modal"
+        >
+          <IngredientDetails />
+        </Modal>
+      )}
+
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
 
       <div style={{ display: "flex" }}>
@@ -67,12 +76,7 @@ const BurgerIngredients = ({
         >
           {bun &&
             bun.map((bunItem) => (
-              <MaterialItem
-                selectedBun={selectedBun}
-                material={bunItem}
-                key={bunItem._id}
-                onSelect={selectBun}
-              />
+              <MaterialItem material={bunItem} key={bunItem._id} />
             ))}
         </div>
         <h2 id="two" className="text text_type_main-medium mt-10">
@@ -84,12 +88,7 @@ const BurgerIngredients = ({
         >
           {sauces &&
             sauces.map((sauce) => (
-              <MaterialItem
-                selectedIngredients={selectedIngredients}
-                material={sauce}
-                key={sauce._id}
-                onSelect={selectIngredient}
-              />
+              <MaterialItem material={sauce} key={sauce._id} />
             ))}
         </div>
         <h2 id="three" className="text text_type_main-medium mt-10">
@@ -101,26 +100,12 @@ const BurgerIngredients = ({
         >
           {main &&
             main.map((mainItem) => (
-              <MaterialItem
-                selectedIngredients={selectedIngredients}
-                material={mainItem}
-                key={mainItem._id}
-                onSelect={selectIngredient}
-              />
+              <MaterialItem material={mainItem} key={mainItem._id} />
             ))}
         </div>
       </div>
     </section>
   );
-};
-
-BurgerIngredients.propTypes = {
-  bun: PropTypes.array.isRequired,
-  sauces: PropTypes.array.isRequired,
-  main: PropTypes.array.isRequired,
-  selectIngredient: PropTypes.func.isRequired,
-  selectedBun: INGREDIENT_TYPES.isRequired,
-  selectedIngredients: PropTypes.arrayOf(INGREDIENT_TYPES).isRequired,
 };
 
 export default BurgerIngredients;
