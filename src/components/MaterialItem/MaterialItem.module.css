@@ -7,9 +7,13 @@
     justify-content: flex-start;
     flex-direction: column;
     position: relative;
-    cursor: pointer;
+    cursor: grab;
     transition: opacity .7s ease;
 }
+.material_active {
+    border: 1px dot-dash green;
+}
+
 .material:hover{
     opacity: .7;
     transition: opacity .7s ease;

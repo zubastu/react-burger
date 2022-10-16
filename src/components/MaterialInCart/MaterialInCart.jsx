@@ -5,24 +5,38 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import materialInCartStyles from "./MaterialInCart.module.css";
 import PropTypes from "prop-types";
+import { useDrag } from "react-dnd";
+import { useDispatch } from "react-redux";
+import { DELETE_INGREDIENT } from "../../services/actions/ingredients";
 
-const MaterialInCart = ({ image, name, price, _id }) => {
+const MaterialInCart = ({ image, name, price, _id, product }) => {
+  const dispatch = useDispatch();
+  const [{ isDrag }, dragRef] = useDrag({
+    type: "ingredient-cart",
+    item: product,
+    collect: (monitor) => ({
+      isDrag: monitor.isDragging(),
+    }),
+  });
+
   const handleDelete = (e) => {
     e.stopPropagation();
-    onDelete(_id);
+    dispatch({ type: DELETE_INGREDIENT, payload: _id });
   };
   return (
-    <div className={materialInCartStyles.container}>
-      <DragIcon type="primary" />
-      <ConstructorElement
-        isLocked={false}
-        /*        handleClose={handleDelete}*/
-        extraClass={materialInCartStyles.constructor}
-        thumbnail={image}
-        text={name}
-        price={price}
-      />
-    </div>
+    !isDrag && (
+      <div className={materialInCartStyles.container} ref={dragRef}>
+        <DragIcon type="primary" />
+        <ConstructorElement
+          isLocked={false}
+          handleClose={handleDelete}
+          extraClass={materialInCartStyles.constructor}
+          thumbnail={image}
+          text={name}
+          price={price}
+        />
+      </div>
+    )
   );
 };
 

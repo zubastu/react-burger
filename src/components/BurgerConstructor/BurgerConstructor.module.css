@@ -9,6 +9,10 @@
     max-height: 100%;
     min-height: 100%;
 }
+.materials_active {
+    border: 1px dot-dash lightgreen;
+}
+
 .materials{
     overflow-y: scroll;
     box-sizing: border-box;
@@ -16,6 +20,7 @@
     flex-direction: column;
     gap: 16px;
     width: 100%;
+    flex: 1 1 auto;
 }
 .total {
     justify-self: flex-end;

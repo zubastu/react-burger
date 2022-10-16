@@ -6,6 +6,8 @@ import { useObserver } from "../../hoocs/useObserver";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import Modal from "../Modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
+import { useDrop } from "react-dnd";
+import { DELETE_INGREDIENT } from "../../services/actions/ingredients";
 
 const BurgerIngredients = () => {
   //Логика табов
@@ -29,8 +31,17 @@ const BurgerIngredients = () => {
     (store) => store.ingredients
   );
 
+  const dispatch = useDispatch();
+  const [, dropTarget] = useDrop({
+    accept: "ingredient-cart",
+    drop(ingredient) {
+      dispatch({ type: DELETE_INGREDIENT, payload: ingredient._id });
+    },
+  });
+
   return (
     <section
+      ref={dropTarget}
       id="ingredients-container"
       className={`${burgerConstructorStyles.container} `}
     >
