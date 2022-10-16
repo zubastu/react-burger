@@ -19,7 +19,7 @@ function App() {
       <Main>
         <>
           <BurgerIngredients />
-          {/*          <BurgerConstructor />*/}
+          <BurgerConstructor />
         </>
       </Main>
     </div>

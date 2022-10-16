@@ -4,6 +4,8 @@ import {
   START_INGREDIENTS_FETCH,
   OPEN_INGREDIENT_DETAILS,
   CLOSE_INGREDIENT_DETAILS,
+  ADD_INGREDIENT,
+  SELECT_BUN,
 } from "../actions/ingredients";
 import { TYPE_BUN, TYPE_MAIN, TYPE_SAUCE } from "../../utils/constants";
 
@@ -16,6 +18,7 @@ const initialState = {
   isModalIngredientOpen: false,
   selectedIngredient: {},
   selectedIngredients: [],
+  selectedBun: {},
 };
 
 export const ingredientsReducer = (state = initialState, action) => {
@@ -51,6 +54,17 @@ export const ingredientsReducer = (state = initialState, action) => {
         ...state,
         isModalIngredientOpen: false,
         selectedIngredient: {},
+      };
+    case ADD_INGREDIENT:
+      return {
+        ...state,
+        selectedIngredients: [...state.selectedIngredients, action.payload],
+      };
+    case SELECT_BUN:
+      return {
+        ...state,
+        selectedBun:
+          state.selectedBun.name === action.payload.name ? {} : action.payload,
       };
     default:
       return state;

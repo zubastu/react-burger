@@ -6,7 +6,7 @@ import {
 import materialInCartStyles from "./MaterialInCart.module.css";
 import PropTypes from "prop-types";
 
-const MaterialInCart = ({ image, name, price, _id, onDelete }) => {
+const MaterialInCart = ({ image, name, price, _id }) => {
   const handleDelete = (e) => {
     e.stopPropagation();
     onDelete(_id);
@@ -16,7 +16,7 @@ const MaterialInCart = ({ image, name, price, _id, onDelete }) => {
       <DragIcon type="primary" />
       <ConstructorElement
         isLocked={false}
-        handleClose={handleDelete}
+        /*        handleClose={handleDelete}*/
         extraClass={materialInCartStyles.constructor}
         thumbnail={image}
         text={name}
@@ -31,7 +31,6 @@ MaterialInCart.propTypes = {
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   _id: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
 };
 
 export default MaterialInCart;

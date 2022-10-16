@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import burgerIngredientsStyles from "./BurgerConstructor.module.css";
 import {
   Button,
@@ -6,7 +6,6 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import { BurgerConstructorContext } from "../../cotexts/BurgerConstructorContext";
 import appStyles from "../App/App.module.css";
 import MaterialInCart from "../MaterialInCart/MaterialInCart";
 import OrderDetails from "../OrderDetails/OrderDetails";
@@ -14,12 +13,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { postOrderDetails } from "../../services/asyncActions/order";
 import Modal from "../Modal/Modal";
 
-const BurgerConstructor = ({ isSelectedBun, removeIngredient }) => {
+const BurgerConstructor = () => {
   const dispatch = useDispatch();
   const { isOpenOrderModal } = useSelector((store) => store.order);
+  const { selectedIngredients, selectedBun } = useSelector(
+    (store) => store.ingredients
+  );
 
-  const { totalPrice, selectedBun, selectedIngredients } = useContext(
-    BurgerConstructorContext
+  const totalPrice = selectedIngredients.reduce(
+    (prev, current) => prev + current.price,
+    selectedBun.price * 2 || 0
   );
 
   const postOrder = () => {
@@ -40,7 +43,7 @@ const BurgerConstructor = ({ isSelectedBun, removeIngredient }) => {
       <div
         className={`${burgerIngredientsStyles.materials} custom-scroll mt-25 pl-4 pr-2`}
       >
-        {isSelectedBun && (
+        {selectedBun.type && (
           <div className={`${appStyles.constructor} ml-8`}>
             <ConstructorElement
               price={selectedBun.price}
@@ -51,18 +54,18 @@ const BurgerConstructor = ({ isSelectedBun, removeIngredient }) => {
             />
           </div>
         )}
-        {selectedIngredients.map((item) => (
-          <MaterialInCart
-            image={item.image}
-            price={item.price}
-            name={item.name}
-            _id={item._id}
-            key={item._id}
-            product={item}
-            onDelete={removeIngredient}
-          />
-        ))}
-        {isSelectedBun && (
+        {selectedIngredients.length > 0 &&
+          selectedIngredients.map((item) => (
+            <MaterialInCart
+              image={item.image}
+              price={item.price}
+              name={item.name}
+              _id={item._id}
+              key={item._id}
+              product={item}
+            />
+          ))}
+        {selectedBun.type && (
           <div className={`${appStyles.constructor} ml-8`}>
             <ConstructorElement
               price={selectedBun.price}

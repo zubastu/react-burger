@@ -1,23 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import materialItemStyles from "./MaterialItem.module.css";
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
-import { OPEN_INGREDIENT_DETAILS } from "../../services/actions/ingredients";
+import {
+  OPEN_INGREDIENT_DETAILS,
+  ADD_INGREDIENT,
+  SELECT_BUN,
+} from "../../services/actions/ingredients";
 import { INGREDIENT_TYPES } from "../../utils/constants";
 
 const MaterialItem = ({ material }) => {
   const dispatch = useDispatch();
-  const { selectedIngredients } = useSelector((store) => store.ingredients);
+  const { selectedIngredients, selectedBun } = useSelector(
+    (store) => store.ingredients
+  );
 
-  const handleClick = () =>
-    dispatch({ type: OPEN_INGREDIENT_DETAILS, payload: material });
+  const handleClick = () => {
+    /* if (material.type !== "bun") {
+      dispatch({ type: ADD_INGREDIENT, payload: material });
+    } else {
+      dispatch({ type: SELECT_BUN, payload: material });
+    }*/
+    dispatch({
+      type: OPEN_INGREDIENT_DETAILS,
+      payload: material,
+    });
+  };
 
   const { name, image, price } = material;
 
   const findCountMaterials = () => {
+    if (material.name === selectedBun.name) return 1;
     const materialsArr = selectedIngredients.filter(
       (item) => item.name === name
     );
