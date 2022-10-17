@@ -17,10 +17,8 @@ function App() {
     <div className={appStyles.app}>
       <AppHeader />
       <Main>
-        <>
-          <BurgerIngredients />
-          <BurgerConstructor />
-        </>
+        <BurgerIngredients />
+        <BurgerConstructor />
       </Main>
     </div>
   );
