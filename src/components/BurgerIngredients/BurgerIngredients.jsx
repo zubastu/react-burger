@@ -5,9 +5,11 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useObserver } from "../../hoocs/useObserver";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import Modal from "../Modal/Modal";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { CLOSE_INGREDIENT_DETAILS } from "../../services/actions/ingredients";
 
 const BurgerIngredients = () => {
+  const dispatch = useDispatch();
   const sauceRef = useRef();
   const bunRef = useRef();
   const mainRef = useRef();
@@ -24,6 +26,8 @@ const BurgerIngredients = () => {
     (store) => store.ingredients
   );
 
+  const closeModal = () => dispatch({ type: CLOSE_INGREDIENT_DETAILS });
+
   return (
     <section
       id="ingredients-container"
@@ -33,7 +37,7 @@ const BurgerIngredients = () => {
         <Modal
           text="Детали ингредиента"
           extraClassName="pb-15"
-          type="ingredient-modal"
+          onClose={closeModal}
         >
           <IngredientDetails />
         </Modal>

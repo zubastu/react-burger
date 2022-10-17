@@ -5,21 +5,8 @@ import { reactModalRootElement } from "../../utils/constants";
 import ModalHeader from "../ModalHeader/ModalHeader";
 import PropTypes from "prop-types";
 import Overlay from "../Overlay/Overlay";
-import { useDispatch } from "react-redux";
-import { CLOSE_ORDER_MODAL } from "../../services/actions/order";
-import { CLOSE_INGREDIENT_DETAILS } from "../../services/actions/ingredients";
 
-const Modal = ({ children, type, text = null, extraClassName }) => {
-  const dispatch = useDispatch();
-  const onClose = () => {
-    if (type === "orderModal") {
-      dispatch({ type: CLOSE_ORDER_MODAL });
-    }
-    if (type === "ingredient-modal") {
-      dispatch({ type: CLOSE_INGREDIENT_DETAILS });
-    }
-  };
-
+const Modal = ({ children, onClose, text = null, extraClassName }) => {
   useEffect(() => {
     const closeOnEscapeKey = (e) => {
       if (e.key === "Escape") {
@@ -49,8 +36,8 @@ const Modal = ({ children, type, text = null, extraClassName }) => {
 
 Modal.propTypes = {
   children: PropTypes.shape(PropTypes.elementType.isRequired).isRequired,
-  type: PropTypes.string.isRequired,
   text: PropTypes.string,
+  onClose: PropTypes.func.isRequired,
   extraClassName: PropTypes.string,
 };
 

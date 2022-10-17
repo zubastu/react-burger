@@ -13,6 +13,7 @@ import { postOrderDetails } from "../../services/asyncActions/order";
 import Modal from "../Modal/Modal";
 import { ADD_INGREDIENT, SELECT_BUN } from "../../services/actions/ingredients";
 import SelectedIngredients from "../SelectedIngredients/SelectedIngredients";
+import { CLOSE_ORDER_MODAL } from "../../services/actions/order";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
@@ -60,13 +61,15 @@ const BurgerConstructor = () => {
     dispatch(postOrderDetails(productData));
   };
 
+  const closeModal = () => dispatch({ type: CLOSE_ORDER_MODAL });
+
   return (
     <section
       ref={dropTarget}
       className={`${burgerIngredientsStyles.container} `}
     >
       {isOpenOrderModal && (
-        <Modal extraClassName="pb-30" type="orderModal">
+        <Modal extraClassName="pb-30" type="orderModal" onClose={closeModal}>
           <OrderDetails />
         </Modal>
       )}
