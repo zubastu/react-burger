@@ -2,13 +2,9 @@ import React from "react";
 import overlayStyles from "./Overlay.module.css";
 import PropTypes from "prop-types";
 
-const Overlay = ({ onClick }, ref) => {
+const Overlay = ({ onClick }) => {
   return (
-    <div
-      ref={ref}
-      className={overlayStyles.overlay}
-      onClick={() => onClick()}
-    ></div>
+    <div className={overlayStyles.overlay} onClick={() => onClick()}></div>
   );
 };
 
