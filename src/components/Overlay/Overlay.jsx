@@ -2,7 +2,7 @@ import React from "react";
 import overlayStyles from "./Overlay.module.css";
 import PropTypes from "prop-types";
 
-const Overlay = React.forwardRef(({ onClick }, ref) => {
+const Overlay = ({ onClick }, ref) => {
   return (
     <div
       ref={ref}
@@ -10,7 +10,7 @@ const Overlay = React.forwardRef(({ onClick }, ref) => {
       onClick={() => onClick()}
     ></div>
   );
-});
+};
 
 Overlay.propTypes = {
   onClick: PropTypes.func,
