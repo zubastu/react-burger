@@ -9,7 +9,7 @@ const Overlay = ({ onClick }) => {
 };
 
 Overlay.propTypes = {
-  onClick: PropTypes.func,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Overlay;

@@ -17,7 +17,7 @@ import { CLOSE_ORDER_MODAL } from "../../services/actions/order";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
-  const { isOpenOrderModal } = useSelector((store) => store.order);
+  const { isOpenOrderModal, isRequest } = useSelector((store) => store.order);
   const { selectedIngredients, selectedBun } = useSelector(
     (store) => store.ingredients
   );
@@ -84,6 +84,7 @@ const BurgerConstructor = () => {
         <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
         <CurrencyIcon type="primary" />
         <Button
+          disabled={isRequest}
           htmlType={"button"}
           type="primary"
           size="medium"

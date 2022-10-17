@@ -68,7 +68,7 @@ const MaterialItem = ({ material }) => {
 };
 
 MaterialItem.propTypes = {
-  material: INGREDIENT_TYPES,
+  material: INGREDIENT_TYPES.isRequired,
 };
 
 export default MaterialItem;

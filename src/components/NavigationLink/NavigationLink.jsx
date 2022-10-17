@@ -18,7 +18,7 @@ NavigationLink.propTypes = {
   path: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   styles: PropTypes.string,
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };
 
 export default NavigationLink;
