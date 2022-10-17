@@ -1,5 +1,6 @@
 import React from "react";
 import overlayStyles from "./Overlay.module.css";
+import PropTypes from "prop-types";
 
 const Overlay = React.forwardRef(({ onClick }, ref) => {
   return (
@@ -10,5 +11,9 @@ const Overlay = React.forwardRef(({ onClick }, ref) => {
     ></div>
   );
 });
+
+Overlay.propTypes = {
+  onClick: PropTypes.func,
+};
 
 export default Overlay;

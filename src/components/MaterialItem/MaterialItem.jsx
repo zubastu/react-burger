@@ -19,14 +19,12 @@ const MaterialItem = ({ material }) => {
   const [, dragRef, dragPreviewRef] = useDrag({
     type: "ingredient",
     item: material,
+    collect: (monitor) => ({
+      opacity: monitor.isDragging() ? 0.5 : 1,
+    }),
   });
 
   const handleClick = () => {
-    /* if (material.type !== "bun") {
-      dispatch({ type: ADD_INGREDIENT, payload: material });
-    } else {
-      dispatch({ type: SELECT_BUN, payload: material });
-    }*/
     dispatch({
       type: OPEN_INGREDIENT_DETAILS,
       payload: material,

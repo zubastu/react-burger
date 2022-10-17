@@ -7,6 +7,7 @@ import {
   ADD_INGREDIENT,
   SELECT_BUN,
   DELETE_INGREDIENT,
+  UPDATE_INGREDIENTS,
 } from "../actions/ingredients";
 import { TYPE_BUN, TYPE_MAIN, TYPE_SAUCE } from "../../utils/constants";
 
@@ -65,14 +66,18 @@ export const ingredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedIngredients: [...state.selectedIngredients].filter(
-          ({ _id }) => _id !== action.payload
+          ({ id }) => id !== action.payload
         ),
       };
     case SELECT_BUN:
       return {
         ...state,
-        selectedBun:
-          state.selectedBun.name === action.payload.name ? {} : action.payload,
+        selectedBun: action.payload,
+      };
+    case UPDATE_INGREDIENTS:
+      return {
+        ...state,
+        selectedIngredients: action.payload,
       };
     default:
       return state;

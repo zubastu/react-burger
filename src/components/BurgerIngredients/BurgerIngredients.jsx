@@ -1,18 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import burgerConstructorStyles from "./BurgerIngredients.module.css";
 import MaterialItem from "../MaterialItem/MaterialItem";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useObserver } from "../../hoocs/useObserver";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import Modal from "../Modal/Modal";
-import { useDispatch, useSelector } from "react-redux";
-import { useDrop } from "react-dnd";
-import { DELETE_INGREDIENT } from "../../services/actions/ingredients";
+import { useSelector } from "react-redux";
 
 const BurgerIngredients = () => {
-  //Логика табов
-  const [current, setCurrent] = useState("one");
-
   const sauceRef = useRef();
   const bunRef = useRef();
   const mainRef = useRef();
@@ -21,27 +16,16 @@ const BurgerIngredients = () => {
   let observerSauces = useObserver(sauceRef);
   let observerMain = useObserver(mainRef);
 
-  useEffect(() => {
-    const element = document.getElementById(current);
-    element.scrollIntoView({ behavior: "smooth" });
-  }, [current]);
+  const handleClick = (ref) =>
+    ref.current.scrollIntoView({ behavior: "smooth" });
 
   // Логика ингредиентов
   const { bun, sauces, main, isModalIngredientOpen } = useSelector(
     (store) => store.ingredients
   );
 
-  const dispatch = useDispatch();
-  const [, dropTarget] = useDrop({
-    accept: "ingredient-cart",
-    drop(ingredient) {
-      dispatch({ type: DELETE_INGREDIENT, payload: ingredient._id });
-    },
-  });
-
   return (
     <section
-      ref={dropTarget}
       id="ingredients-container"
       className={`${burgerConstructorStyles.container} `}
     >
@@ -58,20 +42,24 @@ const BurgerIngredients = () => {
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
 
       <div style={{ display: "flex" }}>
-        <Tab value="one" active={observerBun.intersecting} onClick={setCurrent}>
+        <Tab
+          value="one"
+          active={observerBun.intersecting}
+          onClick={() => handleClick(bunRef)}
+        >
           Булки
         </Tab>
         <Tab
           value="two"
           active={observerSauces.intersecting}
-          onClick={setCurrent}
+          onClick={() => handleClick(sauceRef)}
         >
           Соусы
         </Tab>
         <Tab
           value="three"
           active={observerMain.intersecting}
-          onClick={setCurrent}
+          onClick={() => handleClick(mainRef)}
         >
           Начинки
         </Tab>
