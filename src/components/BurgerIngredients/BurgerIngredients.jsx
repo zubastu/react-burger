@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import burgerConstructorStyles from "./BurgerIngredients.module.css";
 import MaterialItem from "../MaterialItem/MaterialItem";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useObserver } from "../../hoocs/useObserver";
+import { useObserver } from "../../hooks/useObserver";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import Modal from "../Modal/Modal";
 import { useSelector, useDispatch } from "react-redux";
