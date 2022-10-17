@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import selectedIngredientsStyles from "./SelectedIngredients.module.css";
 import MaterialInCart from "../MaterialInCart/MaterialInCart";
-import uuidv1 from "uuid/v1";
 import { useDispatch, useSelector } from "react-redux";
 import appStyles from "../App/App.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -51,8 +50,8 @@ const SelectedIngredients = () => {
             price={item.price}
             name={item.name}
             _id={item._id}
-            id={uuidv1()}
-            key={uuidv1()}
+            id={item.id}
+            key={item.id}
             product={item}
             index={index}
             moveIngredient={moveIngredient}
