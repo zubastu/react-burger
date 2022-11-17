@@ -1,84 +1,114 @@
-import React from "react";
+import React, { useRef } from "react";
 import burgerConstructorStyles from "./BurgerIngredients.module.css";
-import MyTab from "../MyTab/MyTab";
 import MaterialItem from "../MaterialItem/MaterialItem";
-import PropTypes from "prop-types";
-import { INGREDIENT_TYPES } from "../../utils/constants";
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useObserver } from "../../hooks/useObserver";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import Modal from "../Modal/Modal";
+import { useSelector, useDispatch } from "react-redux";
+import { CLOSE_INGREDIENT_DETAILS } from "../../services/actions/ingredients";
 
-const BurgerIngredients = ({
-  bun,
-  sauces,
-  main,
-  selectIngredient,
-  selectedBun,
-  selectedIngredients,
-  selectBun = null,
-}) => {
+const BurgerIngredients = () => {
+  const dispatch = useDispatch();
+  const sauceRef = useRef();
+  const bunRef = useRef();
+  const mainRef = useRef();
+
+  let observerBun = useObserver(bunRef);
+  let observerSauces = useObserver(sauceRef);
+  let observerMain = useObserver(mainRef);
+
+  const handleClick = (ref) =>
+    ref.current.scrollIntoView({ behavior: "smooth" });
+
+  // Логика ингредиентов
+  const { bun, sauces, main, isModalIngredientOpen } = useSelector(
+    (store) => store.ingredients
+  );
+
+  const closeModal = () => dispatch({ type: CLOSE_INGREDIENT_DETAILS });
+
   return (
-    <section className={`${burgerConstructorStyles.container} `}>
+    <section
+      id="ingredients-container"
+      className={`${burgerConstructorStyles.container} `}
+    >
+      {isModalIngredientOpen && (
+        <Modal
+          text="Детали ингредиента"
+          extraClassName="pb-15"
+          onClose={closeModal}
+        >
+          <IngredientDetails />
+        </Modal>
+      )}
+
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
-      <MyTab />
+
+      <div style={{ display: "flex" }}>
+        <Tab
+          value="one"
+          active={observerBun.intersecting}
+          onClick={() => handleClick(bunRef)}
+        >
+          Булки
+        </Tab>
+        <Tab
+          value="two"
+          active={observerSauces.intersecting}
+          onClick={() => handleClick(sauceRef)}
+        >
+          Соусы
+        </Tab>
+        <Tab
+          value="three"
+          active={observerMain.intersecting}
+          onClick={() => handleClick(mainRef)}
+        >
+          Начинки
+        </Tab>
+      </div>
+
       <div className={`${burgerConstructorStyles.scroll} custom-scroll mt-10`}>
         <h2 id="one" className="text text_type_main-medium">
           Булки
         </h2>
         <div
+          ref={bunRef}
           className={`${burgerConstructorStyles.material_container} pt-6 pl-4 pr-4`}
         >
           {bun &&
             bun.map((bunItem) => (
-              <MaterialItem
-                selectedBun={selectedBun}
-                material={bunItem}
-                key={bunItem._id}
-                onSelect={selectBun}
-              />
+              <MaterialItem material={bunItem} key={bunItem._id} />
             ))}
         </div>
         <h2 id="two" className="text text_type_main-medium mt-10">
           Соусы
         </h2>
         <div
+          ref={sauceRef}
           className={`${burgerConstructorStyles.material_container} pt-6 pl-4 pr-4`}
         >
           {sauces &&
             sauces.map((sauce) => (
-              <MaterialItem
-                selectedIngredients={selectedIngredients}
-                material={sauce}
-                key={sauce._id}
-                onSelect={selectIngredient}
-              />
+              <MaterialItem material={sauce} key={sauce._id} />
             ))}
         </div>
         <h2 id="three" className="text text_type_main-medium mt-10">
           Начинки
         </h2>
         <div
+          ref={mainRef}
           className={`${burgerConstructorStyles.material_container} pt-6 pl-4 pr-4`}
         >
           {main &&
             main.map((mainItem) => (
-              <MaterialItem
-                selectedIngredients={selectedIngredients}
-                material={mainItem}
-                key={mainItem._id}
-                onSelect={selectIngredient}
-              />
+              <MaterialItem material={mainItem} key={mainItem._id} />
             ))}
         </div>
       </div>
     </section>
   );
-};
-
-BurgerIngredients.propTypes = {
-  bun: PropTypes.array.isRequired,
-  sauces: PropTypes.array.isRequired,
-  main: PropTypes.array.isRequired,
-  selectIngredient: PropTypes.func.isRequired,
-  selectedBun: INGREDIENT_TYPES.isRequired,
-  selectedIngredients: PropTypes.arrayOf(INGREDIENT_TYPES).isRequired,
 };
 
 export default BurgerIngredients;

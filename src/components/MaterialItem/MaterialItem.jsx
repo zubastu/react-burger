@@ -1,47 +1,58 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import materialItemStyles from "./MaterialItem.module.css";
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useDrag } from "react-dnd";
+import { useDispatch, useSelector } from "react-redux";
+import { OPEN_INGREDIENT_DETAILS } from "../../services/actions/ingredients";
+import { INGREDIENT_TYPES } from "../../utils/constants";
 
-const MaterialItem = ({
-  material,
-  onSelect,
-  selectedBun = null,
-  selectedIngredients = null,
-}) => {
+const MaterialItem = ({ material }) => {
   const { name, image, price } = material;
-  const [counter, setCounter] = useState(0);
+  const dispatch = useDispatch();
+  const { selectedIngredients, selectedBun } = useSelector(
+    (store) => store.ingredients
+  );
 
-  const findCountMaterials = (materials) => {
-    const materialsArr = materials.filter((item) => item.name === name);
-    return materialsArr.length;
+  const [, dragRef, dragPreviewRef] = useDrag({
+    type: "ingredient",
+    item: material,
+    collect: (monitor) => ({
+      opacity: monitor.isDragging() ? 0.5 : 1,
+    }),
+  });
+
+  const handleClick = () => {
+    dispatch({
+      type: OPEN_INGREDIENT_DETAILS,
+      payload: material,
+    });
   };
 
-  useEffect(() => {
-    selectedBun && selectedBun.name === name ? setCounter(1) : setCounter(0);
-  }, [selectedBun]);
-
-  useEffect(() => {
-    selectedIngredients && setCounter(findCountMaterials(selectedIngredients));
-  }, [selectedIngredients]);
+  const findCountMaterials = () => {
+    if (material.name === selectedBun.name) return 1;
+    const materialsArr = selectedIngredients.filter(
+      (item) => item.name === name
+    );
+    return materialsArr.length;
+  };
 
   return (
     <div
       className={materialItemStyles.material}
-      onClick={() => {
-        onSelect(material);
-      }}
+      onClick={handleClick}
+      ref={dragRef}
     >
-      {counter > 0 && (
+      {findCountMaterials() > 0 && (
         <Counter
-          count={counter}
+          count={findCountMaterials()}
           size="small"
           extraClass={materialItemStyles.material__counter}
         />
       )}
-      <img src={image} alt={name} />
+      <img src={image} alt={name} ref={dragPreviewRef} />
       <div className={`${materialItemStyles.material__price} mt-1 mb-1`}>
         <p className="text text_type_digits-default">{price}</p>
         <CurrencyIcon type="primary" />
@@ -54,6 +65,10 @@ const MaterialItem = ({
       </p>
     </div>
   );
+};
+
+MaterialItem.propTypes = {
+  material: INGREDIENT_TYPES.isRequired,
 };
 
 export default MaterialItem;

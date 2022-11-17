@@ -2,6 +2,7 @@
     max-height: 80px;
     box-sizing: border-box;
     max-width: 536px;
+    cursor: grab;
 }
 .container {
     display: flex;

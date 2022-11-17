@@ -1,20 +1,76 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import materialInCartStyles from "./MaterialInCart.module.css";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { DELETE_INGREDIENT } from "../../services/actions/ingredients";
+import { useDrag, useDrop } from "react-dnd";
 import { INGREDIENT_TYPES } from "../../utils/constants";
 
-const MaterialInCart = ({ product, onDelete }) => {
-  const { image, name, price, _id } = product;
+const MaterialInCart = ({
+  image,
+  name,
+  price,
+  _id,
+  product,
+  index,
+  moveIngredient,
+}) => {
+  const ref = useRef(null);
+  const dispatch = useDispatch();
+
+  const [{ handlerId }, dropTarget] = useDrop({
+    accept: "selected-ingredient",
+    collect: (monitor) => ({
+      handlerId: monitor.getHandlerId(),
+    }),
+    hover(ingredient, monitor) {
+      if (!ref.current) {
+        return;
+      }
+      const dIndex = product.index;
+
+      if (dIndex === index) {
+        return;
+      }
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+
+      const clientOffset = monitor.getClientOffset();
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      if (dIndex < index && hoverClientY < hoverMiddleY) {
+        return;
+      }
+      moveIngredient(ingredient, index);
+      ingredient.index = index;
+    },
+  });
+
+  const [, drag] = useDrag({
+    type: "selected-ingredient",
+    item: { index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+  drag(dropTarget(ref));
+
   const handleDelete = (e) => {
     e.stopPropagation();
-    onDelete(_id);
+    dispatch({ type: DELETE_INGREDIENT, payload: product.id });
   };
+
   return (
-    <div className={materialInCartStyles.container}>
+    <div
+      ref={ref}
+      data-handler-id={handlerId}
+      onDrop={(e) => e.preventDefault()}
+      className={materialInCartStyles.container}
+    >
       <DragIcon type="primary" />
       <ConstructorElement
         isLocked={false}
@@ -29,8 +85,13 @@ const MaterialInCart = ({ product, onDelete }) => {
 };
 
 MaterialInCart.propTypes = {
-  product: INGREDIENT_TYPES,
-  onDelete: PropTypes.func.isRequired,
+  image: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  _id: PropTypes.string.isRequired,
+  product: INGREDIENT_TYPES.isRequired,
+  index: PropTypes.number.isRequired,
+  moveIngredient: PropTypes.func.isRequired,
 };
 
 export default MaterialInCart;

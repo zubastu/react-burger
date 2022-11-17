@@ -1,93 +1,101 @@
-import React, { useContext } from "react";
+import React, { useMemo } from "react";
+import uuidv1 from "uuid/v1";
+
 import burgerIngredientsStyles from "./BurgerConstructor.module.css";
 import {
   Button,
-  ConstructorElement,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import { BurgerConstructorContext } from "../../cotexts/BurgerConstructorContext";
-import { ORDERS_URL } from "../../utils/constants";
-import { api } from "../../utils/api";
-import appStyles from "../App/App.module.css";
-import MaterialInCart from "../MaterialInCart/MaterialInCart";
+import { useDrop } from "react-dnd";
+import OrderDetails from "../OrderDetails/OrderDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { postOrderDetails } from "../../services/asyncActions/order";
+import Modal from "../Modal/Modal";
+import { ADD_INGREDIENT, SELECT_BUN } from "../../services/actions/ingredients";
+import SelectedIngredients from "../SelectedIngredients/SelectedIngredients";
+import { CLOSE_ORDER_MODAL } from "../../services/actions/order";
 
-const BurgerConstructor = ({
-  openOrderInfo,
-  isSelectedBun,
-  removeIngredient,
-}) => {
-  const { totalPrice, selectedBun, selectedIngredients } = useContext(
-    BurgerConstructorContext
+const BurgerConstructor = () => {
+  const dispatch = useDispatch();
+  const { isOpenOrderModal, isRequest } = useSelector((store) => store.order);
+  const { selectedIngredients, selectedBun } = useSelector(
+    (store) => store.ingredients
   );
-  const { fetchPost } = api(ORDERS_URL);
 
-  const postOrderDetails = () => {
+  const addIngredient = (ingredient) => {
+    if (ingredient.type !== "bun") {
+      const newIngredient = {
+        ...ingredient,
+        id: uuidv1(),
+      };
+      dispatch({ type: ADD_INGREDIENT, payload: newIngredient });
+    } else {
+      dispatch({ type: SELECT_BUN, payload: ingredient });
+    }
+  };
+
+  const [{ isHover }, dropTarget] = useDrop({
+    accept: "ingredient",
+    drop(ingredient) {
+      addIngredient(ingredient);
+    },
+    collect: (monitor) => ({
+      isHover: monitor.isOver(),
+    }),
+  });
+
+  const totalPrice = useMemo(
+    () =>
+      selectedIngredients.reduce(
+        (prev, current) => prev + current.price,
+        selectedBun.price * 2 || 0
+      ),
+    [selectedIngredients, selectedBun]
+  );
+
+  const postOrder = () => {
     const productIds = selectedIngredients.map((i) => i._id);
     const productData = {
       ingredients: [selectedBun._id, ...productIds, selectedBun._id],
     };
-    fetchPost(productData)
-      .then((data) => {
-        data && data.success && openOrderInfo(data);
-      })
-      .catch(() => alert("Ошибка при запросе создания заказа"));
+    dispatch(postOrderDetails(productData));
   };
+
+  const closeModal = () => dispatch({ type: CLOSE_ORDER_MODAL });
+
   return (
-    <section className={`${burgerIngredientsStyles.container}`}>
+    <section
+      ref={dropTarget}
+      className={`${burgerIngredientsStyles.container} `}
+    >
+      {isOpenOrderModal && (
+        <Modal extraClassName="pb-30" type="orderModal" onClose={closeModal}>
+          <OrderDetails />
+        </Modal>
+      )}
       <div
-        className={`${burgerIngredientsStyles.materials} custom-scroll mt-25 pl-4 pr-2`}
+        className={`${burgerIngredientsStyles.materials} ${
+          isHover && burgerIngredientsStyles.materials_active
+        } custom-scroll mt-25 pl-4 pr-2`}
       >
-        {isSelectedBun && (
-          <div className={`${appStyles.constructor} ml-8`}>
-            <ConstructorElement
-              price={selectedBun.price}
-              text={`${selectedBun.name} (верх)`}
-              thumbnail={selectedBun.image}
-              isLocked={true}
-              type="top"
-            />
-          </div>
-        )}
-        {selectedIngredients.map((item) => (
-          <MaterialInCart
-            key={item._id}
-            product={item}
-            onDelete={removeIngredient}
-          />
-        ))}
-        {isSelectedBun && (
-          <div className={`${appStyles.constructor} ml-8`}>
-            <ConstructorElement
-              price={selectedBun.price}
-              text={`${selectedBun.name} (низ)`}
-              thumbnail={selectedBun.image}
-              isLocked={true}
-              type="bottom"
-            />
-          </div>
-        )}
+        <SelectedIngredients />
       </div>
       <div className={`${burgerIngredientsStyles.total} mt-10`}>
         <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
         <CurrencyIcon type="primary" />
         <Button
+          disabled={isRequest}
           htmlType={"button"}
           type="primary"
           size="medium"
           extraClass={`${burgerIngredientsStyles.buyBtn} ml-10 mr-4`}
-          onClick={postOrderDetails}
+          onClick={postOrder}
         >
           Оформить заказ
         </Button>
       </div>
     </section>
   );
-};
-
-BurgerConstructor.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.elementType]),
-  openOrderInfo: PropTypes.func,
 };
 
 export default BurgerConstructor;

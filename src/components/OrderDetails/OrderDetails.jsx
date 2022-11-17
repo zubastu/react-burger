@@ -1,9 +1,11 @@
 import React from "react";
 import orderDetailsStyles from "./OrderDetails.module.css";
 import successImage from "../../images/done.svg";
+import { useSelector } from "react-redux";
 
-const OrderDetails = ({ orderResponseInfo }) => {
-  const { name, order, success } = orderResponseInfo;
+const OrderDetails = () => {
+  const { orderDetails } = useSelector((store) => store.order);
+  const { name, order, success } = orderDetails;
   const { number } = order;
   return (
     <>
