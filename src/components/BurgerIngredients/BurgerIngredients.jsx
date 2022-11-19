@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import burgerConstructorStyles from "./BurgerIngredients.module.css";
+import styles from "./BurgerIngredients.module.css";
 import MaterialItem from "../MaterialItem/MaterialItem";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useObserver } from "../../hooks/useObserver";
@@ -29,10 +29,7 @@ const BurgerIngredients = () => {
   const closeModal = () => dispatch({ type: CLOSE_INGREDIENT_DETAILS });
 
   return (
-    <section
-      id="ingredients-container"
-      className={`${burgerConstructorStyles.container} `}
-    >
+    <section id="ingredients-container" className={`${styles.container} `}>
       {isModalIngredientOpen && (
         <Modal
           text="Детали ингредиента"
@@ -69,13 +66,13 @@ const BurgerIngredients = () => {
         </Tab>
       </div>
 
-      <div className={`${burgerConstructorStyles.scroll} custom-scroll mt-10`}>
+      <div className={`${styles.scroll} custom-scroll mt-10`}>
         <h2 id="one" className="text text_type_main-medium">
           Булки
         </h2>
         <div
           ref={bunRef}
-          className={`${burgerConstructorStyles.material_container} pt-6 pl-4 pr-4`}
+          className={`${styles.material_container} pt-6 pl-4 pr-4`}
         >
           {bun &&
             bun.map((bunItem) => (
@@ -87,7 +84,7 @@ const BurgerIngredients = () => {
         </h2>
         <div
           ref={sauceRef}
-          className={`${burgerConstructorStyles.material_container} pt-6 pl-4 pr-4`}
+          className={`${styles.material_container} pt-6 pl-4 pr-4`}
         >
           {sauces &&
             sauces.map((sauce) => (
@@ -99,7 +96,7 @@ const BurgerIngredients = () => {
         </h2>
         <div
           ref={mainRef}
-          className={`${burgerConstructorStyles.material_container} pt-6 pl-4 pr-4`}
+          className={`${styles.material_container} pt-6 pl-4 pr-4`}
         >
           {main &&
             main.map((mainItem) => (

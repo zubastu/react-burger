@@ -1,8 +1,7 @@
 import React, { useCallback } from "react";
-import selectedIngredientsStyles from "./SelectedIngredients.module.css";
+import styles from "./SelectedIngredients.module.css";
 import MaterialInCart from "../MaterialInCart/MaterialInCart";
 import { useDispatch, useSelector } from "react-redux";
-import appStyles from "../App/App.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { UPDATE_INGREDIENTS } from "../../services/actions/ingredients";
 
@@ -15,11 +14,8 @@ const SelectedIngredients = () => {
   const moveIngredient = useCallback(
     (dIndex, hIndex) => {
       let draggingIngredient = selectedIngredients[dIndex.index];
-
       const newSelectedIngredients = [...selectedIngredients];
-
       newSelectedIngredients.splice(dIndex.index, 1);
-
       newSelectedIngredients.splice(hIndex, 0, draggingIngredient);
 
       dispatch({
@@ -31,9 +27,9 @@ const SelectedIngredients = () => {
   );
 
   return (
-    <div className={selectedIngredientsStyles.container}>
+    <div className={styles.container}>
       {selectedBun.type && (
-        <div className={`${appStyles.constructor} ml-8`}>
+        <div className={`${styles.constructor} ml-8`}>
           <ConstructorElement
             price={selectedBun.price}
             text={`${selectedBun.name} (верх)`}
@@ -58,7 +54,7 @@ const SelectedIngredients = () => {
           />
         ))}
       {selectedBun.type && (
-        <div className={`${appStyles.constructor} ml-8`}>
+        <div className={`${styles.constructor} ml-8`}>
           <ConstructorElement
             price={selectedBun.price}
             text={`${selectedBun.name} (низ)`}

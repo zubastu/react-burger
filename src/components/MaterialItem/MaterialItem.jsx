@@ -1,5 +1,5 @@
 import React from "react";
-import materialItemStyles from "./MaterialItem.module.css";
+import styles from "./MaterialItem.module.css";
 import {
   Counter,
   CurrencyIcon,
@@ -40,27 +40,21 @@ const MaterialItem = ({ material }) => {
   };
 
   return (
-    <div
-      className={materialItemStyles.material}
-      onClick={handleClick}
-      ref={dragRef}
-    >
+    <div className={styles.material} onClick={handleClick} ref={dragRef}>
       {findCountMaterials() > 0 && (
         <Counter
           count={findCountMaterials()}
           size="small"
-          extraClass={materialItemStyles.material__counter}
+          extraClass={styles.material__counter}
         />
       )}
       <img src={image} alt={name} ref={dragPreviewRef} />
-      <div className={`${materialItemStyles.material__price} mt-1 mb-1`}>
+      <div className={`${styles.material__price} mt-1 mb-1`}>
         <p className="text text_type_digits-default">{price}</p>
         <CurrencyIcon type="primary" />
       </div>
 
-      <p
-        className={`${materialItemStyles.material__name} text text_type_main-small`}
-      >
+      <p className={`${styles.material__name} text text_type_main-small`}>
         {name}
       </p>
     </div>

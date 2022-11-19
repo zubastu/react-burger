@@ -1,4 +1,4 @@
-import ingredientDetailsStyles from "./IngredientDetails.module.css";
+import styles from "./IngredientDetails.module.css";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -8,19 +8,13 @@ const IngredientDetails = () => {
 
   return (
     <>
-      <div className={ingredientDetailsStyles.content}>
-        <img
-          className={`${ingredientDetailsStyles.image} mb-4`}
-          src={image_large}
-          alt={name}
-        />
-        <h3
-          className={`${ingredientDetailsStyles.heading} text text_type_main-medium mb-8`}
-        >
+      <div className={styles.content}>
+        <img className={`${styles.image} mb-4`} src={image_large} alt={name} />
+        <h3 className={`${styles.heading} text text_type_main-medium mb-8`}>
           {name}
         </h3>
-        <ul className={ingredientDetailsStyles.list}>
-          <li className={ingredientDetailsStyles.list__item}>
+        <ul className={styles.list}>
+          <li className={styles.list__item}>
             <p className="text text_type_main-small text_color_inactive">
               Калории,ккал
             </p>
@@ -28,7 +22,7 @@ const IngredientDetails = () => {
               {calories}
             </p>
           </li>
-          <li className={ingredientDetailsStyles.list__item}>
+          <li className={styles.list__item}>
             <p className="text text_type_main-small text_color_inactive">
               Белки, г
             </p>
@@ -36,7 +30,7 @@ const IngredientDetails = () => {
               {proteins}
             </p>
           </li>
-          <li className={ingredientDetailsStyles.list__item}>
+          <li className={styles.list__item}>
             <p className="text text_type_main-small text_color_inactive">
               Жиры, г
             </p>
@@ -44,7 +38,7 @@ const IngredientDetails = () => {
               {fat}
             </p>
           </li>
-          <li className={ingredientDetailsStyles.list__item}>
+          <li className={styles.list__item}>
             <p className="text text_type_main-small text_color_inactive">
               Углеводы, г
             </p>

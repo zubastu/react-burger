@@ -63,6 +63,11 @@ const BurgerConstructor = () => {
 
   const closeModal = () => dispatch({ type: CLOSE_ORDER_MODAL });
 
+  const isDisabled =
+    isRequest ||
+    !Boolean(selectedBun.type) ||
+    !Boolean(selectedIngredients.length);
+
   return (
     <section
       ref={dropTarget}
@@ -84,7 +89,7 @@ const BurgerConstructor = () => {
         <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
         <CurrencyIcon type="primary" />
         <Button
-          disabled={isRequest}
+          disabled={isDisabled}
           htmlType={"button"}
           type="primary"
           size="medium"

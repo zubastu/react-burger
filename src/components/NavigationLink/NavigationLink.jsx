@@ -1,13 +1,10 @@
 import React from "react";
-import navigationLinkStyles from "./NavigationLink.module.css";
+import styles from "./NavigationLink.module.css";
 import PropTypes from "prop-types";
 
-const NavigationLink = ({ path = "/", text, styles = null, children }) => {
+const NavigationLink = ({ path = "/", text, propStyles = null, children }) => {
   return (
-    <a
-      className={`${navigationLinkStyles.link} pl-5 pr-5 pb-4 pt-4 ${styles} `}
-      href="#"
-    >
+    <a className={`${styles.link} pl-5 pr-5 pb-4 pt-4 ${propStyles} `} href="#">
       {children}
       <p className="text text_color_inactive ml-2">{text}</p>
     </a>
@@ -17,7 +14,7 @@ const NavigationLink = ({ path = "/", text, styles = null, children }) => {
 NavigationLink.propTypes = {
   path: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  styles: PropTypes.string,
+  propStyles: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 

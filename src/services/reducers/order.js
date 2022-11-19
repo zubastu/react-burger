@@ -23,13 +23,13 @@ export const orderReducer = (state = initialState, action) => {
     case START_ORDER_POST:
       return {
         ...state,
-        isRequestError: true,
-        isRequest: false,
+        isRequestError: false,
+        isRequest: true,
       };
     case SUCCESS_ORDER_POST:
       return {
         ...state,
-        isRequestError: true,
+        isRequestError: false,
         isRequest: false,
         isOpenOrderModal: true,
         orderDetails: action.payload,
