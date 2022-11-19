@@ -1,0 +1,9 @@
+.container{
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+}
+.link{
+    color: #4C4CFF;
+    text-decoration: none;
+}
