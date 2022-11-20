@@ -3,7 +3,6 @@ import styles from "../LoginForm/LoginForm.module.css";
 import FormHeading from "../FormHeading/FormHeading";
 import {
   Button,
-  EmailInput,
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -14,24 +13,31 @@ const ProfileForm = () => {
     <form className={styles.form}>
       <FormHeading text="Регистрация" extraClass="mb-6" />
       <Input
-        name="name"
-        placeholder="Имя"
-        extraClass="mb-6"
         type="text"
+        placeholder="Имя"
+        name="name"
+        error={false}
+        errorText="Ошибка"
+        size="default"
         icon="EditIcon"
-        isIcon={true}
-      />
-      <EmailInput
-        name="email"
-        placeholder="E-mail"
         extraClass="mb-6"
-        isIcon={true}
+      />
+      <Input
+        type="text"
+        placeholder="Логин"
+        name="name"
+        error={false}
+        errorText="Ошибка"
+        size="default"
+        icon="EditIcon"
+        extraClass="mb-6"
       />
       <PasswordInput
         name="password"
         placeholder="Пароль"
         extraClass="mb-6"
         isIcon={true}
+        icon="EditIcon"
       />
       <Button htmlType="submit" extraClass="mb-20">
         Зарегистрироваться

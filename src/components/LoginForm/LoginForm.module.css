@@ -4,3 +4,8 @@
     align-items: center;
     justify-content: flex-start;
 }
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
