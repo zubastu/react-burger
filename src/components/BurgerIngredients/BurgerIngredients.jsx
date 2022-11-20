@@ -28,6 +28,10 @@ const BurgerIngredients = () => {
 
   const closeModal = () => dispatch({ type: CLOSE_INGREDIENT_DETAILS });
 
+  const ingredient = useSelector(
+    (store) => store.ingredients.selectedIngredient
+  );
+
   return (
     <section id="ingredients-container" className={`${styles.container} `}>
       {isModalIngredientOpen && (
@@ -36,7 +40,7 @@ const BurgerIngredients = () => {
           extraClassName="pb-15"
           onClose={closeModal}
         >
-          <IngredientDetails />
+          <IngredientDetails ingredient={ingredient} />
         </Modal>
       )}
 

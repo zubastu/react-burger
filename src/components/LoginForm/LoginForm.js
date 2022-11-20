@@ -26,7 +26,7 @@ const LoginForm = () => {
       <FormNavigationElement
         text="Забыли пароль?"
         linkText="Восстановить пароль"
-        route="/reset-password"
+        route="/forgot-password"
         extraClass="mb-6"
       />
     </form>

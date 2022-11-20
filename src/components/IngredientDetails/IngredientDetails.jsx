@@ -1,10 +1,11 @@
 import styles from "./IngredientDetails.module.css";
 import React from "react";
-import { useSelector } from "react-redux";
 
-const IngredientDetails = () => {
+const IngredientDetails = ({ ingredient }) => {
+  /*const { image_large, name, calories, fat, carbohydrates, proteins } =
+    ingredient;*/
   const { image_large, name, calories, fat, carbohydrates, proteins } =
-    useSelector((store) => store.ingredients.selectedIngredient);
+    ingredient;
 
   return (
     <>

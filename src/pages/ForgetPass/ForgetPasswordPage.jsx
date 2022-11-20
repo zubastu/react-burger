@@ -1,11 +1,15 @@
 import React from "react";
 import AppHeader from "../../components/AppHeader/AppHeader";
+import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
+import ForgotPassForm from "../../components/ForgotPassForm/ForgotPassForm";
 
 const ForgetPasswordPage = () => {
   return (
     <>
       <AppHeader />
-      <div></div>
+      <PageContentContainer>
+        <ForgotPassForm />
+      </PageContentContainer>
     </>
   );
 };

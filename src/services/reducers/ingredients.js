@@ -35,6 +35,7 @@ export const ingredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         isRequest: false,
+        all: action.payload,
         bun: action.payload.filter(({ type }) => type === TYPE_BUN),
         sauces: action.payload.filter(({ type }) => type === TYPE_SAUCE),
         main: action.payload.filter(({ type }) => type === TYPE_MAIN),
