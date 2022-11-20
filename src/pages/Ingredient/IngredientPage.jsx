@@ -8,8 +8,7 @@ const IngredientPage = () => {
     <>
       <AppHeader />
       <div className={styles.container}>
-        <h2 className="text text_type_main-large">Детали ингредиента</h2>
-        <IngredientDetails />
+        <IngredientDetails hasHeading={true} />
       </div>
     </>
   );

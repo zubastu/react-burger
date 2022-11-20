@@ -1,12 +1,13 @@
 import styles from "./IngredientDetails.module.css";
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchIngredients } from "../../services/asyncActions/ingredients";
 
-const IngredientDetails = () => {
+const IngredientDetails = ({ hasHeading }) => {
   const { ingredientId } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     if (ingredient) {
@@ -16,16 +17,24 @@ const IngredientDetails = () => {
   }, [dispatch]);
 
   const { all } = useSelector((store) => store.ingredients);
+  const ingredient = all && all.find(({ _id }) => ingredientId === _id);
 
-  let ingredient = all && all.find(({ _id }) => ingredientId === _id);
+  useEffect(() => {
+    if (all && !all.find(({ _id }) => ingredientId === _id)) {
+      history.replace("/not-found");
+    }
+  }, [all, ingredientId, history]);
 
   return (
     <>
       {ingredient ? (
         <div className={styles.content}>
+          {hasHeading ? (
+            <h2 className="text text_type_main-large">Детали ингредиента</h2>
+          ) : null}
           <img
             className={`${styles.image} mb-4`}
-            src={ingredient.image_large}
+            src={String(ingredient.image_large)}
             alt={ingredient.name}
           />
           <h3 className={`${styles.heading} text text_type_main-medium mb-8`}>

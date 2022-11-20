@@ -4,7 +4,6 @@ import MaterialItem from "../MaterialItem/MaterialItem";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useObserver } from "../../hooks/useObserver";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 const BurgerIngredients = () => {
   const sauceRef = useRef();

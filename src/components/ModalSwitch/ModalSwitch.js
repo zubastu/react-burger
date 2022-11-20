@@ -68,13 +68,13 @@ const ModalSwitch = () => {
       </Switch>
 
       {background && (
-        <Route path="/ingredients/:ingredientId">
+        <Route exact path="/ingredients/:ingredientId">
           <Modal
             text="Детали ингредиента"
             extraClassName="pb-15"
             onClose={closeIngredientModal}
           >
-            <IngredientDetails />
+            <IngredientDetails hasHeading={false} />
           </Modal>
         </Route>
       )}

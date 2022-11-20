@@ -34,7 +34,7 @@ const MaterialItem = ({ material }) => {
   };
 
   const findCountMaterials = () => {
-    if (material.name === selectedBun.name) return 1;
+    if (material.name === selectedBun.name) return 2;
     const materialsArr = selectedIngredients.filter(
       (item) => item.name === name
     );
