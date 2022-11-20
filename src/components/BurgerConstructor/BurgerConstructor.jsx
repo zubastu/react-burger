@@ -7,17 +7,14 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrop } from "react-dnd";
-import OrderDetails from "../OrderDetails/OrderDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { postOrderDetails } from "../../services/asyncActions/order";
-import Modal from "../Modal/Modal";
 import { ADD_INGREDIENT, SELECT_BUN } from "../../services/actions/ingredients";
 import SelectedIngredients from "../SelectedIngredients/SelectedIngredients";
-import { CLOSE_ORDER_MODAL } from "../../services/actions/order";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
-  const { isOpenOrderModal, isRequest } = useSelector((store) => store.order);
+  const { isRequest } = useSelector((store) => store.order);
   const { selectedIngredients, selectedBun } = useSelector(
     (store) => store.ingredients
   );
@@ -61,8 +58,6 @@ const BurgerConstructor = () => {
     dispatch(postOrderDetails(productData));
   };
 
-  const closeModal = () => dispatch({ type: CLOSE_ORDER_MODAL });
-
   const isDisabled =
     isRequest ||
     !Boolean(selectedBun.type) ||
@@ -73,11 +68,6 @@ const BurgerConstructor = () => {
       ref={dropTarget}
       className={`${burgerIngredientsStyles.container} `}
     >
-      {isOpenOrderModal && (
-        <Modal extraClassName="pb-30" type="orderModal" onClose={closeModal}>
-          <OrderDetails />
-        </Modal>
-      )}
       <div
         className={`${burgerIngredientsStyles.materials} ${
           isHover && burgerIngredientsStyles.materials_active
