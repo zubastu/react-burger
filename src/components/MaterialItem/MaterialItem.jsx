@@ -43,6 +43,7 @@ const MaterialItem = ({ material }) => {
 
   return (
     <Link
+      className={styles.link}
       to={{
         pathname: `/ingredients/${material._id}`,
         state: { background: location },
