@@ -6,12 +6,11 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import FormNavigationElement from "../FormNavigationElement/FormNavigationElement";
 
 const ProfileForm = () => {
   return (
     <form className={styles.form}>
-      <FormHeading text="Регистрация" extraClass="mb-6" />
+      <FormHeading extraClass="mb-6" />
       <Input
         type="text"
         placeholder="Имя"
@@ -39,15 +38,14 @@ const ProfileForm = () => {
         isIcon={true}
         icon="EditIcon"
       />
-      <Button htmlType="submit" extraClass="mb-20">
-        Зарегистрироваться
-      </Button>
-      <FormNavigationElement
-        text="Уже зарегистрированы?"
-        linkText="Войти"
-        route="/login"
-        extraClass="mb-6"
-      />
+      <div className={styles.buttonsContainer}>
+        <Button type="secondary" htmlType="button" extraClass="mb-20">
+          Отмена
+        </Button>
+        <Button type="secondary" htmlType="submit" extraClass="mb-20">
+          Сохранить
+        </Button>
+      </div>
     </form>
   );
 };

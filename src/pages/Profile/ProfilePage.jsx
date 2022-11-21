@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./ProfilePage.module.css";
 import AppHeader from "../../components/AppHeader/AppHeader";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import ProfileNavigationLinks from "../../components/ProfileNavigationLinks/ProfileNavigationLinks";
@@ -8,10 +9,12 @@ const ProfilePage = () => {
   return (
     <>
       <AppHeader />
-      <ProfileNavigationLinks />
-      <PageContentContainer>
-        <ProfileForm />
-      </PageContentContainer>
+      <div className={styles.content}>
+        <ProfileNavigationLinks />
+        <PageContentContainer>
+          <ProfileForm />
+        </PageContentContainer>
+      </div>
     </>
   );
 };

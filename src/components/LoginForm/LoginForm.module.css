@@ -9,3 +9,8 @@
     flex-direction: column;
     gap: 2px;
 }
+.buttonsContainer{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}

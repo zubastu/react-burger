@@ -1,0 +1,7 @@
+.content {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 320px 480px 320px;
+    gap: 60px;
+    align-items: flex-start;
+}
