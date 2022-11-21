@@ -1,7 +1,6 @@
 import React from "react";
 import image from "../../images/404.png";
 import styles from "./NotFound.module.css";
-import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useHistory } from "react-router-dom";
 
 const NotFound = () => {
@@ -10,14 +9,14 @@ const NotFound = () => {
   return (
     <div className={styles.container}>
       <img className={styles.image} src={image} alt="Не найдено" />
-      <Button
-        htmlType="button"
-        size="medium"
+      <button
+        className={styles.button}
         type="secondary"
+        color="white"
         onClick={() => history.goBack()}
       >
         Назад
-      </Button>
+      </button>
     </div>
   );
 };
