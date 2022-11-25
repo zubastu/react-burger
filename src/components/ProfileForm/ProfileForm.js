@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../LoginForm/LoginForm.module.css";
 import FormHeading from "../FormHeading/FormHeading";
 import {
@@ -7,18 +7,19 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useForm } from "../../hooks/useForm";
+import { useSelector } from "react-redux";
 
 const ProfileForm = () => {
   const { values, handleChange, isValid, setValues } = useForm();
-
+  const { name, email } = useSelector((store) => store.login.user);
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(values, isValid);
   };
 
-  /*  useEffect(() => {
-    setValues({ name: , email: , password:  });
-  }, []);*/
+  useEffect(() => {
+    setValues({ name, email });
+  }, []);
   return (
     <form noValidate onSubmit={handleSubmit} className={styles.form}>
       <FormHeading extraClass="mb-6" />
