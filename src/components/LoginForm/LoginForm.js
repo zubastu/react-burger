@@ -7,14 +7,34 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormHeading from "../FormHeading/FormHeading";
 import FormNavigationElement from "../FormNavigationElement/FormNavigationElement";
+import { useForm } from "../../hooks/useForm";
 
 const LoginForm = () => {
+  const { values, handleChange, isValid } = useForm();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    return values;
+  };
+
   return (
-    <form className={styles.form}>
+    <form onSubmit={handleSubmit} noValidate className={styles.form}>
       <FormHeading text={"Вход"} extraClass="mb-6" />
-      <EmailInput name={"email"} placeholder="Логин" extraClass="mb-6" />
-      <PasswordInput name={"password"} placeholder="Логин" extraClass="mb-6" />
-      <Button htmlType="submit" extraClass="mb-20">
+      <EmailInput
+        onChange={handleChange}
+        value={values.email || ""}
+        name={"email"}
+        placeholder="Логин"
+        extraClass="mb-6"
+      />
+      <PasswordInput
+        onChange={handleChange}
+        value={values.password || ""}
+        name={"password"}
+        placeholder="Логин"
+        extraClass="mb-6"
+      />
+      <Button disabled={!isValid} htmlType="submit" extraClass="mb-20">
         Войти
       </Button>
       <FormNavigationElement

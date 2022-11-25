@@ -6,17 +6,26 @@ import {
   EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormNavigationElement from "../FormNavigationElement/FormNavigationElement";
+import { useForm } from "../../hooks/useForm";
 
 const ForgotPassForm = () => {
+  const { values, handleChange, isValid } = useForm();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(values, isValid);
+  };
   return (
-    <form className={styles.form}>
+    <form noValidate onSubmit={handleSubmit} className={styles.form}>
       <FormHeading text="Восстановление пароля" extraClass="mb-6" />
       <EmailInput
+        onChange={handleChange}
+        value={values.email || ""}
         name={"email"}
         placeholder="Укажите e-mail"
         extraClass="mb-6"
       />
-      <Button htmlType="submit" extraClass="mb-20">
+      <Button disabled={!isValid} htmlType="submit" extraClass="mb-20">
         Восстановить
       </Button>
       <FormNavigationElement

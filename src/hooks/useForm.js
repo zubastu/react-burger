@@ -1,9 +1,8 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import validator from "validator/es";
 
 export function useForm() {
   const [values, setValues] = useState({});
-  const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
   const handleChange = (event) => {
@@ -20,18 +19,8 @@ export function useForm() {
     }
 
     setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest("form").checkValidity());
   };
 
-  const resetForm = useCallback(
-    (newValues = {}, newErrors = {}, newIsValid = false) => {
-      setValues(newValues);
-      setErrors(newErrors);
-      setIsValid(newIsValid);
-    },
-    [setValues, setErrors, setIsValid]
-  );
-
-  return { values, handleChange, errors, isValid, resetForm, setValues };
+  return { values, handleChange, setValues, isValid };
 }

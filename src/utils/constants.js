@@ -3,6 +3,14 @@ import PropTypes from "prop-types";
 const BASE_URL = "https://norma.nomoreparties.space/";
 export const INGREDIENTS_URL = `${BASE_URL}api/ingredients`;
 export const ORDERS_URL = `${BASE_URL}api/orders`;
+export const FORGOT_PASS_URL = `${BASE_URL}api/forgot-password`;
+export const RESET_PASS_URL = `${BASE_URL}api/password-reset/reset`;
+export const LOGIN_URL = `${BASE_URL}api/auth/login`;
+export const REGISTER_URL = `${BASE_URL}api/auth/register`;
+export const LOGOUT_URL = `${BASE_URL}api/auth/logout`;
+export const REFRESH_TOKEN_URL = `${BASE_URL}api/auth/token`;
+export const USER_INFO_URL = `${BASE_URL}api/auth/user`;
+
 export const TYPE_BUN = "bun";
 export const TYPE_SAUCE = "sauce";
 export const TYPE_MAIN = "main";
