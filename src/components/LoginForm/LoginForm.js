@@ -8,13 +8,16 @@ import {
 import FormHeading from "../FormHeading/FormHeading";
 import FormNavigationElement from "../FormNavigationElement/FormNavigationElement";
 import { useForm } from "../../hooks/useForm";
+import { useDispatch } from "react-redux";
+import { postRegistrationDetails } from "../../services/asyncActions/login";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const { values, handleChange, isValid } = useForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    return values;
+    dispatch(postRegistrationDetails(values));
   };
 
   return (

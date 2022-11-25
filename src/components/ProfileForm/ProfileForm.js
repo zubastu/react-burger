@@ -50,7 +50,6 @@ const ProfileForm = () => {
         name="password"
         placeholder="Пароль"
         extraClass="mb-6"
-        isIcon={true}
         icon="EditIcon"
         onChange={handleChange}
         value={values.password || ""}

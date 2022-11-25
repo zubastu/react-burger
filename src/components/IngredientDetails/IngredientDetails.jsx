@@ -1,20 +1,11 @@
 import styles from "./IngredientDetails.module.css";
 import React, { useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchIngredients } from "../../services/asyncActions/ingredients";
+import { useSelector } from "react-redux";
 
 const IngredientDetails = ({ hasHeading }) => {
   const { ingredientId } = useParams();
-  const dispatch = useDispatch();
   const history = useHistory();
-
-  useEffect(() => {
-    if (ingredient) {
-      return;
-    }
-    dispatch(fetchIngredients());
-  }, [dispatch]);
 
   const { all } = useSelector((store) => store.ingredients);
   const ingredient = all && all.find(({ _id }) => ingredientId === _id);

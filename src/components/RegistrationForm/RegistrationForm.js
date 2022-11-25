@@ -9,14 +9,18 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormNavigationElement from "../FormNavigationElement/FormNavigationElement";
 import { useForm } from "../../hooks/useForm";
+import { useDispatch } from "react-redux";
+import { postRegistrationDetails } from "../../services/asyncActions/register";
 
 const RegistrationForm = () => {
+  const dispatch = useDispatch();
   const { values, handleChange, isValid } = useForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values, isValid);
+    dispatch(postRegistrationDetails(values));
   };
+
   return (
     <form noValidate onSubmit={handleSubmit} className={styles.form}>
       <FormHeading text="Регистрация" extraClass="mb-6" />
@@ -26,20 +30,23 @@ const RegistrationForm = () => {
         extraClass="mb-6"
         onChange={handleChange}
         value={values.name || ""}
+        required={true}
       />
       <EmailInput
         name={"email"}
         placeholder="E-mail"
         extraClass="mb-6"
         onChange={handleChange}
-        value={values.name || ""}
+        value={values.email || ""}
+        required={true}
       />
       <PasswordInput
         name={"password"}
         placeholder="Пароль"
         extraClass="mb-6"
         onChange={handleChange}
-        value={values.name || ""}
+        value={values.password || ""}
+        required={true}
       />
       <Button disabled={!isValid} htmlType="submit" extraClass="mb-20">
         Зарегистрироваться

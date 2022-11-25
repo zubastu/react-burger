@@ -29,7 +29,7 @@ const ModalSwitch = () => {
     history.goBack();
   };
 
-  let background = location.state && location.state.background;
+  const background = location.state && location.state.background;
 
   return (
     <>
