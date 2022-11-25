@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../LoginForm/LoginForm.module.css";
 import FormHeading from "../FormHeading/FormHeading";
 import {
@@ -8,31 +8,46 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormNavigationElement from "../FormNavigationElement/FormNavigationElement";
 import { useForm } from "../../hooks/useForm";
+import { useDispatch, useSelector } from "react-redux";
+import { postRegistrationDetails } from "../../services/asyncActions/restore-pass";
+import { useHistory } from "react-router-dom";
 
 const RestorePassForm = () => {
+  const dispatch = useDispatch();
   const { values, handleChange, isValid } = useForm();
+  const { hasRequest } = useSelector((store) => store.resetPassword);
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values, isValid);
+    dispatch(postRegistrationDetails(values));
+    console.log(values);
   };
+
+  useEffect(() => {
+    if (hasRequest) {
+      history.push("/login");
+    }
+  }, [hasRequest]);
 
   return (
     <form noValidate onSubmit={handleSubmit} className={styles.form}>
-      <FormHeading text="Регистрация" extraClass="mb-6" />
+      <FormHeading text="Восстановление пароля" extraClass="mb-6" />
       <PasswordInput
         name={"password"}
-        placeholder="Логин"
+        placeholder="Введите новый пароль"
         extraClass="mb-6"
         onChange={handleChange}
         value={values.password || ""}
+        required
       />
       <Input
-        name={"code"}
+        name={"token"}
         placeholder="Введите код из письма"
         extraClass="mb-6"
         onChange={handleChange}
-        value={values.code || ""}
+        value={values.token || ""}
+        required
       />
       <Button disabled={!isValid} htmlType="submit" extraClass="mb-20">
         Сохранить

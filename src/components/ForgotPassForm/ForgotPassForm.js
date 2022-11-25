@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../LoginForm/LoginForm.module.css";
 import FormHeading from "../FormHeading/FormHeading";
 import {
@@ -7,14 +7,27 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormNavigationElement from "../FormNavigationElement/FormNavigationElement";
 import { useForm } from "../../hooks/useForm";
+import { useDispatch, useSelector } from "react-redux";
+import { postRegistrationDetails } from "../../services/asyncActions/forgot-pass";
+import { useHistory } from "react-router-dom";
 
 const ForgotPassForm = () => {
+  const dispatch = useDispatch();
   const { values, handleChange, isValid } = useForm();
+  const { hasRequest } = useSelector((store) => store.forgetPassword);
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values, isValid);
+    dispatch(postRegistrationDetails(values));
   };
+
+  useEffect(() => {
+    if (hasRequest) {
+      history.push("/reset-password");
+    }
+  }, [hasRequest]);
+
   return (
     <form noValidate onSubmit={handleSubmit} className={styles.form}>
       <FormHeading text="Восстановление пароля" extraClass="mb-6" />
