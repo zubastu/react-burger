@@ -1,4 +1,4 @@
-import { getCookie, setCookie } from "./cookie";
+import { getCookie } from "./cookie";
 import { REFRESH_TOKEN_URL } from "./constants";
 
 export const api = (url) => {
@@ -10,6 +10,32 @@ export const api = (url) => {
   const headers = {
     "Content-Type": "application/json",
     Accept: "application/json: charset=utf-8",
+  };
+
+  const fetchSecureGet = () => {
+    const promise = fetch(url, {
+      method: "GET",
+      headers: { ...headers, Authorization: getCookie("accessToken") },
+    });
+    return checkPromise(promise);
+  };
+
+  const fetchSecurePost = (data) => {
+    const promise = fetch(url, {
+      method: "POST",
+      headers: { ...headers, Authorization: getCookie("accessToken") },
+      body: JSON.stringify(data),
+    });
+    return checkPromise(promise);
+  };
+
+  const fetchSecurePatch = (data) => {
+    const promise = fetch(url, {
+      method: "PATCH",
+      headers: { ...headers, Authorization: getCookie("accessToken") },
+      body: JSON.stringify(data),
+    });
+    return checkPromise(promise);
   };
 
   const fetchGet = () => {
@@ -38,20 +64,12 @@ export const api = (url) => {
     return checkPromise(promise);
   };
 
-  const checkAuth = () => {
-    return refreshToken().then((res) => {
-      setCookie("refreshToken", res.refreshToken, {
-        expires: 99999 * 999,
-      });
-      setCookie("accessToken", res.accessToken, { expires: 1200 });
-      return res;
-    });
-  };
-
   return {
     fetchGet,
     fetchPost,
     refreshToken,
-    checkAuth,
+    fetchSecurePost,
+    fetchSecurePatch,
+    fetchSecureGet,
   };
 };

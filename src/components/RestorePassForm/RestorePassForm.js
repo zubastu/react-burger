@@ -21,7 +21,6 @@ const RestorePassForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postRegistrationDetails(values));
-    console.log(values);
   };
 
   useEffect(() => {

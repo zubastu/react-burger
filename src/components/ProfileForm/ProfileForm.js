@@ -7,19 +7,25 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useForm } from "../../hooks/useForm";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { refreshTokenAccess } from "../../services/asyncActions/refreshToken";
+import { getUserInfo } from "../../services/asyncActions/user";
 
 const ProfileForm = () => {
+  const dispatch = useDispatch();
   const { values, handleChange, isValid, setValues } = useForm();
-  const { name, email } = useSelector((store) => store.login.user);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(values, isValid);
-  };
+  const { name, email } = useSelector((store) => store.user.user);
 
   useEffect(() => {
+    dispatch(getUserInfo());
     setValues({ name, email });
-  }, []);
+  }, [dispatch, name, email]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(refreshTokenAccess());
+  };
+
   return (
     <form noValidate onSubmit={handleSubmit} className={styles.form}>
       <FormHeading extraClass="mb-6" />
@@ -38,7 +44,7 @@ const ProfileForm = () => {
       <Input
         type="text"
         placeholder="Логин"
-        name="name"
+        name="email"
         error={false}
         errorText="Ошибка"
         size="default"

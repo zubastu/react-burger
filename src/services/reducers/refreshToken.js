@@ -1,21 +1,30 @@
-import { START_LOGIN, ERROR_LOGIN, SUCCESS_LOGIN } from "../actions/login";
+import {
+  REFRESH_TOKEN_START,
+  REFRESH_TOKEN_ERROR,
+  REFRESH_TOKEN_SUCCESS,
+} from "../actions/refreshToken";
 import { setCookie } from "../../utils/cookie";
 
 const initialState = {
   isRequest: false,
   isError: false,
-  isLogged: false,
 };
 
-export const loginReducer = (state = initialState, action) => {
+export const refreshTokenReducer = (state = initialState, action) => {
   switch (action.type) {
-    case START_LOGIN:
+    case REFRESH_TOKEN_START:
       return {
         ...state,
         isRequest: true,
         isError: false,
       };
-    case SUCCESS_LOGIN:
+    case REFRESH_TOKEN_ERROR:
+      return {
+        ...state,
+        isRequest: false,
+        isError: true,
+      };
+    case REFRESH_TOKEN_SUCCESS:
       setCookie("refreshToken", action.payload.refreshToken, {
         expires: 99999 * 999,
       });
@@ -26,13 +35,6 @@ export const loginReducer = (state = initialState, action) => {
         ...state,
         isRequest: false,
         isError: false,
-        isLogged: true,
-      };
-    case ERROR_LOGIN:
-      return {
-        ...state,
-        isRequest: false,
-        isError: true,
       };
     default:
       return state;
