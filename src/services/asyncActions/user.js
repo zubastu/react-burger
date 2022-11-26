@@ -35,5 +35,14 @@ export const changeUserInfo = (data) => (dispatch) => {
     .then((response) => {
       dispatch({ type: GET_USER_INFO_SUCCESS, payload: response.user });
     })
-    .catch((err) => dispatch({ type: GET_USER_INFO_ERROR }));
+    .catch((err) => {
+      if (err === "Ошибка: 401") {
+        fetchSecurePatch(data)
+          .then((response) => {
+            dispatch({ type: GET_USER_INFO_SUCCESS, payload: response.user });
+          })
+          .catch((err) => dispatch({ type: GET_USER_INFO_ERROR }));
+      }
+      dispatch({ type: GET_USER_INFO_ERROR });
+    });
 };
