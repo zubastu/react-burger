@@ -8,8 +8,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
-import { refreshTokenAccess } from "../../services/asyncActions/refreshToken";
-import { getUserInfo } from "../../services/asyncActions/user";
+import { changeUserInfo, getUserInfo } from "../../services/asyncActions/user";
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
@@ -23,7 +22,7 @@ const ProfileForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(refreshTokenAccess());
+    dispatch(changeUserInfo(values));
   };
 
   return (
