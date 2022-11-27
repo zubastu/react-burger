@@ -11,7 +11,7 @@ import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { RESET_REQUEST_ACCEPT } from "../../services/actions/restore-pass";
-import { postRegistrationDetails } from "../../services/asyncActions/auth";
+import { resetPasswordPost } from "../../services/asyncActions/resetPass";
 
 const RestorePassForm = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const RestorePassForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postRegistrationDetails(values));
+    dispatch(resetPasswordPost(values));
   };
 
   useEffect(() => {
