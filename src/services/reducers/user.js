@@ -2,6 +2,7 @@ import {
   GET_USER_INFO_START,
   GET_USER_INFO_ERROR,
   GET_USER_INFO_SUCCESS,
+  RESET_USER_INFO,
 } from "../actions/user";
 
 const initialState = {
@@ -30,6 +31,11 @@ export const userInfoReducer = (state = initialState, action) => {
         ...state,
         isRequest: false,
         isError: true,
+      };
+    case RESET_USER_INFO:
+      return {
+        ...state,
+        user: {},
       };
     default:
       return state;

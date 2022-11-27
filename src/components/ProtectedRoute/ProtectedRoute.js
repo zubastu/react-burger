@@ -1,19 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 const ProtectedRoute = ({ children, ...rest }) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    init();
-  }, []);
+  const { isLogged } = useSelector((store) => store.login);
 
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        auth.user ? (
+        isLogged ? (
           children
         ) : (
           <Redirect
@@ -26,6 +23,10 @@ const ProtectedRoute = ({ children, ...rest }) => {
       }
     />
   );
+};
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default ProtectedRoute;

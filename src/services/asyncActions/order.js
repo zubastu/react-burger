@@ -6,11 +6,11 @@ import {
 import { ORDERS_URL } from "../../utils/constants";
 import { api } from "../../utils/api";
 
-const { fetchPost } = api(ORDERS_URL);
+const { fetchSecurePost } = api(ORDERS_URL);
 
 export const postOrderDetails = (data) => (dispatch) => {
   dispatch({ type: START_ORDER_POST });
-  fetchPost(data)
+  fetchSecurePost(data)
     .then((response) =>
       response && response.success
         ? dispatch({ type: SUCCESS_ORDER_POST, payload: response })

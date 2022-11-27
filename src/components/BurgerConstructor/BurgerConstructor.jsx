@@ -11,13 +11,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { postOrderDetails } from "../../services/asyncActions/order";
 import { ADD_INGREDIENT, SELECT_BUN } from "../../services/actions/ingredients";
 import SelectedIngredients from "../SelectedIngredients/SelectedIngredients";
+import { useHistory } from "react-router-dom";
 
 const BurgerConstructor = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const { isRequest } = useSelector((store) => store.order);
   const { selectedIngredients, selectedBun } = useSelector(
     (store) => store.ingredients
   );
+  const { isLogged } = useSelector((store) => store.login);
 
   const addIngredient = (ingredient) => {
     if (ingredient.type !== "bun") {
@@ -51,11 +54,15 @@ const BurgerConstructor = () => {
   );
 
   const postOrder = () => {
-    const productIds = selectedIngredients.map((i) => i._id);
-    const productData = {
-      ingredients: [selectedBun._id, ...productIds, selectedBun._id],
-    };
-    dispatch(postOrderDetails(productData));
+    if (isLogged) {
+      const productIds = selectedIngredients.map((i) => i._id);
+      const productData = {
+        ingredients: [selectedBun._id, ...productIds, selectedBun._id],
+      };
+      dispatch(postOrderDetails(productData));
+    } else {
+      history.push("/login");
+    }
   };
 
   const isDisabled =

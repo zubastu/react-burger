@@ -1,4 +1,10 @@
-import { START_LOGIN, ERROR_LOGIN, SUCCESS_LOGIN } from "../actions/login";
+import {
+  START_LOGIN,
+  ERROR_LOGIN,
+  SUCCESS_LOGIN,
+  LOGOUT,
+  LOGIN_CHECKED,
+} from "../actions/login";
 import { setCookie } from "../../utils/cookie";
 
 const initialState = {
@@ -33,6 +39,18 @@ export const loginReducer = (state = initialState, action) => {
         ...state,
         isRequest: false,
         isError: true,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        isRequest: false,
+        isError: false,
+        isLogged: false,
+      };
+    case LOGIN_CHECKED:
+      return {
+        ...state,
+        isLogged: true,
       };
     default:
       return state;

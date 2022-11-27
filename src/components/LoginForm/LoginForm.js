@@ -9,15 +9,31 @@ import FormHeading from "../FormHeading/FormHeading";
 import FormNavigationElement from "../FormNavigationElement/FormNavigationElement";
 import { useForm } from "../../hooks/useForm";
 import { useDispatch } from "react-redux";
-import { postRegistrationDetails } from "../../services/asyncActions/login";
+import { ERROR_LOGIN, SUCCESS_LOGIN } from "../../services/actions/login";
+import { GET_USER_INFO_SUCCESS } from "../../services/actions/user";
+import { api } from "../../utils/api";
+import { LOGIN_URL } from "../../utils/constants";
+import { useHistory } from "react-router-dom";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const { values, handleChange, isValid } = useForm();
+  const { fetchPost } = api(LOGIN_URL);
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postRegistrationDetails(values));
+    fetchPost(values)
+      .then((response) => {
+        if (response && response.success) {
+          dispatch({ type: SUCCESS_LOGIN, payload: response });
+          dispatch({ type: GET_USER_INFO_SUCCESS, payload: response.user });
+          history.push("/");
+        } else {
+          dispatch({ type: ERROR_LOGIN });
+        }
+      })
+      .catch((err) => dispatch({ type: ERROR_LOGIN }));
   };
 
   return (

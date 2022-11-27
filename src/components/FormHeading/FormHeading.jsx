@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const FormHeading = ({ text, extraClass }) => {
   return (
@@ -9,5 +10,8 @@ const FormHeading = ({ text, extraClass }) => {
     </>
   );
 };
-
+FormHeading.propTypes = {
+  text: PropTypes.string,
+  extraClass: PropTypes.string,
+};
 export default FormHeading;

@@ -1,11 +1,9 @@
 import { getCookie } from "./cookie";
-import { REFRESH_TOKEN_URL } from "./constants";
+import { LOGOUT_URL, REFRESH_TOKEN_URL } from "./constants";
 
 export const api = (url) => {
   const checkPromise = (promise) =>
-    promise.then((res) =>
-      res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-    );
+    promise.then((res) => (res.ok ? res.json() : Promise.reject(res)));
 
   const headers = {
     "Content-Type": "application/json",
@@ -64,6 +62,15 @@ export const api = (url) => {
     return checkPromise(promise);
   };
 
+  const logout = () => {
+    const promise = fetch(LOGOUT_URL, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ token: getCookie("refreshToken") }),
+    });
+    return checkPromise(promise);
+  };
+
   return {
     fetchGet,
     fetchPost,
@@ -71,5 +78,6 @@ export const api = (url) => {
     fetchSecurePost,
     fetchSecurePatch,
     fetchSecureGet,
+    logout,
   };
 };

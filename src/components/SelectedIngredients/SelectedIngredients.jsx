@@ -28,7 +28,7 @@ const SelectedIngredients = () => {
 
   return (
     <div className={styles.container}>
-      {selectedBun.type && (
+      {selectedBun.type ? (
         <div className={`${styles.constructor} ml-8`}>
           <ConstructorElement
             price={selectedBun.price}
@@ -38,22 +38,23 @@ const SelectedIngredients = () => {
             type="top"
           />
         </div>
-      )}
-      {selectedIngredients.length > 0 &&
-        selectedIngredients.map((item, index) => (
-          <MaterialInCart
-            image={item.image}
-            price={item.price}
-            name={item.name}
-            _id={item._id}
-            id={item.id}
-            key={item.id}
-            product={item}
-            index={index}
-            moveIngredient={moveIngredient}
-          />
-        ))}
-      {selectedBun.type && (
+      ) : null}
+      {selectedIngredients.length > 0
+        ? selectedIngredients.map((item, index) => (
+            <MaterialInCart
+              image={item.image}
+              price={item.price}
+              name={item.name}
+              _id={item._id}
+              id={item.id}
+              key={item.id}
+              product={item}
+              index={index}
+              moveIngredient={moveIngredient}
+            />
+          ))
+        : null}
+      {selectedBun.type ? (
         <div className={`${styles.constructor} ml-8`}>
           <ConstructorElement
             price={selectedBun.price}
@@ -63,7 +64,7 @@ const SelectedIngredients = () => {
             type="bottom"
           />
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./FormNavigationElement.module.css";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const FormNavigationElement = ({ text, linkText, route, extraClass }) => {
   return (
@@ -11,6 +12,13 @@ const FormNavigationElement = ({ text, linkText, route, extraClass }) => {
       </Link>
     </div>
   );
+};
+
+FormNavigationElement.propTypes = {
+  text: PropTypes.string.isRequired,
+  linkText: PropTypes.string.isRequired,
+  route: PropTypes.string.isRequired,
+  extraClass: PropTypes.string.isRequired,
 };
 
 export default FormNavigationElement;

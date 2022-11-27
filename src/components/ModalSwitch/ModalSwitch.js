@@ -16,8 +16,10 @@ import OrderDetails from "../OrderDetails/OrderDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { CLOSE_ORDER_MODAL } from "../../services/actions/order";
 import { CLOSE_INGREDIENT_DETAILS } from "../../services/actions/ingredients";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import PropTypes from "prop-types";
 
-const ModalSwitch = () => {
+const ModalSwitch = ({ auth }) => {
   const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -35,11 +37,11 @@ const ModalSwitch = () => {
     <>
       <Switch location={background || location}>
         <Route path="/login">
-          <LoginPage />
+          <LoginPage auth={auth} />
         </Route>
 
         <Route path="/register">
-          <RegisterPage />
+          <RegisterPage auth={auth} />
         </Route>
 
         <Route path="/forgot-password">
@@ -50,16 +52,16 @@ const ModalSwitch = () => {
           <RestorePasswordPage />
         </Route>
 
-        <Route path="/profile">
-          <ProfilePage />
-        </Route>
+        <ProtectedRoute path="/profile">
+          <ProfilePage auth={auth} />
+        </ProtectedRoute>
 
         <Route exact path="/ingredients/:ingredientId">
           <IngredientPage />
         </Route>
 
         <Route exact path="/">
-          <MainPage />
+          <MainPage auth={auth} />
         </Route>
 
         <Route path="*">
@@ -90,6 +92,10 @@ const ModalSwitch = () => {
       )}
     </>
   );
+};
+
+ModalSwitch.propTypes = {
+  auth: PropTypes.func.isRequired,
 };
 
 export default ModalSwitch;

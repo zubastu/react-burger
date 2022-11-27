@@ -5,13 +5,16 @@ import {
   BurgerIcon,
   ListIcon,
   ProfileIcon,
+  LogoutIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import NavigationLink from "../NavigationLink/NavigationLink";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const AppHeader = () => {
   const location = useLocation();
   const { pathname } = location;
+  const { isLogged } = useSelector((store) => store.login);
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -29,13 +32,23 @@ const AppHeader = () => {
         <Link to="/" className={styles.nav__item}>
           <Logo />
         </Link>
-        <div className={styles.nav__item}>
-          <NavigationLink path="/profile" text="Личный кабинет">
-            <ProfileIcon
-              type={pathname === "/profile" ? "primary" : "secondary"}
-            />
-          </NavigationLink>
-        </div>
+        {isLogged ? (
+          <div className={styles.nav__item}>
+            <NavigationLink path="/profile" text="Личный кабинет">
+              <ProfileIcon
+                type={pathname === "/profile" ? "primary" : "secondary"}
+              />
+            </NavigationLink>
+          </div>
+        ) : (
+          <div className={styles.nav__item}>
+            <NavigationLink path="/login" text="Войти">
+              <LogoutIcon
+                type={pathname === "/login" ? "primary" : "secondary"}
+              />
+            </NavigationLink>
+          </div>
+        )}
       </nav>
     </header>
   );
