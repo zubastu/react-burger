@@ -10,39 +10,19 @@ import FormNavigationElement from "../FormNavigationElement/FormNavigationElemen
 import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { RESET_PASS_URL } from "../../utils/constants";
-import { api } from "../../utils/api";
-import {
-  ERROR_RESTORE_PASS,
-  START_RESTORE_PASS,
-  SUCCESS_RESTORE_PASS,
-  RESET_REQUEST_ACCEPT,
-} from "../../services/actions/restore-pass";
+import { RESET_REQUEST_ACCEPT } from "../../services/actions/restore-pass";
+import { postRegistrationDetails } from "../../services/asyncActions/auth";
 
 const RestorePassForm = () => {
   const dispatch = useDispatch();
   const { values, handleChange, isValid } = useForm();
   const { hasRequest } = useSelector((store) => store.resetPassword);
-  const { fetchPost } = api(RESET_PASS_URL);
   const history = useHistory();
   const { isLogged } = useSelector((store) => store.login);
 
-  const postRegistrationDetails = (data) => {
-    dispatch({ type: START_RESTORE_PASS });
-    return fetchPost(data)
-      .then((response) => {
-        if (response && response.success) {
-          dispatch({ type: SUCCESS_RESTORE_PASS, payload: response });
-          dispatch({ type: ERROR_RESTORE_PASS });
-          history.push("/login");
-        }
-      })
-      .catch((err) => dispatch({ type: ERROR_RESTORE_PASS }));
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    postRegistrationDetails(values);
+    dispatch(postRegistrationDetails(values));
   };
 
   useEffect(() => {

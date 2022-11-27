@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
-import AppHeader from "../../components/AppHeader/AppHeader";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import LoginForm from "../../components/LoginForm/LoginForm";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import PropTypes from "prop-types";
+import { checkAuth } from "../../services/asyncActions/auth";
 
-const LoginPage = ({ auth }) => {
+const LoginPage = () => {
   const { isLogged } = useSelector((store) => store.login);
+  const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
-    !isLogged && auth();
+    !isLogged && dispatch(checkAuth(isLogged));
   }, []);
 
   useEffect(() => {
@@ -20,17 +20,10 @@ const LoginPage = ({ auth }) => {
     }
   }, [isLogged]);
   return (
-    <>
-      <AppHeader />
-      <PageContentContainer>
-        <LoginForm />
-      </PageContentContainer>
-    </>
+    <PageContentContainer>
+      <LoginForm />
+    </PageContentContainer>
   );
-};
-
-LoginPage.propTypes = {
-  auth: PropTypes.func.isRequired,
 };
 
 export default LoginPage;

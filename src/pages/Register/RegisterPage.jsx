@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
-import AppHeader from "../../components/AppHeader/AppHeader";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import PropTypes from "prop-types";
+import { checkAuth } from "../../services/asyncActions/auth";
 
-const RegisterPage = ({ auth }) => {
+const RegisterPage = () => {
+  const dispatch = useDispatch();
   const { isLogged } = useSelector((store) => store.login);
   const history = useHistory();
   useEffect(() => {
-    !isLogged && auth();
+    !isLogged && dispatch(checkAuth(isLogged));
   }, []);
 
   useEffect(() => {
@@ -19,17 +19,10 @@ const RegisterPage = ({ auth }) => {
     }
   }, [isLogged]);
   return (
-    <>
-      <AppHeader />
-      <PageContentContainer>
-        <RegistrationForm />
-      </PageContentContainer>
-    </>
+    <PageContentContainer>
+      <RegistrationForm />
+    </PageContentContainer>
   );
-};
-
-RegisterPage.propTypes = {
-  auth: PropTypes.func.isRequired,
 };
 
 export default RegisterPage;

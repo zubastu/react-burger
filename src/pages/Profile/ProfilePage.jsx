@@ -1,30 +1,26 @@
 import React, { useEffect } from "react";
 import styles from "./ProfilePage.module.css";
-import AppHeader from "../../components/AppHeader/AppHeader";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import ProfileNavigationLinks from "../../components/ProfileNavigationLinks/ProfileNavigationLinks";
 import ProfileForm from "../../components/ProfileForm/ProfileForm";
-import PropTypes from "prop-types";
+import { checkAuth } from "../../services/asyncActions/auth";
+import { useDispatch, useSelector } from "react-redux";
 
-const ProfilePage = ({ auth }) => {
+const ProfilePage = () => {
+  const dispatch = useDispatch();
+  const { isLogged } = useSelector((store) => store.login);
   useEffect(() => {
-    auth();
+    dispatch(checkAuth(isLogged));
   }, []);
-  return (
-    <>
-      <AppHeader />
-      <div className={styles.content}>
-        <ProfileNavigationLinks />
-        <PageContentContainer>
-          <ProfileForm />
-        </PageContentContainer>
-      </div>
-    </>
-  );
-};
 
-ProfilePage.propTypes = {
-  auth: PropTypes.func.isRequired,
+  return (
+    <div className={styles.content}>
+      <ProfileNavigationLinks />
+      <PageContentContainer>
+        <ProfileForm />
+      </PageContentContainer>
+    </div>
+  );
 };
 
 export default ProfilePage;

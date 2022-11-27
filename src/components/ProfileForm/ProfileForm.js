@@ -8,28 +8,12 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
-import { api } from "../../utils/api";
-import { USER_INFO_URL } from "../../utils/constants";
-import {
-  GET_USER_INFO_ERROR,
-  GET_USER_INFO_START,
-  GET_USER_INFO_SUCCESS,
-} from "../../services/actions/user";
-const { fetchSecurePatch } = api(USER_INFO_URL);
+import { changeUserInfo } from "../../services/asyncActions/user";
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
   const { values, handleChange, setValues } = useForm();
   const { name, email } = useSelector((store) => store.user.user);
-
-  const changeUserInfo = (data) => {
-    dispatch({ type: GET_USER_INFO_START });
-    return fetchSecurePatch(data)
-      .then((response) => {
-        dispatch({ type: GET_USER_INFO_SUCCESS, payload: response.user });
-      })
-      .catch((err) => dispatch({ type: GET_USER_INFO_ERROR }));
-  };
 
   useEffect(() => {
     setValues({ name, email });
@@ -37,7 +21,7 @@ const ProfileForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    changeUserInfo(values);
+    dispatch(changeUserInfo(values));
   };
 
   const handleCancel = () => {
