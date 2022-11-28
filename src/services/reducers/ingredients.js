@@ -8,6 +8,7 @@ import {
   SELECT_BUN,
   DELETE_INGREDIENT,
   UPDATE_INGREDIENTS,
+  RESET_INGREDIENTS,
 } from "../actions/ingredients";
 import { TYPE_BUN, TYPE_MAIN, TYPE_SAUCE } from "../../utils/constants";
 
@@ -79,6 +80,12 @@ export const ingredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedIngredients: action.payload,
+      };
+    case RESET_INGREDIENTS:
+      return {
+        ...state,
+        selectedIngredients: [],
+        selectedBun: {},
       };
     default:
       return state;
