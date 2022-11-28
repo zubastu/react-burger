@@ -1,25 +1,27 @@
 import React, { useEffect } from "react";
-import appStyles from "./App.module.css";
-import AppHeader from "../AppHeader/AppHeader";
-import Main from "../Main/Main";
-import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
-import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
+import styles from "./App.module.css";
 import { useDispatch } from "react-redux";
 import { fetchIngredients } from "../../services/asyncActions/ingredients";
+import ModalSwitch from "../ModalSwitch/ModalSwitch";
+import { checkAuth } from "../../services/asyncActions/auth";
+import { useSelector } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();
-
+  const { isLogged } = useSelector((store) => store.login);
   useEffect(() => {
     dispatch(fetchIngredients());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!isLogged) {
+      dispatch(checkAuth(isLogged));
+    }
+  }, [isLogged]);
+
   return (
-    <div className={appStyles.app}>
-      <AppHeader />
-      <Main>
-        <BurgerIngredients />
-        <BurgerConstructor />
-      </Main>
+    <div className={styles.app}>
+      <ModalSwitch />
     </div>
   );
 }

@@ -1,34 +1,54 @@
 import React from "react";
-import appHeaderStyles from "./AppHeader.module.css";
+import styles from "./AppHeader.module.css";
 import {
   Logo,
   BurgerIcon,
   ListIcon,
   ProfileIcon,
+  LogoutIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import NavigationLink from "../NavigationLink/NavigationLink";
+import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const AppHeader = () => {
+  const location = useLocation();
+  const { pathname } = location;
+  const { isLogged } = useSelector((store) => store.login);
   return (
-    <header className={appHeaderStyles.header}>
-      <nav className={appHeaderStyles.nav}>
-        <div className={appHeaderStyles.nav__item}>
-          <NavigationLink path="/" text="Конструктор" styles="mr-2">
-            <BurgerIcon type="secondary" />
+    <header className={styles.header}>
+      <nav className={styles.nav}>
+        <div className={styles.nav__item}>
+          <NavigationLink path="/" text="Конструктор" propStyles="mr-2">
+            <BurgerIcon type={pathname === "/" ? "primary" : "secondary"} />
           </NavigationLink>
 
-          <NavigationLink path="/" text="Лента заказов">
-            <ListIcon type="secondary" />
+          <NavigationLink path="/profile/orders" text="Лента заказов">
+            <ListIcon
+              type={pathname === "/profile/orders" ? "primary" : "secondary"}
+            />
           </NavigationLink>
         </div>
-        <a href="#" className={appHeaderStyles.nav__item}>
+        <Link to="/" className={styles.nav__item}>
           <Logo />
-        </a>
-        <div className={appHeaderStyles.nav__item}>
-          <NavigationLink path="/" text="Личный кабинет">
-            <ProfileIcon type="secondary" />
-          </NavigationLink>
-        </div>
+        </Link>
+        {isLogged ? (
+          <div className={styles.nav__item}>
+            <NavigationLink path="/profile" text="Личный кабинет">
+              <ProfileIcon
+                type={pathname === "/profile" ? "primary" : "secondary"}
+              />
+            </NavigationLink>
+          </div>
+        ) : (
+          <div className={styles.nav__item}>
+            <NavigationLink path="/login" text="Войти">
+              <LogoutIcon
+                type={pathname === "/login" ? "primary" : "secondary"}
+              />
+            </NavigationLink>
+          </div>
+        )}
       </nav>
     </header>
   );

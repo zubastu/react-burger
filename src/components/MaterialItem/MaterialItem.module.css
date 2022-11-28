@@ -37,3 +37,7 @@
     height: 32px;
     box-sizing: border-box;
 }
+.link {
+    text-decoration: none;
+    color: inherit;
+}

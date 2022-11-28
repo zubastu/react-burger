@@ -1,0 +1,36 @@
+.nav {
+    margin: 180px 0 0 0;
+    width: 320px;
+}
+.list{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+}
+.listItem{
+    width: 320px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.link{
+    text-decoration: none;
+    transition: opacity .6s ease;
+}
+.link:hover {
+    opacity: .8;
+    transition: opacity .6s ease;
+}
+.text{
+    color: #8585AD;
+    opacity: 0.4;
+    width: 320px;
+    height: 48px;
+}
+.button {
+    background: inherit;
+    border: none;
+    cursor: pointer;
+}

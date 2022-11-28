@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
-import modalStyles from "./Modal.module.css";
+import styles from "./Modal.module.css";
 import { reactModalRootElement } from "../../utils/constants";
 import ModalHeader from "../ModalHeader/ModalHeader";
 import PropTypes from "prop-types";
@@ -20,12 +20,10 @@ const Modal = ({ children, onClose, text = null, extraClassName }) => {
   }, [onClose]);
 
   return createPortal(
-    <div className={modalStyles.container}>
+    <div className={styles.container}>
       <Overlay onClick={onClose} />
 
-      <div
-        className={`${modalStyles.modal} pt-10 pl-10 pr-10 ${extraClassName}`}
-      >
+      <div className={`${styles.modal} pt-10 pl-10 pr-10 ${extraClassName}`}>
         <ModalHeader text={text} onClose={onClose} />
         {children}
       </div>

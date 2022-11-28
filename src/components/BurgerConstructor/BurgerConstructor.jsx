@@ -7,20 +7,20 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrop } from "react-dnd";
-import OrderDetails from "../OrderDetails/OrderDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { postOrderDetails } from "../../services/asyncActions/order";
-import Modal from "../Modal/Modal";
 import { ADD_INGREDIENT, SELECT_BUN } from "../../services/actions/ingredients";
 import SelectedIngredients from "../SelectedIngredients/SelectedIngredients";
-import { CLOSE_ORDER_MODAL } from "../../services/actions/order";
+import { useHistory } from "react-router-dom";
 
 const BurgerConstructor = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
-  const { isOpenOrderModal, isRequest } = useSelector((store) => store.order);
+  const { isRequest } = useSelector((store) => store.order);
   const { selectedIngredients, selectedBun } = useSelector(
     (store) => store.ingredients
   );
+  const { isLogged } = useSelector((store) => store.login);
 
   const addIngredient = (ingredient) => {
     if (ingredient.type !== "bun") {
@@ -54,25 +54,27 @@ const BurgerConstructor = () => {
   );
 
   const postOrder = () => {
-    const productIds = selectedIngredients.map((i) => i._id);
-    const productData = {
-      ingredients: [selectedBun._id, ...productIds, selectedBun._id],
-    };
-    dispatch(postOrderDetails(productData));
+    if (isLogged) {
+      const productIds = selectedIngredients.map((i) => i._id);
+      const productData = {
+        ingredients: [selectedBun._id, ...productIds, selectedBun._id],
+      };
+      dispatch(postOrderDetails(productData));
+    } else {
+      history.push("/login");
+    }
   };
 
-  const closeModal = () => dispatch({ type: CLOSE_ORDER_MODAL });
+  const isDisabled =
+    isRequest ||
+    !Boolean(selectedBun.type) ||
+    !Boolean(selectedIngredients.length);
 
   return (
     <section
       ref={dropTarget}
       className={`${burgerIngredientsStyles.container} `}
     >
-      {isOpenOrderModal && (
-        <Modal extraClassName="pb-30" type="orderModal" onClose={closeModal}>
-          <OrderDetails />
-        </Modal>
-      )}
       <div
         className={`${burgerIngredientsStyles.materials} ${
           isHover && burgerIngredientsStyles.materials_active
@@ -84,7 +86,7 @@ const BurgerConstructor = () => {
         <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
         <CurrencyIcon type="primary" />
         <Button
-          disabled={isRequest}
+          disabled={isDisabled}
           htmlType={"button"}
           type="primary"
           size="medium"

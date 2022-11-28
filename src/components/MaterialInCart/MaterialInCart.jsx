@@ -3,7 +3,7 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import materialInCartStyles from "./MaterialInCart.module.css";
+import styles from "./MaterialInCart.module.css";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { DELETE_INGREDIENT } from "../../services/actions/ingredients";
@@ -69,13 +69,13 @@ const MaterialInCart = ({
       ref={ref}
       data-handler-id={handlerId}
       onDrop={(e) => e.preventDefault()}
-      className={materialInCartStyles.container}
+      className={styles.container}
     >
       <DragIcon type="primary" />
       <ConstructorElement
         isLocked={false}
         handleClose={handleDelete}
-        extraClass={materialInCartStyles.constructor}
+        extraClass={styles.constructor}
         thumbnail={image}
         text={name}
         price={price}
