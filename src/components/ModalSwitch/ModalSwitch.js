@@ -20,6 +20,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import AppHeader from "../AppHeader/AppHeader";
 import RequestInformation from "../RequestInformation/RequestInformation";
 import { CLOSE_REQUEST_INFO } from "../../services/actions/requestInformation";
+import Preloader from "../Preloader/Preloader";
 
 const ModalSwitch = () => {
   const location = useLocation();
@@ -27,6 +28,7 @@ const ModalSwitch = () => {
   const dispatch = useDispatch();
   const { isOpenOrderModal } = useSelector((store) => store.order);
   const { isOpened } = useSelector((store) => store.request);
+  const { isPreloaderActive } = useSelector((store) => store.preloader);
 
   const closeOrderModal = () => dispatch({ type: CLOSE_ORDER_MODAL });
   const closeIngredientModal = () => {
@@ -97,6 +99,8 @@ const ModalSwitch = () => {
           <RequestInformation />
         </Modal>
       ) : null}
+
+      {isPreloaderActive ? <Preloader /> : null}
     </>
   );
 };

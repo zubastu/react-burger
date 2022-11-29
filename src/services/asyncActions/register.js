@@ -10,11 +10,13 @@ import {
   SHOW_REQUEST_ERROR_INFO,
   SHOW_REQUEST_INFO,
 } from "../actions/requestInformation";
+import { PRELOADER_START, PRELOADER_STOP } from "../actions/preloader";
 
 const { fetchPost } = api(REGISTER_URL);
 
 export const postRegistrationDetails = (data) => (dispatch) => {
   dispatch({ type: START_REGISTRATION });
+  dispatch({ type: PRELOADER_START });
   fetchPost(data)
     .then((response) => {
       if (response && response.success) {
@@ -30,5 +32,6 @@ export const postRegistrationDetails = (data) => (dispatch) => {
         dispatch({ type: ERROR_REGISTRATION });
         dispatch({ type: SHOW_REQUEST_ERROR_INFO, payload: data.message });
       });
-    });
+    })
+    .finally(() => dispatch({ type: PRELOADER_STOP }));
 };

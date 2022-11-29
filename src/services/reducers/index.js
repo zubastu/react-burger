@@ -8,6 +8,7 @@ import { restorePasswordReducer } from "./restore-pass";
 import { refreshTokenReducer } from "./refreshToken";
 import { userInfoReducer } from "./user";
 import { requestInformationReducer } from "./requestInformation";
+import { preloaderReducer } from "./preloader";
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -19,4 +20,5 @@ export const rootReducer = combineReducers({
   token: refreshTokenReducer,
   user: userInfoReducer,
   request: requestInformationReducer,
+  preloader: preloaderReducer,
 });
