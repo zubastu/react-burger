@@ -1,4 +1,4 @@
-import { browserHistory, USER_INFO_URL } from "../../utils/constants";
+import { USER_INFO_URL } from "../../utils/constants";
 import {
   ERROR_LOGIN,
   LOGIN_CHECKED,
@@ -21,7 +21,6 @@ export const handleLogin = (data) => (dispatch) => {
       if (response && response.success) {
         dispatch({ type: SUCCESS_LOGIN, payload: response });
         dispatch({ type: GET_USER_INFO_SUCCESS, payload: response.user });
-        browserHistory.push("/");
       } else {
         dispatch({ type: ERROR_LOGIN });
       }

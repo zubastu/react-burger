@@ -4,6 +4,7 @@ import LoginForm from "../../components/LoginForm/LoginForm";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { checkAuth } from "../../services/asyncActions/auth";
+import { getCookie } from "../../utils/cookie";
 
 const LoginPage = () => {
   const { isLogged } = useSelector((store) => store.login);
@@ -11,7 +12,8 @@ const LoginPage = () => {
   const history = useHistory();
 
   useEffect(() => {
-    !isLogged && dispatch(checkAuth(isLogged));
+    const token = getCookie("refreshToken");
+    !isLogged && token && dispatch(checkAuth(isLogged));
   }, []);
 
   useEffect(() => {

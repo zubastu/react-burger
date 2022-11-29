@@ -10,7 +10,6 @@ import FormNavigationElement from "../FormNavigationElement/FormNavigationElemen
 import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { RESET_REQUEST_ACCEPT } from "../../services/actions/restore-pass";
 import { resetPasswordPost } from "../../services/asyncActions/resetPass";
 
 const RestorePassForm = () => {
@@ -28,7 +27,6 @@ const RestorePassForm = () => {
   useEffect(() => {
     if (!hasRequest) {
       history.push("/login");
-      dispatch({ type: RESET_REQUEST_ACCEPT });
     } else if (isLogged) {
       history.push("/profile");
     }

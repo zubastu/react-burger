@@ -5,9 +5,8 @@ import {
 } from "../actions/forgot-pass";
 
 const initialState = {
-  isRequest: true,
+  isRequest: false,
   isError: false,
-  hasRequest: false,
 };
 
 export const forgetPasswordReducer = (state = initialState, action) => {
@@ -17,21 +16,18 @@ export const forgetPasswordReducer = (state = initialState, action) => {
         ...state,
         isRequest: true,
         isError: false,
-        hasRequest: false,
       };
     case ERROR_FORGOT_PASS:
       return {
         ...state,
         isRequest: false,
-        isError: false,
-        hasRequest: false,
+        isError: true,
       };
     case SUCCESS_FORGOT_PASS:
       return {
         ...state,
         isRequest: false,
-        isError: true,
-        hasRequest: true,
+        isError: false,
       };
     default:
       return state;

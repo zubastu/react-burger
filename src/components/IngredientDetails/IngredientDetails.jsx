@@ -2,6 +2,7 @@ import styles from "./IngredientDetails.module.css";
 import React, { useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 const IngredientDetails = ({ hasHeading }) => {
   const { ingredientId } = useParams();
@@ -69,6 +70,10 @@ const IngredientDetails = ({ hasHeading }) => {
       ) : null}
     </>
   );
+};
+
+IngredientDetails.propTypes = {
+  hasHeading: PropTypes.bool,
 };
 
 export default IngredientDetails;

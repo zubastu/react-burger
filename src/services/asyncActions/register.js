@@ -6,16 +6,29 @@ import {
 
 import { REGISTER_URL } from "../../utils/constants";
 import { api } from "../../utils/api";
+import {
+  SHOW_REQUEST_ERROR_INFO,
+  SHOW_REQUEST_INFO,
+} from "../actions/requestInformation";
 
 const { fetchPost } = api(REGISTER_URL);
 
 export const postRegistrationDetails = (data) => (dispatch) => {
   dispatch({ type: START_REGISTRATION });
   fetchPost(data)
-    .then((response) =>
-      response && response.success
-        ? dispatch({ type: SUCCESS_REGISTRATION, payload: response })
-        : dispatch({ type: ERROR_REGISTRATION })
-    )
-    .catch((err) => dispatch({ type: ERROR_REGISTRATION }));
+    .then((response) => {
+      if (response && response.success) {
+        dispatch({ type: SUCCESS_REGISTRATION, payload: response });
+        dispatch({
+          type: SHOW_REQUEST_INFO,
+          payload: "Вы успешно зарегистрировались!",
+        });
+      }
+    })
+    .catch((err) => {
+      err.json().then((data) => {
+        dispatch({ type: ERROR_REGISTRATION });
+        dispatch({ type: SHOW_REQUEST_ERROR_INFO, payload: data.message });
+      });
+    });
 };

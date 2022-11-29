@@ -18,7 +18,6 @@ export const restorePasswordReducer = (state = initialState, action) => {
         ...state,
         isRequest: true,
         isError: false,
-        hasRequest: false,
       };
     case SUCCESS_RESTORE_PASS:
       return {
@@ -32,7 +31,6 @@ export const restorePasswordReducer = (state = initialState, action) => {
         ...state,
         isRequest: false,
         isError: true,
-        hasRequest: false,
       };
     case RESET_REQUEST_ACCEPT:
       return {

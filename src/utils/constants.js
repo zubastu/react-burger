@@ -1,4 +1,3 @@
-import { createBrowserHistory } from "history";
 import PropTypes from "prop-types";
 
 const BASE_URL = "https://norma.nomoreparties.space/";
@@ -17,8 +16,6 @@ export const TYPE_SAUCE = "sauce";
 export const TYPE_MAIN = "main";
 
 export const reactModalRootElement = document.querySelector(".react-modals");
-
-export const browserHistory = createBrowserHistory();
 
 export const INGREDIENT_TYPES = PropTypes.shape({
   _id: PropTypes.string.isRequired,

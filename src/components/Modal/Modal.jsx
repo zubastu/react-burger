@@ -33,7 +33,7 @@ const Modal = ({ children, onClose, text = null, extraClassName }) => {
 };
 
 Modal.propTypes = {
-  children: PropTypes.shape(PropTypes.elementType.isRequired).isRequired,
+  children: PropTypes.node.isRequired,
   text: PropTypes.string,
   onClose: PropTypes.func.isRequired,
   extraClassName: PropTypes.string,
