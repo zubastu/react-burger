@@ -21,7 +21,7 @@ import AppHeader from "../AppHeader/AppHeader";
 import RequestInformation from "../RequestInformation/RequestInformation";
 import { CLOSE_REQUEST_INFO } from "../../services/actions/requestInformation";
 import Preloader from "../Preloader/Preloader";
-import { TStore, TBackground } from "../../types";
+import { TStore, TModalState } from "../../types";
 
 const ModalSwitch = () => {
   const location = useLocation();
@@ -38,16 +38,14 @@ const ModalSwitch = () => {
     dispatch({ type: CLOSE_INGREDIENT_DETAILS });
     history.goBack();
   };
+
   const closeRequestModal = (): any => dispatch({ type: CLOSE_REQUEST_INFO });
 
-  const background: TBackground = location.state && location.state.background;
-
-  // @ts-ignore
-  // @ts-ignore
+  const state = location.state as TModalState;
   return (
     <>
       <AppHeader />
-      <Switch location={background || location}>
+      <Switch location={state?.background || location}>
         <Route path="/login">
           <LoginPage />
         </Route>
@@ -81,12 +79,13 @@ const ModalSwitch = () => {
         </Route>
       </Switch>
 
-      {background ? (
+      {state?.background ? (
         <Route exact path="/ingredients/:ingredientId">
           <Modal
             text="Детали ингредиента"
             extraClassName="pb-15"
             onClose={closeIngredientModal}
+            container={document.getElementById("react-modals") as HTMLElement}
           >
             <IngredientDetails hasHeading={false} />
           </Modal>
@@ -94,13 +93,21 @@ const ModalSwitch = () => {
       ) : null}
 
       {isOpenOrderModal ? (
-        <Modal extraClassName="pb-30" onClose={closeOrderModal}>
+        <Modal
+          extraClassName="pb-30"
+          onClose={closeOrderModal}
+          container={document.getElementById("react-modals") as HTMLElement}
+        >
           <OrderDetails />
         </Modal>
       ) : null}
 
       {isOpened ? (
-        <Modal text="Результат запроса" onClose={closeRequestModal}>
+        <Modal
+          text="Результат запроса"
+          onClose={closeRequestModal}
+          container={document.getElementById("react-modals") as HTMLElement}
+        >
           <RequestInformation />
         </Modal>
       ) : null}

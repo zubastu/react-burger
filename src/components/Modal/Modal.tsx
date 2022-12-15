@@ -1,14 +1,27 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { createPortal } from "react-dom";
 import styles from "./Modal.module.css";
-import { reactModalRootElement } from "../../utils/constants";
 import ModalHeader from "../ModalHeader/ModalHeader";
-import PropTypes from "prop-types";
 import Overlay from "../Overlay/Overlay";
+import { TChildrenNode } from "../../types";
 
-const Modal = ({ children, onClose, text = null, extraClassName }) => {
+type TModalProps = {
+  text?: string;
+  onClose: () => any;
+  extraClassName?: string;
+  children: TChildrenNode;
+  container: HTMLElement;
+};
+
+const Modal: FC<TModalProps> = ({
+  children,
+  onClose,
+  text = null,
+  extraClassName,
+  container,
+}) => {
   useEffect(() => {
-    const closeOnEscapeKey = (e) => {
+    const closeOnEscapeKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onClose();
       }
@@ -28,15 +41,8 @@ const Modal = ({ children, onClose, text = null, extraClassName }) => {
         {children}
       </div>
     </div>,
-    reactModalRootElement
+    container
   );
-};
-
-Modal.propTypes = {
-  children: PropTypes.node.isRequired,
-  text: PropTypes.string,
-  onClose: PropTypes.func.isRequired,
-  extraClassName: PropTypes.string,
 };
 
 export default Modal;

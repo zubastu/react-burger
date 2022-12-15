@@ -7,7 +7,6 @@ import {
 import { useDrag } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { OPEN_INGREDIENT_DETAILS } from "../../services/actions/ingredients";
-import { INGREDIENT_TYPES } from "../../utils/constants";
 import { Link, useLocation } from "react-router-dom";
 
 const MaterialItem = ({ material }) => {
@@ -71,8 +70,10 @@ const MaterialItem = ({ material }) => {
   );
 };
 
+/*
 MaterialItem.propTypes = {
   material: INGREDIENT_TYPES.isRequired,
 };
+*/
 
 export default MaterialItem;

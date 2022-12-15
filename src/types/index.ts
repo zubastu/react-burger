@@ -1,6 +1,10 @@
 import store from "../services/store";
 import React from "react";
-import PropTypes from "prop-types";
+import * as H from "history";
+
+export type TModalState = {
+  background?: H.Location;
+};
 
 export type TStore = ReturnType<typeof store.getState>;
 export type TPathnameString = { pathname: string };

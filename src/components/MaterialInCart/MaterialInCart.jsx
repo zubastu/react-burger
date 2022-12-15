@@ -4,11 +4,9 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./MaterialInCart.module.css";
-import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { DELETE_INGREDIENT } from "../../services/actions/ingredients";
 import { useDrag, useDrop } from "react-dnd";
-import { INGREDIENT_TYPES } from "../../utils/constants";
 
 const MaterialInCart = ({
   image,
@@ -83,6 +81,7 @@ const MaterialInCart = ({
     </div>
   );
 };
+/*
 
 MaterialInCart.propTypes = {
   image: PropTypes.string.isRequired,
@@ -93,5 +92,6 @@ MaterialInCart.propTypes = {
   index: PropTypes.number.isRequired,
   moveIngredient: PropTypes.func.isRequired,
 };
+*/
 
 export default MaterialInCart;
