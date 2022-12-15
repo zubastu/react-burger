@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import image from "../../images/404.png";
 import styles from "./NotFound.module.css";
 import { useHistory } from "react-router-dom";
 
-const NotFound = () => {
+const NotFound: FC = () => {
   const history = useHistory();
 
   return (
@@ -11,7 +11,7 @@ const NotFound = () => {
       <img className={styles.image} src={image} alt="Не найдено" />
       <button
         className={styles.button}
-        type="secondary"
+        type="button"
         color="white"
         onClick={() => history.goBack()}
       >

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "./LoginForm.module.css";
 import {
   Button,
@@ -11,13 +11,16 @@ import { useForm } from "../../hooks/useForm";
 import { useDispatch } from "react-redux";
 import { handleLogin } from "../../services/asyncActions/auth";
 
-const LoginForm = () => {
+const LoginForm: FC = () => {
   const dispatch = useDispatch();
-  const { values, handleChange, isValid } = useForm();
+  const { values, handleChange, isValid } = useForm({
+    email: "",
+    password: "",
+  });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    dispatch(handleLogin(values));
+    handleLogin(values)(dispatch);
   };
 
   return (

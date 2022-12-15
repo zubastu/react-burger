@@ -1,8 +1,8 @@
-import React from "react";
+import React, { FC } from "react";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import RestorePassForm from "../../components/RestorePassForm/RestorePassForm";
 
-const RestorePasswordPage = () => {
+const RestorePasswordPage: FC = () => {
   return (
     <PageContentContainer>
       <RestorePassForm />

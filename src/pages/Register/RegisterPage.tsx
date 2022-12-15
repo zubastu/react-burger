@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { checkAuth } from "../../services/asyncActions/auth";
 import { RESET_REGISTRATION } from "../../services/actions/register";
+import { TStore } from "../../types";
 
-const RegisterPage = () => {
+const RegisterPage: FC = () => {
   const dispatch = useDispatch();
-  const { isLogged } = useSelector((store) => store.login);
-  const { hasRequest } = useSelector((store) => store.register);
+  const { isLogged } = useSelector((store: TStore) => store.login);
+  const { hasRequest } = useSelector((store: TStore) => store.register);
   const history = useHistory();
 
   useEffect(() => {
@@ -20,7 +21,7 @@ const RegisterPage = () => {
   }, [hasRequest]);
 
   useEffect(() => {
-    !isLogged && dispatch(checkAuth(isLogged));
+    !isLogged && checkAuth(isLogged)(dispatch);
   }, []);
 
   useEffect(() => {

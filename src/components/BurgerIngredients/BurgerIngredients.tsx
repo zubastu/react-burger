@@ -1,23 +1,26 @@
-import React, { useRef } from "react";
+import React, { useRef, RefObject } from "react";
 import styles from "./BurgerIngredients.module.css";
 import MaterialItem from "../MaterialItem/MaterialItem";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useObserver } from "../../hooks/useObserver";
 import { useSelector } from "react-redux";
+import { TStore, TIngredient } from "../../types";
 
 const BurgerIngredients = () => {
-  const sauceRef = useRef();
-  const bunRef = useRef();
-  const mainRef = useRef();
+  const sauceRef = useRef<HTMLDivElement>(null);
+  const bunRef = useRef<HTMLDivElement>(null);
+  const mainRef = useRef<HTMLDivElement>(null);
 
   let observerBun = useObserver(bunRef);
   let observerSauces = useObserver(sauceRef);
   let observerMain = useObserver(mainRef);
 
-  const handleClick = (ref) =>
-    ref.current.scrollIntoView({ behavior: "smooth" });
+  const handleClick = (ref: RefObject<HTMLDivElement>) =>
+    ref.current?.scrollIntoView({ behavior: "smooth" });
 
-  const { bun, sauces, main } = useSelector((store) => store.ingredients);
+  const { bun, sauces, main } = useSelector(
+    (store: TStore) => store.ingredients
+  );
 
   return (
     <section id="ingredients-container" className={`${styles.container} `}>
@@ -56,7 +59,7 @@ const BurgerIngredients = () => {
           className={`${styles.material_container} pt-6 pl-4 pr-4`}
         >
           {bun &&
-            bun.map((bunItem) => (
+            bun.map((bunItem: TIngredient) => (
               <MaterialItem material={bunItem} key={bunItem._id} />
             ))}
         </div>
@@ -68,7 +71,7 @@ const BurgerIngredients = () => {
           className={`${styles.material_container} pt-6 pl-4 pr-4`}
         >
           {sauces &&
-            sauces.map((sauce) => (
+            sauces.map((sauce: TIngredient) => (
               <MaterialItem material={sauce} key={sauce._id} />
             ))}
         </div>
@@ -80,7 +83,7 @@ const BurgerIngredients = () => {
           className={`${styles.material_container} pt-6 pl-4 pr-4`}
         >
           {main &&
-            main.map((mainItem) => (
+            main.map((mainItem: TIngredient) => (
               <MaterialItem material={mainItem} key={mainItem._id} />
             ))}
         </div>

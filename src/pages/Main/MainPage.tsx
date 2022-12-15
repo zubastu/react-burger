@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import Main from "../../components/Main/Main";
 import BurgerIngredients from "../../components/BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../../components/BurgerConstructor/BurgerConstructor";
 
-const MainPage = () => {
+const MainPage: FC = () => {
   return (
     <Main>
       <BurgerIngredients />

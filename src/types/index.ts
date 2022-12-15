@@ -6,6 +6,13 @@ export type TModalState = {
   background?: H.Location;
 };
 
+export type TForm = {
+  name?: string;
+  code?: string;
+  password?: string;
+  email?: string;
+};
+
 export type TStore = ReturnType<typeof store.getState>;
 export type TPathnameString = { pathname: string };
 export type TIsLogged = { isLogged: boolean };
