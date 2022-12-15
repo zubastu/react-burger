@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, RefObject } from "react";
 
-export const useObserver = (ref) => {
+export const useObserver = (ref: RefObject<HTMLElement>) => {
   const [intersecting, setIntersecting] = useState(false);
 
   const options = {
@@ -15,7 +15,7 @@ export const useObserver = (ref) => {
   );
 
   useEffect(() => {
-    observer.observe(ref.current);
+    observer.observe(ref.current!);
     return () => observer.disconnect();
   }, []);
 
