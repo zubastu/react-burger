@@ -1,11 +1,22 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "./NavigationLink.module.css";
-import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
+import { TPathnameString, TChildrenNode } from "../../types";
 
-const NavigationLink = ({ path = "/", text, propStyles = null, children }) => {
+interface INavigationLinkProps {
+  path: string;
+  text: string;
+  propStyles?: string | undefined;
+  children: TChildrenNode;
+}
+const NavigationLink: React.FC<INavigationLinkProps> = ({
+  path = "/",
+  text,
+  propStyles = undefined,
+  children,
+}) => {
   const location = useLocation();
-  const { pathname } = location;
+  const { pathname }: TPathnameString = location;
   return (
     <Link
       className={`${styles.link} pl-5 pr-5 pb-4 pt-4 ${propStyles} `}
@@ -21,13 +32,6 @@ const NavigationLink = ({ path = "/", text, propStyles = null, children }) => {
       </p>
     </Link>
   );
-};
-
-NavigationLink.propTypes = {
-  path: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-  propStyles: PropTypes.string,
-  children: PropTypes.node.isRequired,
 };
 
 export default NavigationLink;

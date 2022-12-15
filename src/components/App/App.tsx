@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 
 import styles from "./App.module.css";
 import { useDispatch } from "react-redux";
@@ -6,17 +6,18 @@ import { fetchIngredients } from "../../services/asyncActions/ingredients";
 import ModalSwitch from "../ModalSwitch/ModalSwitch";
 import { checkAuth } from "../../services/asyncActions/auth";
 import { useSelector } from "react-redux";
+import { TStore } from "../../types";
 
-function App() {
+const App: FC = () => {
   const dispatch = useDispatch();
-  const { isLogged } = useSelector((store) => store.login);
+  const { isLogged } = useSelector((store: TStore) => store.login);
   useEffect(() => {
-    dispatch(fetchIngredients());
+    fetchIngredients()(dispatch);
   }, [dispatch]);
 
   useEffect(() => {
     if (!isLogged) {
-      dispatch(checkAuth(isLogged));
+      checkAuth(isLogged)(dispatch);
     }
   }, [isLogged]);
 
@@ -25,6 +26,6 @@ function App() {
       <ModalSwitch />
     </div>
   );
-}
+};
 
 export default App;

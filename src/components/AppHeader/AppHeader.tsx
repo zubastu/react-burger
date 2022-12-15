@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "./AppHeader.module.css";
 import {
   Logo,
@@ -10,11 +10,12 @@ import {
 import NavigationLink from "../NavigationLink/NavigationLink";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { TIsLogged, TPathnameString, TStore } from "../../types";
 
-const AppHeader = () => {
+const AppHeader: FC = () => {
   const location = useLocation();
-  const { pathname } = location;
-  const { isLogged } = useSelector((store) => store.login);
+  const { pathname }: TPathnameString = location;
+  const { isLogged }: TIsLogged = useSelector((store: TStore) => store.login);
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>

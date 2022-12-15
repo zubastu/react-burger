@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
-import uuidv1 from "uuid/v1";
+import { v4 as uuidv4 } from "uuid";
+import { TConstructorIngredient, TIngredient, TStore } from "../../types";
 
 import burgerIngredientsStyles from "./BurgerConstructor.module.css";
 import {
@@ -12,21 +13,22 @@ import { postOrderDetails } from "../../services/asyncActions/order";
 import { ADD_INGREDIENT, SELECT_BUN } from "../../services/actions/ingredients";
 import SelectedIngredients from "../SelectedIngredients/SelectedIngredients";
 import { useHistory } from "react-router-dom";
+import { bool } from "prop-types";
 
 const BurgerConstructor = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { isRequest } = useSelector((store) => store.order);
+  const { isRequest } = useSelector((store: TStore) => store.order);
   const { selectedIngredients, selectedBun } = useSelector(
-    (store) => store.ingredients
+    (store: TStore) => store.ingredients
   );
-  const { isLogged } = useSelector((store) => store.login);
+  const { isLogged } = useSelector((store: TStore) => store.login);
 
-  const addIngredient = (ingredient) => {
+  const addIngredient = (ingredient: TIngredient | TConstructorIngredient) => {
     if (ingredient.type !== "bun") {
       const newIngredient = {
         ...ingredient,
-        id: uuidv1(),
+        id: uuidv4(),
       };
       dispatch({ type: ADD_INGREDIENT, payload: newIngredient });
     } else {
@@ -36,7 +38,7 @@ const BurgerConstructor = () => {
 
   const [{ isHover }, dropTarget] = useDrop({
     accept: "ingredient",
-    drop(ingredient) {
+    drop(ingredient: TIngredient) {
       addIngredient(ingredient);
     },
     collect: (monitor) => ({
@@ -47,7 +49,7 @@ const BurgerConstructor = () => {
   const totalPrice = useMemo(
     () =>
       selectedIngredients.reduce(
-        (prev, current) => prev + current.price,
+        (prev: number, current: TIngredient) => prev + current.price,
         selectedBun.price * 2 || 0
       ),
     [selectedIngredients, selectedBun]
@@ -55,17 +57,20 @@ const BurgerConstructor = () => {
 
   const postOrder = () => {
     if (isLogged) {
-      const productIds = selectedIngredients.map((i) => i._id);
-      const productData = {
+      const productIds: Array<string> = selectedIngredients.map(
+        (i: TIngredient) => i._id
+      );
+
+      const productData: { ingredients: Array<string> } = {
         ingredients: [selectedBun._id, ...productIds, selectedBun._id],
       };
-      dispatch(postOrderDetails(productData));
+      postOrderDetails(productData)(dispatch);
     } else {
       history.push("/login");
     }
   };
 
-  const isDisabled =
+  const isDisabled: boolean =
     isRequest ||
     !Boolean(selectedBun.type) ||
     !Boolean(selectedIngredients.length);

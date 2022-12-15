@@ -21,24 +21,29 @@ import AppHeader from "../AppHeader/AppHeader";
 import RequestInformation from "../RequestInformation/RequestInformation";
 import { CLOSE_REQUEST_INFO } from "../../services/actions/requestInformation";
 import Preloader from "../Preloader/Preloader";
+import { TStore, TBackground } from "../../types";
 
 const ModalSwitch = () => {
   const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
-  const { isOpenOrderModal } = useSelector((store) => store.order);
-  const { isOpened } = useSelector((store) => store.request);
-  const { isPreloaderActive } = useSelector((store) => store.preloader);
 
-  const closeOrderModal = () => dispatch({ type: CLOSE_ORDER_MODAL });
-  const closeIngredientModal = () => {
+  const { isOpenOrderModal } = useSelector((store: TStore) => store.order);
+  const { isOpened } = useSelector((store: TStore) => store.request);
+  const { isPreloaderActive } = useSelector((store: TStore) => store.preloader);
+
+  const closeOrderModal = (): any => dispatch({ type: CLOSE_ORDER_MODAL });
+
+  const closeIngredientModal = (): void => {
     dispatch({ type: CLOSE_INGREDIENT_DETAILS });
     history.goBack();
   };
-  const closeRequestModal = () => dispatch({ type: CLOSE_REQUEST_INFO });
+  const closeRequestModal = (): any => dispatch({ type: CLOSE_REQUEST_INFO });
 
-  const background = location.state && location.state.background;
+  const background: TBackground = location.state && location.state.background;
 
+  // @ts-ignore
+  // @ts-ignore
   return (
     <>
       <AppHeader />
