@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, FC } from "react";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import ForgotPassForm from "../../components/ForgotPassForm/ForgotPassForm";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { TStore } from "../../types";
 
-const ForgetPasswordPage = () => {
+const ForgetPasswordPage: FC = () => {
   const history = useHistory();
-  const { hasRequest } = useSelector((store) => store.resetPassword);
+  const { hasRequest } = useSelector((store: TStore) => store.resetPassword);
 
   useEffect(() => {
     if (hasRequest) {

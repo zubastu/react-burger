@@ -1,11 +1,24 @@
 import { getCookie } from "./cookie";
 import { LOGOUT_URL, REFRESH_TOKEN_URL } from "./constants";
+import { TIngredient } from "../types";
 
-export const api = (url) => {
-  const checkPromise = (promise) =>
+type TUserData = {
+  name?: string;
+  email?: string;
+  password?: string;
+};
+
+type TOrder = {
+  ingredients: Array<string>;
+};
+
+type TAuthInfo = TUserData & { code?: string };
+
+export const api = (url: string) => {
+  const checkPromise = (promise: Promise<Response>) =>
     promise.then((res) => (res.ok ? res.json() : Promise.reject(res)));
 
-  const headers = {
+  const headers: HeadersInit = {
     "Content-Type": "application/json",
     Accept: "application/json: charset=utf-8",
   };
@@ -13,24 +26,24 @@ export const api = (url) => {
   const fetchSecureGet = () => {
     const promise = fetch(url, {
       method: "GET",
-      headers: { ...headers, Authorization: getCookie("accessToken") },
+      headers: { ...headers, Authorization: `${getCookie("accessToken")}` },
     });
     return checkPromise(promise);
   };
 
-  const fetchSecurePost = (data) => {
+  const fetchSecurePost = (data: TUserData | TOrder) => {
     const promise = fetch(url, {
       method: "POST",
-      headers: { ...headers, Authorization: getCookie("accessToken") },
+      headers: { ...headers, Authorization: `${getCookie("accessToken")}` },
       body: JSON.stringify(data),
     });
     return checkPromise(promise);
   };
 
-  const fetchSecurePatch = (data) => {
+  const fetchSecurePatch = (data: TUserData) => {
     const promise = fetch(url, {
       method: "PATCH",
-      headers: { ...headers, Authorization: getCookie("accessToken") },
+      headers: { ...headers, Authorization: `${getCookie("accessToken")}` },
       body: JSON.stringify(data),
     });
     return checkPromise(promise);
@@ -44,7 +57,7 @@ export const api = (url) => {
     return checkPromise(promise);
   };
 
-  const fetchPost = (data) => {
+  const fetchPost = (data: TAuthInfo) => {
     const promise = fetch(url, {
       method: "POST",
       headers,
