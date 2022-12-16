@@ -24,7 +24,7 @@ const ProfileForm: FC = () => {
     setValues({ name, email });
   }, [name, email]);
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     changeUserInfo(values)(dispatch);
   };

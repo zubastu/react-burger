@@ -5,12 +5,12 @@ export function useForm(data: TForm) {
   const [values, setValues] = useState(data);
   const [isValid, setIsValid] = useState(false);
 
-  const handleChange = (event: React.SyntheticEvent) => {
+  const handleChange = (event: React.ChangeEvent) => {
     const target = event.target as HTMLInputElement;
 
     setValues({ ...values, [target.name]: target.value });
-    // @ts-ignore
-    setIsValid(target.closest("form").checkValidity());
+
+    setIsValid(target.closest("form")!.checkValidity());
   };
 
   return { values, handleChange, setValues, isValid };

@@ -11,7 +11,7 @@ type TOrder = {
   ingredients: Array<string>;
 };
 
-type TAuthInfo = TUserData & { code?: string };
+type TAuthInfo = TUserData & { token?: string };
 
 export const api = (url: string) => {
   const checkPromise = (promise: Promise<Response>) =>

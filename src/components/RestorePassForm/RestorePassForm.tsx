@@ -20,7 +20,7 @@ const RestorePassForm: FC = () => {
   const history = useHistory();
   const { isLogged } = useSelector((store: TStore) => store.login);
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     resetPasswordPost(values)(dispatch);
   };

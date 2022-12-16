@@ -23,6 +23,8 @@ import { CLOSE_REQUEST_INFO } from "../../services/actions/requestInformation";
 import Preloader from "../Preloader/Preloader";
 import { TStore, TModalState } from "../../types";
 
+const container = document.getElementById("react-modals") as HTMLElement;
+
 const ModalSwitch = () => {
   const location = useLocation();
   const history = useHistory();
@@ -32,14 +34,18 @@ const ModalSwitch = () => {
   const { isOpened } = useSelector((store: TStore) => store.request);
   const { isPreloaderActive } = useSelector((store: TStore) => store.preloader);
 
-  const closeOrderModal = (): any => dispatch({ type: CLOSE_ORDER_MODAL });
+  const closeOrderModal = (): void => {
+    dispatch({ type: CLOSE_ORDER_MODAL });
+  };
 
   const closeIngredientModal = (): void => {
     dispatch({ type: CLOSE_INGREDIENT_DETAILS });
     history.goBack();
   };
 
-  const closeRequestModal = (): any => dispatch({ type: CLOSE_REQUEST_INFO });
+  const closeRequestModal = (): void => {
+    dispatch({ type: CLOSE_REQUEST_INFO });
+  };
 
   const state = location.state as TModalState;
   return (
@@ -85,7 +91,7 @@ const ModalSwitch = () => {
             text="Детали ингредиента"
             extraClassName="pb-15"
             onClose={closeIngredientModal}
-            container={document.getElementById("react-modals") as HTMLElement}
+            container={container}
           >
             <IngredientDetails hasHeading={false} />
           </Modal>
@@ -96,7 +102,7 @@ const ModalSwitch = () => {
         <Modal
           extraClassName="pb-30"
           onClose={closeOrderModal}
-          container={document.getElementById("react-modals") as HTMLElement}
+          container={container}
         >
           <OrderDetails />
         </Modal>
@@ -106,7 +112,7 @@ const ModalSwitch = () => {
         <Modal
           text="Результат запроса"
           onClose={closeRequestModal}
-          container={document.getElementById("react-modals") as HTMLElement}
+          container={container}
         >
           <RequestInformation />
         </Modal>

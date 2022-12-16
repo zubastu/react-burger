@@ -13,7 +13,6 @@ import { postOrderDetails } from "../../services/asyncActions/order";
 import { ADD_INGREDIENT, SELECT_BUN } from "../../services/actions/ingredients";
 import SelectedIngredients from "../SelectedIngredients/SelectedIngredients";
 import { useHistory } from "react-router-dom";
-import { bool } from "prop-types";
 
 const BurgerConstructor = () => {
   const history = useHistory();
@@ -24,7 +23,9 @@ const BurgerConstructor = () => {
   );
   const { isLogged } = useSelector((store: TStore) => store.login);
 
-  const addIngredient = (ingredient: TIngredient | TConstructorIngredient) => {
+  const addIngredient = (
+    ingredient: TIngredient | TConstructorIngredient
+  ): void => {
     if (ingredient.type !== "bun") {
       const newIngredient = {
         ...ingredient,
@@ -55,7 +56,7 @@ const BurgerConstructor = () => {
     [selectedIngredients, selectedBun]
   );
 
-  const postOrder = () => {
+  const postOrder = (): void => {
     if (isLogged) {
       const productIds: Array<string> = selectedIngredients.map(
         (i: TIngredient) => i._id

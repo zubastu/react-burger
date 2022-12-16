@@ -15,7 +15,7 @@ const BurgerIngredients = () => {
   let observerSauces = useObserver(sauceRef);
   let observerMain = useObserver(mainRef);
 
-  const handleClick = (ref: RefObject<HTMLDivElement>) =>
+  const handleClick = (ref: RefObject<HTMLDivElement>): void =>
     ref.current?.scrollIntoView({ behavior: "smooth" });
 
   const { bun, sauces, main } = useSelector(

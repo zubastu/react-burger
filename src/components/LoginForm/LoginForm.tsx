@@ -18,7 +18,7 @@ const LoginForm: FC = () => {
     password: "",
   });
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     handleLogin(values)(dispatch);
   };

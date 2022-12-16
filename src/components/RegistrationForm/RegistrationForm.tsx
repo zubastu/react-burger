@@ -20,7 +20,7 @@ const RegistrationForm: FC = () => {
     password: "",
   });
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     postRegistrationDetails(values)(dispatch);
   };

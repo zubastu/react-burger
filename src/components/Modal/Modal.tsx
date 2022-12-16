@@ -7,7 +7,7 @@ import { TChildrenNode } from "../../types";
 
 type TModalProps = {
   text?: string;
-  onClose: () => any;
+  onClose: () => void;
   extraClassName?: string;
   children: TChildrenNode;
   container: HTMLElement;
@@ -21,7 +21,7 @@ const Modal: FC<TModalProps> = ({
   container,
 }) => {
   useEffect(() => {
-    const closeOnEscapeKey = (e: KeyboardEvent) => {
+    const closeOnEscapeKey = (e: KeyboardEvent): void => {
       if (e.key === "Escape") {
         onClose();
       }

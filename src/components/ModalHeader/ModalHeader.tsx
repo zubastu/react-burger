@@ -4,7 +4,7 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC } from "react";
 
 type TModalHeaderProps = {
-  onClose: () => any;
+  onClose: () => void;
   text?: string | null;
 };
 
