@@ -1,6 +1,5 @@
 import { getCookie } from "./cookie";
-import { LOGOUT_URL, REFRESH_TOKEN_URL } from "./constants";
-import { TIngredient } from "../types";
+import { REFRESH_TOKEN_URL } from "./constants";
 
 type TUserData = {
   name?: string;
@@ -76,7 +75,7 @@ export const api = (url: string) => {
   };
 
   const logout = () => {
-    const promise = fetch(LOGOUT_URL, {
+    const promise = fetch(url, {
       method: "POST",
       headers,
       body: JSON.stringify({ token: getCookie("refreshToken") }),

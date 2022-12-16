@@ -1,12 +1,13 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "./RequestInformation.module.css";
 import { useSelector } from "react-redux";
 import successImage from "../../images/done.svg";
 import errorImage from "../../images/error.svg";
+import { TStore } from "../../types";
 
-const RequestInformation = () => {
+const RequestInformation: FC = () => {
   const { isError, textInfo = "testTextInfo" } = useSelector(
-    (store) => store.request
+    (store: TStore) => store.request
   );
   const image = isError ? errorImage : successImage;
 

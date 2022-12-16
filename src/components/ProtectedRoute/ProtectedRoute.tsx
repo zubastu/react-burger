@@ -1,10 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
+import { TChildrenNode, TStore } from "../../types";
 
-const ProtectedRoute = ({ children, ...rest }) => {
-  const { isLogged } = useSelector((store) => store.login);
+type TProtectedRouteProps = {
+  children: TChildrenNode;
+  path: string;
+};
+
+const ProtectedRoute: FC<TProtectedRouteProps> = ({ children, ...rest }) => {
+  const { isLogged } = useSelector((store: TStore) => store.login);
 
   return (
     <Route
@@ -23,10 +28,6 @@ const ProtectedRoute = ({ children, ...rest }) => {
       }
     />
   );
-};
-
-ProtectedRoute.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default ProtectedRoute;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "../LoginForm/LoginForm.module.css";
 import FormHeading from "../FormHeading/FormHeading";
 import {
@@ -12,13 +12,17 @@ import { useForm } from "../../hooks/useForm";
 import { useDispatch } from "react-redux";
 import { postRegistrationDetails } from "../../services/asyncActions/register";
 
-const RegistrationForm = () => {
+const RegistrationForm: FC = () => {
   const dispatch = useDispatch();
-  const { values, handleChange, isValid } = useForm();
+  const { values, handleChange, isValid } = useForm({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    dispatch(postRegistrationDetails(values));
+    postRegistrationDetails(values)(dispatch);
   };
 
   return (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "./MaterialItem.module.css";
 import {
   Counter,
@@ -8,12 +8,17 @@ import { useDrag } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { OPEN_INGREDIENT_DETAILS } from "../../services/actions/ingredients";
 import { Link, useLocation } from "react-router-dom";
+import { TIngredient, TStore } from "../../types";
 
-const MaterialItem = ({ material }) => {
+type TMaterialItemProps = {
+  material: TIngredient;
+};
+
+const MaterialItem: FC<TMaterialItemProps> = ({ material }) => {
   const { name, image, price } = material;
   const dispatch = useDispatch();
   const { selectedIngredients, selectedBun } = useSelector(
-    (store) => store.ingredients
+    (store: TStore) => store.ingredients
   );
   const location = useLocation();
 
@@ -35,7 +40,7 @@ const MaterialItem = ({ material }) => {
   const findCountMaterials = () => {
     if (material.name === selectedBun.name) return 2;
     const materialsArr = selectedIngredients.filter(
-      (item) => item.name === name
+      (item: TIngredient) => item.name === name
     );
     return materialsArr.length;
   };

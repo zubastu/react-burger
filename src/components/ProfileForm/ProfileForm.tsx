@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import styles from "../LoginForm/LoginForm.module.css";
 import FormHeading from "../FormHeading/FormHeading";
 import {
@@ -9,19 +9,24 @@ import {
 import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { changeUserInfo } from "../../services/asyncActions/user";
+import { TStore } from "../../types";
 
-const ProfileForm = () => {
+const ProfileForm: FC = () => {
   const dispatch = useDispatch();
-  const { values, handleChange, setValues } = useForm();
-  const { name, email } = useSelector((store) => store.user.user);
+  const { values, handleChange, setValues } = useForm({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const { name, email } = useSelector((store: TStore) => store.user.user);
 
   useEffect(() => {
     setValues({ name, email });
   }, [name, email]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    dispatch(changeUserInfo(values));
+    changeUserInfo(values)(dispatch);
   };
 
   const handleCancel = () => {

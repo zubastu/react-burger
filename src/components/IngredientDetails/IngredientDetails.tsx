@@ -1,21 +1,22 @@
 import styles from "./IngredientDetails.module.css";
-import React, { useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import React, { FC } from "react";
+import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
+import { TIngredient, TStore } from "../../types";
 
-const IngredientDetails = ({ hasHeading }) => {
-  const { ingredientId } = useParams();
-  const history = useHistory();
+type TIngredientDetailsProps = {
+  hasHeading: boolean;
+};
+interface IIngredientDetailsParams {
+  ingredientId: string;
+}
+const IngredientDetails: FC<TIngredientDetailsProps> = ({ hasHeading }) => {
+  const { ingredientId } = useParams<IIngredientDetailsParams>();
 
-  const { all } = useSelector((store) => store.ingredients);
-  const ingredient = all && all.find(({ _id }) => ingredientId === _id);
-
-  useEffect(() => {
-    if (all && !all.find(({ _id }) => ingredientId === _id)) {
-      history.replace("/not-found");
-    }
-  }, [all, ingredientId, history]);
+  const { ingredients }: { ingredients: TIngredient[] } = useSelector(
+    (store: TStore) => store.ingredients
+  );
+  const ingredient = ingredients.find(({ _id }) => ingredientId === _id);
 
   return (
     <>
@@ -70,10 +71,6 @@ const IngredientDetails = ({ hasHeading }) => {
       ) : null}
     </>
   );
-};
-
-IngredientDetails.propTypes = {
-  hasHeading: PropTypes.bool,
 };
 
 export default IngredientDetails;

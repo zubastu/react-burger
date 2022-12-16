@@ -1,18 +1,19 @@
-import React, { useCallback } from "react";
+import React, { FC, useCallback } from "react";
 import styles from "./SelectedIngredients.module.css";
 import MaterialInCart from "../MaterialInCart/MaterialInCart";
 import { useDispatch, useSelector } from "react-redux";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { UPDATE_INGREDIENTS } from "../../services/actions/ingredients";
+import { TConstructorIngredient, TStore } from "../../types";
 
-const SelectedIngredients = () => {
+const SelectedIngredients: FC = () => {
   const { selectedIngredients, selectedBun } = useSelector(
-    (store) => store.ingredients
+    (store: TStore) => store.ingredients
   );
   const dispatch = useDispatch();
 
   const moveIngredient = useCallback(
-    (dIndex, hIndex) => {
+    (dIndex: { index: number }, hIndex: number) => {
       let draggingIngredient = selectedIngredients[dIndex.index];
       const newSelectedIngredients = [...selectedIngredients];
       newSelectedIngredients.splice(dIndex.index, 1);
@@ -40,19 +41,23 @@ const SelectedIngredients = () => {
         </div>
       ) : null}
       {selectedIngredients.length > 0
-        ? selectedIngredients.map((item, index) => (
-            <MaterialInCart
-              image={item.image}
-              price={item.price}
-              name={item.name}
-              _id={item._id}
-              id={item.id}
-              key={item.id}
-              product={item}
-              index={index}
-              moveIngredient={moveIngredient}
-            />
-          ))
+        ? selectedIngredients.map(
+            (
+              item: TConstructorIngredient & { index: number },
+              index: number
+            ) => (
+              <MaterialInCart
+                image={item.image}
+                price={item.price}
+                name={item.name}
+                _id={item._id}
+                key={item.id}
+                product={item}
+                index={index}
+                moveIngredient={moveIngredient}
+              />
+            )
+          )
         : null}
       {selectedBun.type ? (
         <div className={`${styles.constructor} ml-8`}>

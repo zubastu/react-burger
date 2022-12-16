@@ -8,7 +8,7 @@ export type TModalState = {
 
 export type TForm = {
   name?: string;
-  code?: string;
+  token?: string;
   password?: string;
   email?: string;
 };
@@ -17,13 +17,6 @@ export type TStore = ReturnType<typeof store.getState>;
 export type TPathnameString = { pathname: string };
 export type TIsLogged = { isLogged: boolean };
 export type TChildrenNode = React.ReactNode | React.ReactElement;
-
-export type TBackground = {
-  hash: string;
-  pathname: string;
-  search: string;
-  state: object | undefined;
-};
 
 export type TIngredient = {
   _id: string;

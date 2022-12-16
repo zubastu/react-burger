@@ -1,10 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "./OrderDetails.module.css";
 import successImage from "../../images/done.svg";
 import { useSelector } from "react-redux";
+import { TStore } from "../../types";
 
-const OrderDetails = () => {
-  const { orderDetails } = useSelector((store) => store.order);
+const OrderDetails: FC = () => {
+  const { orderDetails } = useSelector((store: TStore) => store.order);
   const { name, order, success } = orderDetails;
   const { number } = order;
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import styles from "../LoginForm/LoginForm.module.css";
 import FormHeading from "../FormHeading/FormHeading";
 import {
@@ -11,17 +11,18 @@ import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { resetPasswordPost } from "../../services/asyncActions/resetPass";
+import { TStore } from "../../types";
 
-const RestorePassForm = () => {
+const RestorePassForm: FC = () => {
   const dispatch = useDispatch();
-  const { values, handleChange, isValid } = useForm();
-  const { hasRequest } = useSelector((store) => store.resetPassword);
+  const { values, handleChange, isValid } = useForm({ token: "" });
+  const { hasRequest } = useSelector((store: TStore) => store.resetPassword);
   const history = useHistory();
-  const { isLogged } = useSelector((store) => store.login);
+  const { isLogged } = useSelector((store: TStore) => store.login);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    dispatch(resetPasswordPost(values));
+    resetPasswordPost(values)(dispatch);
   };
 
   useEffect(() => {
