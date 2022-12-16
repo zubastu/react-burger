@@ -13,6 +13,7 @@ import {
 import { TYPE_BUN, TYPE_MAIN, TYPE_SAUCE } from "../../utils/constants";
 
 const initialState = {
+  ingredients: [],
   bun: [],
   sauces: [],
   main: [],
@@ -33,10 +34,11 @@ export const ingredientsReducer = (state = initialState, action) => {
         isRequest: false,
       };
     case SUCCESS_INGREDIENTS_FETCH:
+      const allIngredients = action.payload;
       return {
         ...state,
         isRequest: false,
-        all: action.payload,
+        ingredients: allIngredients,
         bun: action.payload.filter(({ type }) => type === TYPE_BUN),
         sauces: action.payload.filter(({ type }) => type === TYPE_SAUCE),
         main: action.payload.filter(({ type }) => type === TYPE_MAIN),
