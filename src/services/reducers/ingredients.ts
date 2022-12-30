@@ -9,10 +9,25 @@ import {
   DELETE_INGREDIENT,
   UPDATE_INGREDIENTS,
   RESET_INGREDIENTS,
+  TIngredients,
 } from "../actions/ingredients";
 import { TYPE_BUN, TYPE_MAIN, TYPE_SAUCE } from "../../utils/constants";
+import { TConstructorIngredient, TIngredient } from "../../types";
 
-const initialState = {
+type TIngredientsReducer = {
+  ingredients: TIngredient[];
+  bun: TIngredient[];
+  sauces: TIngredient[];
+  main: TIngredient[];
+  isRequestError: boolean;
+  isRequest: boolean;
+  isModalIngredientOpen: boolean;
+  selectedIngredient: TIngredient;
+  selectedIngredients: Array<TConstructorIngredient>;
+  selectedBun: TConstructorIngredient;
+};
+
+const initialState: TIngredientsReducer = {
   ingredients: [],
   bun: [],
   sauces: [],
@@ -20,12 +35,42 @@ const initialState = {
   isRequestError: false,
   isRequest: false,
   isModalIngredientOpen: false,
-  selectedIngredient: {},
+  selectedIngredient: {
+    _id: "",
+    name: "",
+    type: "",
+    proteins: 0,
+    fat: 0,
+    carbohydrates: 0,
+    calories: 0,
+    price: 0,
+    image: "",
+    image_mobile: "",
+    image_large: "",
+    __v: 0,
+  },
   selectedIngredients: [],
-  selectedBun: {},
+  selectedBun: {
+    _id: "",
+    id: "",
+    name: "",
+    type: "",
+    proteins: 0,
+    fat: 0,
+    carbohydrates: 0,
+    calories: 0,
+    price: 0,
+    image: "",
+    image_mobile: "",
+    image_large: "",
+    __v: 0,
+  },
 };
 
-export const ingredientsReducer = (state = initialState, action) => {
+export const ingredientsReducer = (
+  state = initialState,
+  action: TIngredients
+): TIngredientsReducer => {
   switch (action.type) {
     case ERROR_INGREDIENTS_FETCH:
       return {
@@ -34,11 +79,10 @@ export const ingredientsReducer = (state = initialState, action) => {
         isRequest: false,
       };
     case SUCCESS_INGREDIENTS_FETCH:
-      const allIngredients = action.payload;
       return {
         ...state,
         isRequest: false,
-        ingredients: allIngredients,
+        ingredients: action.payload,
         bun: action.payload.filter(({ type }) => type === TYPE_BUN),
         sauces: action.payload.filter(({ type }) => type === TYPE_SAUCE),
         main: action.payload.filter(({ type }) => type === TYPE_MAIN),
@@ -59,7 +103,20 @@ export const ingredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         isModalIngredientOpen: false,
-        selectedIngredient: {},
+        selectedIngredient: {
+          _id: "",
+          name: "",
+          type: "",
+          proteins: 0,
+          fat: 0,
+          carbohydrates: 0,
+          calories: 0,
+          price: 0,
+          image: "",
+          image_mobile: "",
+          image_large: "",
+          __v: 0,
+        },
       };
     case ADD_INGREDIENT:
       return {
@@ -87,7 +144,21 @@ export const ingredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedIngredients: [],
-        selectedBun: {},
+        selectedBun: {
+          _id: "",
+          id: "",
+          name: "",
+          type: "",
+          proteins: 0,
+          fat: 0,
+          carbohydrates: 0,
+          calories: 0,
+          price: 0,
+          image: "",
+          image_mobile: "",
+          image_large: "",
+          __v: 0,
+        },
       };
     default:
       return state;

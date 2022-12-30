@@ -31,10 +31,7 @@ export type TIngredient = {
   image_mobile: string;
   image_large: string;
   __v: number;
+  index?: number;
 };
 
 export type TConstructorIngredient = TIngredient & { id: string };
-
-export type TRequestSuccess = {
-  success: boolean;
-};

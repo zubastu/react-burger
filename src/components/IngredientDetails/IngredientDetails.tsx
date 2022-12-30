@@ -13,9 +13,7 @@ interface IIngredientDetailsParams {
 const IngredientDetails: FC<TIngredientDetailsProps> = ({ hasHeading }) => {
   const { ingredientId } = useParams<IIngredientDetailsParams>();
 
-  const { ingredients }: { ingredients: TIngredient[] } = useSelector(
-    (store: TStore) => store.ingredients
-  );
+  const { ingredients } = useSelector((store: TStore) => store.ingredients);
   const ingredient = ingredients.find(({ _id }) => ingredientId === _id);
 
   return (

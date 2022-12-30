@@ -16,7 +16,7 @@ type TMaterialInCartProps = {
   name: string;
   price: number;
   _id: string;
-  product: TMaterial;
+  product: TConstructorIngredient;
   index: number;
   moveIngredient: (ingredient: TMaterial, index: number) => void;
 };
@@ -55,7 +55,7 @@ const MaterialInCart: FC<TMaterialInCartProps> = ({
       const clientOffset = monitor.getClientOffset();
       // @ts-ignore
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-      if (dIndex < index && hoverClientY < hoverMiddleY) {
+      if (dIndex! < index && hoverClientY < hoverMiddleY) {
         return;
       }
       // @ts-ignore

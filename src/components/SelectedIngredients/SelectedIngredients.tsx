@@ -42,10 +42,7 @@ const SelectedIngredients: FC = () => {
       ) : null}
       {selectedIngredients.length > 0
         ? selectedIngredients.map(
-            (
-              item: TConstructorIngredient & { index: number },
-              index: number
-            ) => (
+            (item: TConstructorIngredient, index: number) => (
               <MaterialInCart
                 image={item.image}
                 price={item.price}
