@@ -2,7 +2,7 @@ import styles from "./IngredientDetails.module.css";
 import React, { FC } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { TIngredient, TStore } from "../../types";
+import { TStore } from "../../types";
 
 type TIngredientDetailsProps = {
   hasHeading: boolean;

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import styles from "./NavigationLink.module.css";
 import { Link, useLocation } from "react-router-dom";
 import { TPathnameString, TChildrenNode } from "../../types";

@@ -1,5 +1,4 @@
 import { TConstructorIngredient, TIngredient } from "../../types";
-import { typeOptions } from "@testing-library/user-event/dist/type/typeImplementation";
 
 export const START_INGREDIENTS_FETCH: "START_INGREDIENTS_FETCH" =
   "START_INGREDIENTS_FETCH";
