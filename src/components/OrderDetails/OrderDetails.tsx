@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import styles from "./OrderDetails.module.css";
 import successImage from "../../images/done.svg";
+import errorImage from "../../images/error.svg";
 import { useSelector } from "react-redux";
 import { TStore } from "../../types";
 
@@ -17,7 +18,7 @@ const OrderDetails: FC = () => {
         <p className="text text_type_main-medium mb-15">{name}</p>
         <img
           className={styles.image}
-          src={success && successImage}
+          src={success ? successImage : errorImage}
           alt={success ? "Успешно" : "Ошибка"}
         />
         {success && (

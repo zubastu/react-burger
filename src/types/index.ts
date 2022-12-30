@@ -47,3 +47,24 @@ export type TLogin = {
   success: boolean;
   user: TUser;
 };
+
+export type TOrderResponse = {
+  success: boolean;
+  name: string;
+  order: {
+    ingredients: TIngredient[];
+    _id: string;
+    owner: {
+      name: string;
+      email: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+    status: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+    number: number;
+    price: number;
+  };
+};

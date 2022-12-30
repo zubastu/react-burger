@@ -3,16 +3,47 @@ import {
   ERROR_ORDER_POST,
   START_ORDER_POST,
   CLOSE_ORDER_MODAL,
+  TOrderActions,
 } from "../actions/order";
+import { TOrderResponse } from "../../types";
 
-const initialState = {
-  isRequest: false,
-  isRequestError: false,
-  orderDetails: {},
-  isOpenOrderModal: false,
+type TOrderReducerState = {
+  isRequest: boolean;
+  isRequestError: boolean;
+  orderDetails: TOrderResponse;
+  isOpenOrderModal: boolean;
 };
 
-export const orderReducer = (state = initialState, action) => {
+const initialState: TOrderReducerState = {
+  isRequest: false,
+  isRequestError: false,
+  isOpenOrderModal: false,
+  orderDetails: {
+    success: false,
+    name: "",
+    order: {
+      ingredients: [],
+      _id: "",
+      owner: {
+        name: "",
+        email: "",
+        createdAt: "",
+        updatedAt: "",
+      },
+      status: "",
+      name: "",
+      createdAt: "",
+      updatedAt: "",
+      number: 0,
+      price: 0,
+    },
+  },
+};
+
+export const orderReducer = (
+  state = initialState,
+  action: TOrderActions
+): TOrderReducerState => {
   switch (action.type) {
     case ERROR_ORDER_POST:
       return {
