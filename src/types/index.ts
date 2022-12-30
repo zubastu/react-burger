@@ -35,3 +35,15 @@ export type TIngredient = {
 };
 
 export type TConstructorIngredient = TIngredient & { id: string };
+
+export type TUser = {
+  name: string;
+  email: string;
+};
+
+export type TLogin = {
+  accessToken: string;
+  refreshToken: string;
+  success: boolean;
+  user: TUser;
+};

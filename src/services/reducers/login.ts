@@ -4,16 +4,23 @@ import {
   SUCCESS_LOGIN,
   LOGOUT,
   LOGIN_CHECKED,
+  TLoginActions,
 } from "../actions/login";
 import { setCookie } from "../../utils/cookie";
 
-const initialState = {
+type TLoginReducer = {
+  isRequest: boolean;
+  isError: boolean;
+  isLogged: boolean;
+};
+
+const initialState: TLoginReducer = {
   isRequest: false,
   isError: false,
   isLogged: false,
 };
 
-export const loginReducer = (state = initialState, action) => {
+export const loginReducer = (state = initialState, action: TLoginActions) => {
   switch (action.type) {
     case START_LOGIN:
       return {
