@@ -20,7 +20,10 @@ const initialState: TLoginReducer = {
   isLogged: false,
 };
 
-export const loginReducer = (state = initialState, action: TLoginActions) => {
+export const loginReducer = (
+  state = initialState,
+  action: TLoginActions
+): TLoginReducer => {
   switch (action.type) {
     case START_LOGIN:
       return {

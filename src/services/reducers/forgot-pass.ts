@@ -18,7 +18,7 @@ const initialState: TForgetPasswordReducer = {
 export const forgetPasswordReducer = (
   state = initialState,
   action: TForgotPass
-) => {
+): TForgetPasswordReducer => {
   switch (action.type) {
     case START_FORGOT_PASS:
       return {

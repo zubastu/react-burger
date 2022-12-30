@@ -2,15 +2,24 @@ import {
   REFRESH_TOKEN_START,
   REFRESH_TOKEN_ERROR,
   REFRESH_TOKEN_SUCCESS,
+  TRefreshTokenActions,
 } from "../actions/refreshToken";
 import { setCookie } from "../../utils/cookie";
 
-const initialState = {
+export type TRefreshTokenReducer = {
+  isRequest: boolean;
+  isError: boolean;
+};
+
+const initialState: TRefreshTokenReducer = {
   isRequest: false,
   isError: false,
 };
 
-export const refreshTokenReducer = (state = initialState, action) => {
+export const refreshTokenReducer = (
+  state = initialState,
+  action: TRefreshTokenActions
+): TRefreshTokenReducer => {
   switch (action.type) {
     case REFRESH_TOKEN_START:
       return {

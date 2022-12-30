@@ -68,3 +68,9 @@ export type TOrderResponse = {
     price: number;
   };
 };
+
+export type TRefreshToken = {
+  success: boolean;
+  accessToken: string;
+  refreshToken: string;
+};
