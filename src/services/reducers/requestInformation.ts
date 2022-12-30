@@ -2,15 +2,25 @@ import {
   CLOSE_REQUEST_INFO,
   SHOW_REQUEST_INFO,
   SHOW_REQUEST_ERROR_INFO,
+  TRequestInformation,
 } from "../actions/requestInformation";
 
-const initialState = {
+export type TRequestInformationReducer = {
+  isOpened: boolean;
+  isError: boolean;
+  textInfo: string;
+};
+
+const initialState: TRequestInformationReducer = {
   isOpened: false,
   isError: false,
   textInfo: "",
 };
 
-export const requestInformationReducer = (state = initialState, action) => {
+export const requestInformationReducer = (
+  state = initialState,
+  action: TRequestInformation
+): TRequestInformationReducer => {
   switch (action.type) {
     case SHOW_REQUEST_INFO:
       return {
