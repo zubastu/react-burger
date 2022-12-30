@@ -3,15 +3,25 @@ import {
   ERROR_REGISTRATION,
   START_REGISTRATION,
   RESET_REGISTRATION,
+  TRegisterActions,
 } from "../actions/register";
 
-const initialState = {
+export type TRegistrationReducer = {
+  isRequest: boolean;
+  isError: boolean;
+  hasRequest: boolean;
+};
+
+const initialState: TRegistrationReducer = {
   isRequest: false,
   isError: false,
   hasRequest: false,
 };
 
-export const registrationReducer = (state = initialState, action) => {
+export const registrationReducer = (
+  state = initialState,
+  action: TRegisterActions
+): TRegistrationReducer => {
   switch (action.type) {
     case START_REGISTRATION:
       return {
