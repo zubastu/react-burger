@@ -34,3 +34,7 @@ export type TIngredient = {
 };
 
 export type TConstructorIngredient = TIngredient & { id: string };
+
+export type TRequestSuccess = {
+  success: boolean;
+};
