@@ -8,11 +8,11 @@ import {
 import FormHeading from "../FormHeading/FormHeading";
 import FormNavigationElement from "../FormNavigationElement/FormNavigationElement";
 import { useForm } from "../../hooks/useForm";
-import { useDispatch } from "react-redux";
 import { handleLogin } from "../../services/asyncActions/auth";
+import { useAppDispatch } from "../../utils/constants";
 
 const LoginForm: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { values, handleChange, isValid } = useForm({
     email: "",
     password: "",
@@ -20,7 +20,7 @@ const LoginForm: FC = () => {
 
   const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
-    handleLogin(values)(dispatch);
+    dispatch(handleLogin(values));
   };
 
   return (

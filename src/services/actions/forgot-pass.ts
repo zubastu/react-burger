@@ -14,7 +14,7 @@ export interface IErrorForgotPass {
   readonly type: typeof ERROR_FORGOT_PASS;
 }
 
-export type TForgotPass =
+export type TForgotPassActions =
   | ISuccessForgotPass
   | IStartForgotPass
   | IErrorForgotPass;

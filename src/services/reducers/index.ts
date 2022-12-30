@@ -1,4 +1,5 @@
-import { combineReducers } from "redux";
+import { Action, ActionCreator, combineReducers, Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
 import { ingredientsReducer } from "./ingredients";
 import { orderReducer } from "./order";
 import { registrationReducer } from "./register";
@@ -9,6 +10,7 @@ import { refreshTokenReducer } from "./refreshToken";
 import { userInfoReducer } from "./user";
 import { requestInformationReducer } from "./requestInformation";
 import { preloaderReducer } from "./preloader";
+import { TApplicationActions, TStore } from "../../types";
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -22,3 +24,9 @@ export const rootReducer = combineReducers({
   request: requestInformationReducer,
   preloader: preloaderReducer,
 });
+
+export type AppThunk<TReturn = void> = ActionCreator<
+  ThunkAction<TReturn, Action, TStore, TApplicationActions>
+>;
+
+export type AppDispatch = Dispatch<TApplicationActions>;

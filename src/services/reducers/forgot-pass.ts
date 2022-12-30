@@ -2,7 +2,7 @@ import {
   ERROR_FORGOT_PASS,
   START_FORGOT_PASS,
   SUCCESS_FORGOT_PASS,
-  TForgotPass,
+  TForgotPassActions,
 } from "../actions/forgot-pass";
 
 type TForgetPasswordReducer = {
@@ -17,7 +17,7 @@ const initialState: TForgetPasswordReducer = {
 
 export const forgetPasswordReducer = (
   state = initialState,
-  action: TForgotPass
+  action: TForgotPassActions
 ): TForgetPasswordReducer => {
   switch (action.type) {
     case START_FORGOT_PASS:

@@ -1,16 +1,16 @@
 import React, { FC, useCallback } from "react";
 import styles from "./SelectedIngredients.module.css";
 import MaterialInCart from "../MaterialInCart/MaterialInCart";
-import { useDispatch, useSelector } from "react-redux";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { UPDATE_INGREDIENTS } from "../../services/actions/ingredients";
 import { TConstructorIngredient, TStore } from "../../types";
+import { useAppDispatch, useAppSelector } from "../../utils/constants";
 
 const SelectedIngredients: FC = () => {
-  const { selectedIngredients, selectedBun } = useSelector(
+  const { selectedIngredients, selectedBun } = useAppSelector(
     (store: TStore) => store.ingredients
   );
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const moveIngredient = useCallback(
     (dIndex: { index: number }, hIndex: number) => {

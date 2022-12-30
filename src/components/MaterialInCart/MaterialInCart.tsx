@@ -4,10 +4,10 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./MaterialInCart.module.css";
-import { useDispatch } from "react-redux";
 import { DELETE_INGREDIENT } from "../../services/actions/ingredients";
 import { useDrag, useDrop } from "react-dnd";
 import { TConstructorIngredient } from "../../types";
+import { useAppDispatch } from "../../utils/constants";
 
 type TMaterial = TConstructorIngredient & { index: number };
 
@@ -31,7 +31,7 @@ const MaterialInCart: FC<TMaterialInCartProps> = ({
   moveIngredient,
 }) => {
   const ref = useRef(null);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [{ handlerId }, dropTarget] = useDrop({
     accept: "selected-ingredient",

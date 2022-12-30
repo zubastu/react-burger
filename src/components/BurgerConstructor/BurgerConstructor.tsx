@@ -8,20 +8,20 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrop } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
 import { postOrderDetails } from "../../services/asyncActions/order";
 import { ADD_INGREDIENT, SELECT_BUN } from "../../services/actions/ingredients";
 import SelectedIngredients from "../SelectedIngredients/SelectedIngredients";
 import { useHistory } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../utils/constants";
 
 const BurgerConstructor = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
-  const { isRequest } = useSelector((store: TStore) => store.order);
-  const { selectedIngredients, selectedBun } = useSelector(
+  const dispatch = useAppDispatch();
+  const { isRequest } = useAppSelector((store: TStore) => store.order);
+  const { selectedIngredients, selectedBun } = useAppSelector(
     (store: TStore) => store.ingredients
   );
-  const { isLogged } = useSelector((store: TStore) => store.login);
+  const { isLogged } = useAppSelector((store: TStore) => store.login);
 
   const addIngredient = (
     ingredient: TIngredient | TConstructorIngredient
@@ -65,7 +65,7 @@ const BurgerConstructor = () => {
       const productData: { ingredients: Array<string> } = {
         ingredients: [selectedBun._id, ...productIds, selectedBun._id],
       };
-      postOrderDetails(productData)(dispatch);
+      dispatch(postOrderDetails(productData));
     } else {
       history.push("/login");
     }

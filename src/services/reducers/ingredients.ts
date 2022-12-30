@@ -9,7 +9,7 @@ import {
   DELETE_INGREDIENT,
   UPDATE_INGREDIENTS,
   RESET_INGREDIENTS,
-  TIngredients,
+  TIngredientsActions,
 } from "../actions/ingredients";
 import { TYPE_BUN, TYPE_MAIN, TYPE_SAUCE } from "../../utils/constants";
 import { TConstructorIngredient, TIngredient } from "../../types";
@@ -69,7 +69,7 @@ const initialState: TIngredientsReducer = {
 
 export const ingredientsReducer = (
   state = initialState,
-  action: TIngredients
+  action: TIngredientsActions
 ): TIngredientsReducer => {
   switch (action.type) {
     case ERROR_INGREDIENTS_FETCH:

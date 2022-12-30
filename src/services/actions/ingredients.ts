@@ -56,7 +56,7 @@ export interface IResetIngredients {
   readonly type: typeof RESET_INGREDIENTS;
 }
 
-export type TIngredients =
+export type TIngredientsActions =
   | IStartIngredientsFetch
   | ISuccessIngredientsFetch
   | IErrorIngredientsFetch

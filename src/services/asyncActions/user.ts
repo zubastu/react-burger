@@ -10,9 +10,11 @@ import {
   SHOW_REQUEST_ERROR_INFO,
 } from "../actions/requestInformation";
 import { PRELOADER_START, PRELOADER_STOP } from "../actions/preloader";
+import { AppThunk } from "../reducers";
+import { TErrorData, TUser } from "../../types";
 const { fetchSecurePatch } = api(USER_INFO_URL);
 
-export const changeUserInfo = (data) => (dispatch) => {
+export const changeUserInfo: AppThunk = (data: TUser) => (dispatch) => {
   dispatch({ type: GET_USER_INFO_START });
   dispatch({ type: PRELOADER_START });
   return fetchSecurePatch(data)
@@ -24,7 +26,7 @@ export const changeUserInfo = (data) => (dispatch) => {
       });
     })
     .catch((err) => {
-      err.json().then((data) => {
+      err.json().then((data: TErrorData) => {
         dispatch({ type: GET_USER_INFO_ERROR });
         dispatch({ type: SHOW_REQUEST_ERROR_INFO, payload: data.message });
       });

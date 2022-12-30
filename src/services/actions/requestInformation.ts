@@ -15,7 +15,7 @@ export interface IShowRequestErrorInfo {
   readonly payload: string;
 }
 
-export type TRequestInformation =
+export type TRequestInformationActions =
   | ICloseRequestInfo
   | IShowRequestInfo
   | IShowRequestErrorInfo;

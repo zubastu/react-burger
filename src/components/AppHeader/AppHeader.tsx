@@ -9,13 +9,15 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import NavigationLink from "../NavigationLink/NavigationLink";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { TIsLogged, TPathnameString, TStore } from "../../types";
+import { useAppSelector } from "../../utils/constants";
 
 const AppHeader: FC = () => {
   const location = useLocation();
   const { pathname }: TPathnameString = location;
-  const { isLogged }: TIsLogged = useSelector((store: TStore) => store.login);
+  const { isLogged }: TIsLogged = useAppSelector(
+    (store: TStore) => store.login
+  );
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>

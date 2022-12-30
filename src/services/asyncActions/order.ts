@@ -4,13 +4,14 @@ import {
   SUCCESS_ORDER_POST,
 } from "../actions/order";
 import { ORDERS_URL } from "../../utils/constants";
-import { api } from "../../utils/api";
+import { api, TOrder } from "../../utils/api";
 import { RESET_INGREDIENTS } from "../actions/ingredients";
 import { PRELOADER_START, PRELOADER_STOP } from "../actions/preloader";
+import { AppThunk } from "../reducers";
 
 const { fetchSecurePost } = api(ORDERS_URL);
 
-export const postOrderDetails = (data) => (dispatch) => {
+export const postOrderDetails: AppThunk = (data: TOrder) => (dispatch) => {
   dispatch({ type: START_ORDER_POST });
   dispatch({ type: PRELOADER_START });
   fetchSecurePost(data)

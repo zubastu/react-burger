@@ -18,7 +18,7 @@ export interface IResetRestorePass {
   readonly type: typeof RESET_REQUEST_ACCEPT;
 }
 
-export type TRestorePassword =
+export type TRestorePasswordActions =
   | IStartRestorePass
   | IErrorRestorePass
   | IResetRestorePass

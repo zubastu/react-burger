@@ -1,6 +1,18 @@
+import { Action, ActionCreator, Dispatch } from "redux";
 import store from "../services/store";
 import React from "react";
 import * as H from "history";
+import { TForgotPassActions } from "../services/actions/forgot-pass";
+import { TIngredientsActions } from "../services/actions/ingredients";
+import { TLoginActions } from "../services/actions/login";
+import { TOrderActions } from "../services/actions/order";
+import { TPreloaderActions } from "../services/actions/preloader";
+import { TRefreshTokenActions } from "../services/actions/refreshToken";
+import { TRegisterActions } from "../services/actions/register";
+import { TRequestInformationActions } from "../services/actions/requestInformation";
+import { TRestorePasswordActions } from "../services/actions/restore-pass";
+import { TUserActions } from "../services/actions/user";
+import { ThunkAction } from "redux-thunk";
 
 export type TModalState = {
   background?: H.Location;
@@ -74,4 +86,21 @@ export type TRefreshToken = {
   success: boolean;
   accessToken: string;
   refreshToken: string;
+};
+
+export type TApplicationActions =
+  | TForgotPassActions
+  | TIngredientsActions
+  | TLoginActions
+  | TOrderActions
+  | TPreloaderActions
+  | TRefreshTokenActions
+  | TRegisterActions
+  | TRequestInformationActions
+  | TRestorePasswordActions
+  | TUserActions;
+
+export type TErrorData = {
+  success: boolean;
+  message: string;
 };

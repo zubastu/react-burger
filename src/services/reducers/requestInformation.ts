@@ -2,7 +2,7 @@ import {
   CLOSE_REQUEST_INFO,
   SHOW_REQUEST_INFO,
   SHOW_REQUEST_ERROR_INFO,
-  TRequestInformation,
+  TRequestInformationActions,
 } from "../actions/requestInformation";
 
 export type TRequestInformationReducer = {
@@ -19,7 +19,7 @@ const initialState: TRequestInformationReducer = {
 
 export const requestInformationReducer = (
   state = initialState,
-  action: TRequestInformation
+  action: TRequestInformationActions
 ): TRequestInformationReducer => {
   switch (action.type) {
     case SHOW_REQUEST_INFO:

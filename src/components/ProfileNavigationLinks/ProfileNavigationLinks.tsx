@@ -2,14 +2,13 @@ import React, { FC } from "react";
 import styles from "./ProfileNavigationLinks.module.css";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { deleteCookie } from "../../utils/cookie";
-import { useDispatch } from "react-redux";
 import { LOGOUT } from "../../services/actions/login";
 import { RESET_USER_INFO } from "../../services/actions/user";
 import { api } from "../../utils/api";
-import { LOGOUT_URL } from "../../utils/constants";
+import { LOGOUT_URL, useAppDispatch } from "../../utils/constants";
 
 const ProfileNavigationLinks: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const { pathname } = location;
   const history = useHistory();

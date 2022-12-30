@@ -3,8 +3,8 @@ import styles from "./BurgerIngredients.module.css";
 import MaterialItem from "../MaterialItem/MaterialItem";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useObserver } from "../../hooks/useObserver";
-import { useSelector } from "react-redux";
 import { TStore, TIngredient } from "../../types";
+import { useAppSelector } from "../../utils/constants";
 
 const BurgerIngredients = () => {
   const sauceRef = useRef<HTMLDivElement>(null);
@@ -18,7 +18,7 @@ const BurgerIngredients = () => {
   const handleClick = (ref: RefObject<HTMLDivElement>): void =>
     ref.current?.scrollIntoView({ behavior: "smooth" });
 
-  const { bun, sauces, main } = useSelector(
+  const { bun, sauces, main } = useAppSelector(
     (store: TStore) => store.ingredients
   );
 

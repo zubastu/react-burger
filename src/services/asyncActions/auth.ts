@@ -11,12 +11,19 @@ import { LOGIN_URL } from "../../utils/constants";
 import { getCookie } from "../../utils/cookie";
 import { REFRESH_TOKEN_SUCCESS } from "../actions/refreshToken";
 import { PRELOADER_START, PRELOADER_STOP } from "../actions/preloader";
+import { AppThunk } from "../reducers";
+
 const { fetchPost } = api(LOGIN_URL);
 const { fetchSecureGet, refreshToken } = api(USER_INFO_URL);
 const token = getCookie("accessToken");
 const refresh = getCookie("refreshToken");
 
-export const handleLogin = (data) => (dispatch) => {
+type TUserAuthData = {
+  email: string;
+  password: string;
+};
+
+export const handleLogin: AppThunk = (data: TUserAuthData) => (dispatch) => {
   dispatch({ type: PRELOADER_START });
   fetchPost(data)
     .then((response) => {
@@ -31,7 +38,7 @@ export const handleLogin = (data) => (dispatch) => {
     .finally(() => dispatch({ type: PRELOADER_STOP }));
 };
 
-export const checkAuth = (isLogged) => (dispatch) => {
+export const checkAuth: AppThunk = (isLogged: boolean) => (dispatch) => {
   if (!refresh) {
     return;
   }

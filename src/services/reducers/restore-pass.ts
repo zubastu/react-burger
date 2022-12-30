@@ -3,7 +3,7 @@ import {
   ERROR_RESTORE_PASS,
   START_RESTORE_PASS,
   RESET_REQUEST_ACCEPT,
-  TRestorePassword,
+  TRestorePasswordActions,
 } from "../actions/restore-pass";
 
 export type TRestorePasswordReducer = {
@@ -20,7 +20,7 @@ const initialState: TRestorePasswordReducer = {
 
 export const restorePasswordReducer = (
   state = initialState,
-  action: TRestorePassword
+  action: TRestorePasswordActions
 ): TRestorePasswordReducer => {
   switch (action.type) {
     case START_RESTORE_PASS:
