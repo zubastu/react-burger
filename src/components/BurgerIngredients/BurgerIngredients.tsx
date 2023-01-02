@@ -23,7 +23,7 @@ const BurgerIngredients = () => {
   );
 
   return (
-    <section id="ingredients-container" className={`${styles.container} `}>
+    <section className={`${styles.container} `}>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
 
       <div style={{ display: "flex" }}>
@@ -80,6 +80,7 @@ const BurgerIngredients = () => {
         </h2>
         <div
           ref={mainRef}
+          id="ingredients-container"
           className={`${styles.material_container} pt-6 pl-4 pr-4`}
         >
           {main &&
