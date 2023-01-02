@@ -30,7 +30,7 @@ const MaterialInCart: FC<TMaterialInCartProps> = ({
   index,
   moveIngredient,
 }) => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
 
   const [{ handlerId }, dropTarget] = useDrop({
@@ -38,7 +38,7 @@ const MaterialInCart: FC<TMaterialInCartProps> = ({
     collect: (monitor) => ({
       handlerId: monitor.getHandlerId(),
     }),
-    hover(ingredient, monitor) {
+    hover(ingredient: TMaterial, monitor) {
       if (!ref.current) {
         return;
       }
@@ -47,20 +47,20 @@ const MaterialInCart: FC<TMaterialInCartProps> = ({
       if (dIndex === index) {
         return;
       }
-      // @ts-ignore
-      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+
+      const hoverBoundingRect = ref.current.getBoundingClientRect();
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 
       const clientOffset = monitor.getClientOffset();
-      // @ts-ignore
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+
+      const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
       if (dIndex! < index && hoverClientY < hoverMiddleY) {
         return;
       }
-      // @ts-ignore
+
       moveIngredient(ingredient, index);
-      // @ts-ignore
+
       ingredient.index = index;
     },
   });
