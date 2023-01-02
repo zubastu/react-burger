@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../utils/constants";
 const ProfilePage: FC = () => {
   const dispatch = useAppDispatch();
   const { isLogged } = useAppSelector((store: TStore) => store.login);
+
   useEffect(() => {
     dispatch(checkAuth(isLogged));
   }, []);

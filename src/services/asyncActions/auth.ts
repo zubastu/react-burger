@@ -15,8 +15,6 @@ import { AppThunk } from "../reducers";
 
 const { fetchPost } = api(LOGIN_URL);
 const { fetchSecureGet, refreshToken } = api(USER_INFO_URL);
-const token = getCookie("accessToken");
-const refresh = getCookie("refreshToken");
 
 type TUserAuthData = {
   email: string;
@@ -34,11 +32,13 @@ export const handleLogin: AppThunk = (data: TUserAuthData) => (dispatch) => {
         dispatch({ type: ERROR_LOGIN });
       }
     })
-    .catch((err) => dispatch({ type: ERROR_LOGIN }))
+    .catch(() => dispatch({ type: ERROR_LOGIN }))
     .finally(() => dispatch({ type: PRELOADER_STOP }));
 };
 
 export const checkAuth: AppThunk = (isLogged: boolean) => (dispatch) => {
+  const refresh = getCookie("refreshToken");
+  const token = getCookie("accessToken");
   if (!refresh) {
     return;
   }
@@ -46,16 +46,17 @@ export const checkAuth: AppThunk = (isLogged: boolean) => (dispatch) => {
     dispatch({ type: PRELOADER_START });
     refreshToken()
       .then((res) => dispatch({ type: REFRESH_TOKEN_SUCCESS, payload: res }))
-      .catch((err) => dispatch({ type: LOGOUT }))
+      .catch(() => dispatch({ type: LOGOUT }))
       .finally(() => dispatch({ type: PRELOADER_STOP }));
-  } else if (!isLogged) {
+  }
+  if (!isLogged) {
     dispatch({ type: PRELOADER_START });
     fetchSecureGet()
       .then((response) => {
         dispatch({ type: LOGIN_CHECKED });
         dispatch({ type: GET_USER_INFO_SUCCESS, payload: response.user });
       })
-      .catch((err) => dispatch({ type: GET_USER_INFO_ERROR }))
+      .catch(() => dispatch({ type: GET_USER_INFO_ERROR }))
       .finally(() => dispatch({ type: PRELOADER_STOP }));
   }
 };

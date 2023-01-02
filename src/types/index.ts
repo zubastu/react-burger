@@ -1,4 +1,3 @@
-import { Action, ActionCreator, Dispatch } from "redux";
 import store from "../services/store";
 import React from "react";
 import * as H from "history";
@@ -12,10 +11,15 @@ import { TRegisterActions } from "../services/actions/register";
 import { TRequestInformationActions } from "../services/actions/requestInformation";
 import { TRestorePasswordActions } from "../services/actions/restore-pass";
 import { TUserActions } from "../services/actions/user";
-import { ThunkAction } from "redux-thunk";
 
 export type TModalState = {
   background?: H.Location;
+};
+
+export type TLocationState = {
+  from: {
+    pathname: string;
+  };
 };
 
 export type TForm = {

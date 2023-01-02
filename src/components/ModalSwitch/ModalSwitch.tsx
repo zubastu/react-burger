@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, useHistory, useLocation } from "react-router-dom";
+import { Route, Switch, useHistory, useLocation, Link } from "react-router-dom";
 import {
   ForgetPasswordPage,
   IngredientPage,
@@ -70,13 +70,27 @@ const ModalSwitch = () => {
           <RestorePasswordPage />
         </Route>
 
-        <ProtectedRoute path="/profile">
+        <Route exact path="/profile">
           <ProfilePage />
-        </ProtectedRoute>
+        </Route>
 
         <Route exact path="/ingredients/:ingredientId">
           <IngredientPage />
         </Route>
+
+        <Route exact path="/feed">
+          1
+        </Route>
+        <Route exact path="/feed/:id">
+          12
+        </Route>
+
+        <ProtectedRoute exact path="/profile/orders">
+          <Link to="/profile/orders/123">link</Link>
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/profile/orders/:id">
+          1
+        </ProtectedRoute>
 
         <Route exact path="/">
           <MainPage />
@@ -88,16 +102,25 @@ const ModalSwitch = () => {
       </Switch>
 
       {state?.background ? (
-        <Route exact path="/ingredients/:ingredientId">
-          <Modal
-            text="Детали ингредиента"
-            extraClassName="pb-15"
-            onClose={closeIngredientModal}
-            container={container}
-          >
-            <IngredientDetails hasHeading={false} />
-          </Modal>
-        </Route>
+        <Switch>
+          <Route exact path="/ingredients/:ingredientId">
+            <Modal
+              text="Детали ингредиента"
+              extraClassName="pb-15"
+              onClose={closeIngredientModal}
+              container={container}
+            >
+              <IngredientDetails hasHeading={false} />
+            </Modal>
+          </Route>
+
+          <Route exact path="/feed/:ingredientId">
+            1
+          </Route>
+          <Route exact path="/profile/orders/:ingredientId">
+            2
+          </Route>
+        </Switch>
       ) : null}
 
       {isOpenOrderModal ? (
