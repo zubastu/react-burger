@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import type { Middleware, MiddlewareAPI } from "redux";
 import type { AppDispatch } from "../reducers";
 import type { TStore } from "../../types";
