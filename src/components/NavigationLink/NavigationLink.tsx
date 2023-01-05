@@ -7,6 +7,7 @@ interface INavigationLinkProps {
   path: string;
   text: string;
   propStyles?: string | undefined;
+  include?: string;
   children: TChildrenNode;
 }
 const NavigationLink: React.FC<INavigationLinkProps> = ({
@@ -14,6 +15,7 @@ const NavigationLink: React.FC<INavigationLinkProps> = ({
   text,
   propStyles = undefined,
   children,
+  include,
 }) => {
   const location = useLocation();
   const { pathname }: TPathnameString = location;
@@ -25,7 +27,13 @@ const NavigationLink: React.FC<INavigationLinkProps> = ({
       {children}
       <p
         className={`text ${
-          pathname === path ? "text_color_primary" : "text_color_inactive"
+          include
+            ? pathname.includes(include)
+              ? "text_color_primary"
+              : "text_color_inactive"
+            : pathname === path
+            ? "text_color_primary"
+            : "text_color_inactive"
         } ml-2`}
       >
         {text}

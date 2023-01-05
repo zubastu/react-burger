@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch, useHistory, useLocation, Link } from "react-router-dom";
 import {
+  Feed,
   ForgetPasswordPage,
   IngredientPage,
   LoginPage,
@@ -9,6 +10,7 @@ import {
   ProfilePage,
   RegisterPage,
   RestorePasswordPage,
+  OrdersHistory,
 } from "../../pages";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
@@ -79,14 +81,14 @@ const ModalSwitch = () => {
         </Route>
 
         <Route exact path="/feed">
-          1
+          <Feed />
         </Route>
         <Route exact path="/feed/:id">
           12
         </Route>
 
         <ProtectedRoute exact path="/profile/orders">
-          <Link to="/profile/orders/123">link</Link>
+          <OrdersHistory />
         </ProtectedRoute>
         <ProtectedRoute exact path="/profile/orders/:id">
           1

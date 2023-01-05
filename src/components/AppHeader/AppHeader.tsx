@@ -26,9 +26,9 @@ const AppHeader: FC = () => {
             <BurgerIcon type={pathname === "/" ? "primary" : "secondary"} />
           </NavigationLink>
 
-          <NavigationLink path="/profile/orders" text="Лента заказов">
+          <NavigationLink path="/feed" include="feed" text="Лента заказов">
             <ListIcon
-              type={pathname === "/profile/orders" ? "primary" : "secondary"}
+              type={pathname.includes("feed") ? "primary" : "secondary"}
             />
           </NavigationLink>
         </div>
@@ -37,9 +37,13 @@ const AppHeader: FC = () => {
         </Link>
         {isLogged ? (
           <div className={styles.nav__item}>
-            <NavigationLink path="/profile" text="Личный кабинет">
+            <NavigationLink
+              path="/profile"
+              include="profile"
+              text="Личный кабинет"
+            >
               <ProfileIcon
-                type={pathname === "/profile" ? "primary" : "secondary"}
+                type={pathname.includes("profile") ? "primary" : "secondary"}
               />
             </NavigationLink>
           </div>

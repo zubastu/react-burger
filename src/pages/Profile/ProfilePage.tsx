@@ -17,7 +17,7 @@ const ProfilePage: FC = () => {
 
   return (
     <div className={styles.content}>
-      <ProfileNavigationLinks />
+      <ProfileNavigationLinks text="В этом разделе вы можете изменить свои персональные данные" />
       <PageContentContainer>
         <ProfileForm />
       </PageContentContainer>

@@ -7,7 +7,11 @@ import { RESET_USER_INFO } from "../../services/actions/user";
 import { api } from "../../utils/api";
 import { LOGOUT_URL, useAppDispatch } from "../../utils/constants";
 
-const ProfileNavigationLinks: FC = () => {
+type TProfileNavigationLinksProps = {
+  text: string;
+};
+
+const ProfileNavigationLinks: FC<TProfileNavigationLinksProps> = ({ text }) => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const { pathname } = location;
@@ -65,7 +69,7 @@ const ProfileNavigationLinks: FC = () => {
         </li>
       </ul>
       <p className={`${styles.text} text text_type_main-default mt-20`}>
-        В этом разделе вы можете изменить свои персональные данные
+        {text}
       </p>
     </nav>
   );
