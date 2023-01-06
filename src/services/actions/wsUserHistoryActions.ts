@@ -34,7 +34,7 @@ export type TWSUserHistoryActions =
 
 export const WSActionsOrdersUserHistory = {
   wsInit: WS_USER_HISTORY_CONNECTION_SUCCESS,
-  onClose: WS_USER_HISTORY_CONNECTION_CLOSED,
+  disconnect: WS_USER_HISTORY_CONNECTION_CLOSED,
   onError: WS_USER_HISTORY_CONNECTION_ERROR,
   onMessage: WS_GET_USER_HISTORY_ORDERS,
 };

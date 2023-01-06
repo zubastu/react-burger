@@ -33,7 +33,7 @@ export type TWSOrdersActions =
 
 export const WSActionsOrdersAll = {
   wsInit: WS_ORDERS_CONNECTION_SUCCESS,
-  onClose: WS_ORDERS_CONNECTION_CLOSED,
+  disconnect: WS_ORDERS_CONNECTION_CLOSED,
   onError: WS_ORDERS_CONNECTION_ERROR,
   onMessage: WS_GET_ORDERS,
 };
