@@ -5,6 +5,7 @@ import { TOrder } from "../../types";
 import { getParsedOrderTime } from "../../utils/getParsedTime";
 import { useAppSelector } from "../../utils/constants";
 import { getIngredientsDetails } from "../../utils/getIngredientsDetails";
+import IngredientIcon from "../IngredientIcon/IngredientIcon";
 
 type TOrderComponentProps = {
   order: TOrder;
@@ -59,29 +60,24 @@ const OrderComponent: FC<TOrderComponentProps> = ({
           {getIngredientsImages()
             .slice(0, 5)
             .map((i, index) => (
-              <div
-                className={`${styles.orderIngredientImageContainer}`}
-                style={{ zIndex: `${-index + 500}` }}
+              <IngredientIcon
+                src={i}
                 key={index}
-              >
-                <img
-                  src={i}
-                  className={styles.orderIngredientImage}
-                  alt="Ингредиент"
-                />
-              </div>
+                zIndex={`${-index + 500}`}
+                type="big"
+              />
             ))}
           {getIngredientsImages().length > 6 ? (
             <div className={`${styles.orderIngredientImageContainer}`}>
-              <img
+              <IngredientIcon
                 src={getIngredientsImages()[5]}
-                className={styles.orderIngredientImage}
-                style={{ opacity: ".5" }}
-                alt="Ингредиент"
+                type="big"
+                opacity={true}
+                counter={{
+                  hasCounter: true,
+                  counterNumber: getIngredientsImages().length - 6,
+                }}
               />
-              <p className={`${styles.counter} text text_type_digits-default`}>
-                +{getIngredientsImages().length - 6}
-              </p>
             </div>
           ) : null}
         </div>

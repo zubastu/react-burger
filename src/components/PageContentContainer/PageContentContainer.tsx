@@ -4,10 +4,21 @@ import { TChildrenNode } from "../../types";
 
 type TPageContentContainer = {
   children: TChildrenNode;
+  customMargin?: string;
 };
 
-const PageContentContainer: FC<TPageContentContainer> = ({ children }) => {
-  return <div className={`${styles.container}`}>{children}</div>;
+const PageContentContainer: FC<TPageContentContainer> = ({
+  children,
+  customMargin,
+}) => {
+  return (
+    <div
+      style={{ marginTop: `${customMargin ? customMargin : "180px"}` }}
+      className={`${styles.container}`}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default PageContentContainer;

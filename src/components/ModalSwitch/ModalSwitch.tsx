@@ -86,7 +86,7 @@ const ModalSwitch = () => {
           <Feed />
         </Route>
         <Route exact path="/feed/:id">
-          <PageContentContainer>
+          <PageContentContainer customMargin="122px">
             <OrderInfo />
           </PageContentContainer>
         </Route>
@@ -96,7 +96,7 @@ const ModalSwitch = () => {
         </ProtectedRoute>
 
         <ProtectedRoute exact path="/profile/orders/:id">
-          <PageContentContainer>
+          <PageContentContainer customMargin="122px">
             <OrderInfo />
           </PageContentContainer>
         </ProtectedRoute>
