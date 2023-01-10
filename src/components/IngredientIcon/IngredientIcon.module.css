@@ -14,11 +14,11 @@
     height: 56px;
     width: 56px;
 }
-.imageContainer:not(:first-child) {
+.imageContainerBig:not(:first-child) {
     margin-left: -15px;
 }
 
-.imageContainer:last-child{
+.imageContainerBig:last-child{
     position: relative;
     z-index: 45;
     display: flex;

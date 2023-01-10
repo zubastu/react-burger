@@ -14,7 +14,6 @@ const OrdersHistory = () => {
 
   useEffect(() => {
     dispatch({ type: WS_USER_HISTORY_CONNECTION_SUCCESS });
-
     return () => {
       dispatch({ type: WS_USER_HISTORY_CONNECTION_CLOSED });
     };

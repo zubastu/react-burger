@@ -5,12 +5,12 @@ import { useAppSelector } from "../../utils/constants";
 import { useLocation, Link } from "react-router-dom";
 
 const Orders = () => {
-  const { wsConnected, data } = useAppSelector((store) => store.userOrders);
+  const { data } = useAppSelector((store) => store.userOrders);
   const location = useLocation();
 
   return (
     <section className={`${styles.container} custom-scroll pr-2`}>
-      {wsConnected && data.success
+      {data.success
         ? data.orders.map((order) => (
             <Link
               key={order._id}
