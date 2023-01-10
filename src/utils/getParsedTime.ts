@@ -10,6 +10,20 @@ export const getParsedOrderTime = (t: string) => {
       : dateOfOrder.getMinutes()
   }`;
 
+  const dayFormat = (number: number) => {
+    if (number > 10 && [11, 12, 13, 14].includes(number % 100)) return "дней";
+    const lastNum = number % 10;
+    if (lastNum == 1) {
+      return "день";
+    }
+    if ([2, 3, 4].includes(lastNum)) {
+      return "дня";
+    }
+    if ([5, 6, 7, 8, 9, 0].includes(lastNum)) {
+      return "дней";
+    }
+  };
+
   const day = () => {
     const now = new Date();
     const currentDate = new Date(
@@ -24,20 +38,6 @@ export const getParsedOrderTime = (t: string) => {
       dateOfOrder.getDate()
     );
 
-    const dayTitle = (number: number) => {
-      if (number > 10 && [11, 12, 13, 14].includes(number % 100)) return "дней";
-      const lastNum = number % 10;
-      if (lastNum == 1) {
-        return "день";
-      }
-      if ([2, 3, 4].includes(lastNum)) {
-        return "дня";
-      }
-      if ([5, 6, 7, 8, 9, 0].includes(lastNum)) {
-        return "дней";
-      }
-    };
-
     const msDay = 86400000;
 
     if (currentDate.getTime() - orderDate.getTime() === 0) {
@@ -48,7 +48,7 @@ export const getParsedOrderTime = (t: string) => {
       const totalDays = Math.abs(
         Math.floor((orderDate.getTime() - currentDate.getTime()) / msDay)
       );
-      return `${totalDays} ${dayTitle(totalDays)} назад`;
+      return `${totalDays} ${dayFormat(totalDays)} назад`;
     }
   };
   return { time, day };

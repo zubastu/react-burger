@@ -8,9 +8,13 @@ import { getIngredientsDetails } from "../../utils/getIngredientsDetails";
 
 type TOrderComponentProps = {
   order: TOrder;
+  showStatus?: boolean;
 };
 
-const OrderComponent: FC<TOrderComponentProps> = ({ order }) => {
+const OrderComponent: FC<TOrderComponentProps> = ({
+  order,
+  showStatus = true,
+}) => {
   const { ingredients } = useAppSelector((store) => store.ingredients);
 
   const orderDate = `${getParsedOrderTime(order.createdAt).day()}, ${
@@ -40,7 +44,7 @@ const OrderComponent: FC<TOrderComponentProps> = ({ order }) => {
         {order.name}
       </div>
 
-      {order.status ? (
+      {showStatus ? (
         <div
           className={`${
             styles.orderStatus

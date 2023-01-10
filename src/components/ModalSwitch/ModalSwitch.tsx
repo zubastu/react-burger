@@ -24,6 +24,8 @@ import { CLOSE_REQUEST_INFO } from "../../services/actions/requestInformation";
 import Preloader from "../Preloader/Preloader";
 import { TStore, TModalState } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../utils/constants";
+import OrderInfo from "../OrderInfo/OrderInfo";
+import PageContentContainer from "../PageContentContainer/PageContentContainer";
 
 const container = document.getElementById("react-modals") as HTMLElement;
 
@@ -84,14 +86,19 @@ const ModalSwitch = () => {
           <Feed />
         </Route>
         <Route exact path="/feed/:id">
-          12
+          <PageContentContainer>
+            <OrderInfo />
+          </PageContentContainer>
         </Route>
 
         <ProtectedRoute exact path="/profile/orders">
           <OrdersHistory />
         </ProtectedRoute>
+
         <ProtectedRoute exact path="/profile/orders/:id">
-          1
+          <PageContentContainer>
+            <OrderInfo />
+          </PageContentContainer>
         </ProtectedRoute>
 
         <Route exact path="/">
@@ -116,11 +123,16 @@ const ModalSwitch = () => {
             </Modal>
           </Route>
 
-          <Route exact path="/feed/:ingredientId">
-            1
+          <Route exact path="/feed/:id">
+            <Modal container={container} onClose={() => history.goBack()}>
+              <OrderInfo />
+            </Modal>
           </Route>
-          <Route exact path="/profile/orders/:ingredientId">
-            2
+
+          <Route exact path="/profile/orders/:id">
+            <Modal container={container} onClose={() => history.goBack()}>
+              <OrderInfo />
+            </Modal>
           </Route>
         </Switch>
       ) : null}

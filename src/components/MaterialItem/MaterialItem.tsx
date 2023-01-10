@@ -75,10 +75,4 @@ const MaterialItem: FC<TMaterialItemProps> = ({ material }) => {
   );
 };
 
-/*
-MaterialItem.propTypes = {
-  material: INGREDIENT_TYPES.isRequired,
-};
-*/
-
 export default MaterialItem;

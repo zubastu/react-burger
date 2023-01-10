@@ -10,6 +10,7 @@ type TIngredientDetailsProps = {
 interface IIngredientDetailsParams {
   ingredientId: string;
 }
+
 const IngredientDetails: FC<TIngredientDetailsProps> = ({ hasHeading }) => {
   const { ingredientId } = useParams<IIngredientDetailsParams>();
 
