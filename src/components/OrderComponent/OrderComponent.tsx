@@ -63,7 +63,7 @@ const OrderComponent: FC<TOrderComponentProps> = ({
               <IngredientIcon
                 src={i}
                 key={index}
-                zIndex={`${-index + 500}`}
+                zIndex={`${-index + 50}`}
                 type="big"
               />
             ))}
