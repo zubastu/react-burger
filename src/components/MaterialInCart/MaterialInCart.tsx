@@ -4,10 +4,10 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./MaterialInCart.module.css";
-import { useDispatch } from "react-redux";
 import { DELETE_INGREDIENT } from "../../services/actions/ingredients";
 import { useDrag, useDrop } from "react-dnd";
 import { TConstructorIngredient } from "../../types";
+import { useAppDispatch } from "../../utils/constants";
 
 type TMaterial = TConstructorIngredient & { index: number };
 
@@ -16,7 +16,7 @@ type TMaterialInCartProps = {
   name: string;
   price: number;
   _id: string;
-  product: TMaterial;
+  product: TConstructorIngredient;
   index: number;
   moveIngredient: (ingredient: TMaterial, index: number) => void;
 };
@@ -30,15 +30,15 @@ const MaterialInCart: FC<TMaterialInCartProps> = ({
   index,
   moveIngredient,
 }) => {
-  const ref = useRef(null);
-  const dispatch = useDispatch();
+  const ref = useRef<HTMLDivElement>(null);
+  const dispatch = useAppDispatch();
 
   const [{ handlerId }, dropTarget] = useDrop({
     accept: "selected-ingredient",
     collect: (monitor) => ({
       handlerId: monitor.getHandlerId(),
     }),
-    hover(ingredient, monitor) {
+    hover(ingredient: TMaterial, monitor) {
       if (!ref.current) {
         return;
       }
@@ -47,20 +47,20 @@ const MaterialInCart: FC<TMaterialInCartProps> = ({
       if (dIndex === index) {
         return;
       }
-      // @ts-ignore
-      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+
+      const hoverBoundingRect = ref.current.getBoundingClientRect();
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 
       const clientOffset = monitor.getClientOffset();
-      // @ts-ignore
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-      if (dIndex < index && hoverClientY < hoverMiddleY) {
+
+      const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
+      if (dIndex! < index && hoverClientY < hoverMiddleY) {
         return;
       }
-      // @ts-ignore
+
       moveIngredient(ingredient, index);
-      // @ts-ignore
+
       ingredient.index = index;
     },
   });

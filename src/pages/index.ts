@@ -6,6 +6,8 @@ import ProfilePage from "./Profile/ProfilePage";
 import RegisterPage from "./Register/RegisterPage";
 import RestorePasswordPage from "./RestorePass/RestorePasswordPage";
 import MainPage from "./Main/MainPage";
+import Feed from "./Feed/Feed";
+import OrdersHistory from "./OrdersHistory/OrdersHistory";
 
 export {
   ForgetPasswordPage,
@@ -16,4 +18,6 @@ export {
   RestorePasswordPage,
   RegisterPage,
   MainPage,
+  Feed,
+  OrdersHistory,
 };

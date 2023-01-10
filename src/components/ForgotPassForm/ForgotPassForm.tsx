@@ -7,21 +7,21 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormNavigationElement from "../FormNavigationElement/FormNavigationElement";
 import { useForm } from "../../hooks/useForm";
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { restorePassword } from "../../services/asyncActions/restorePassword";
 import { TStore } from "../../types";
+import { useAppDispatch, useAppSelector } from "../../utils/constants";
 
 const ForgotPassForm: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { values, handleChange, isValid } = useForm({ email: "" });
 
   const history = useHistory();
-  const { isLogged } = useSelector((store: TStore) => store.login);
+  const { isLogged } = useAppSelector((store: TStore) => store.login);
 
   const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
-    restorePassword(values)(dispatch);
+    dispatch(restorePassword(values));
   };
 
   useEffect(() => {

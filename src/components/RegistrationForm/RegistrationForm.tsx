@@ -9,11 +9,11 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormNavigationElement from "../FormNavigationElement/FormNavigationElement";
 import { useForm } from "../../hooks/useForm";
-import { useDispatch } from "react-redux";
 import { postRegistrationDetails } from "../../services/asyncActions/register";
+import { useAppDispatch } from "../../utils/constants";
 
 const RegistrationForm: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { values, handleChange, isValid } = useForm({
     name: "",
     email: "",
@@ -22,7 +22,7 @@ const RegistrationForm: FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    postRegistrationDetails(values)(dispatch);
+    dispatch(postRegistrationDetails(values));
   };
 
   return (

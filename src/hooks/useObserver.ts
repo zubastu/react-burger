@@ -5,8 +5,8 @@ export const useObserver = (ref: RefObject<HTMLElement>) => {
 
   const options = {
     root: document.getElementById("ingredients-container"),
-    rootMargin: "0px",
-    threshold: 0.4,
+    rootMargin: "0px 0px -40% 0px",
+    threshold: 0.19,
   };
 
   const observer = new IntersectionObserver(

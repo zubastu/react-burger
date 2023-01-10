@@ -1,6 +1,7 @@
 import React from "react";
-import { Route, Switch, useHistory, useLocation } from "react-router-dom";
+import { Route, Switch, useHistory, useLocation, Link } from "react-router-dom";
 import {
+  Feed,
   ForgetPasswordPage,
   IngredientPage,
   LoginPage,
@@ -9,11 +10,11 @@ import {
   ProfilePage,
   RegisterPage,
   RestorePasswordPage,
+  OrdersHistory,
 } from "../../pages";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import OrderDetails from "../OrderDetails/OrderDetails";
-import { useDispatch, useSelector } from "react-redux";
 import { CLOSE_ORDER_MODAL } from "../../services/actions/order";
 import { CLOSE_INGREDIENT_DETAILS } from "../../services/actions/ingredients";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
@@ -22,17 +23,20 @@ import RequestInformation from "../RequestInformation/RequestInformation";
 import { CLOSE_REQUEST_INFO } from "../../services/actions/requestInformation";
 import Preloader from "../Preloader/Preloader";
 import { TStore, TModalState } from "../../types";
+import { useAppDispatch, useAppSelector } from "../../utils/constants";
 
 const container = document.getElementById("react-modals") as HTMLElement;
 
 const ModalSwitch = () => {
   const location = useLocation();
   const history = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { isOpenOrderModal } = useSelector((store: TStore) => store.order);
-  const { isOpened } = useSelector((store: TStore) => store.request);
-  const { isPreloaderActive } = useSelector((store: TStore) => store.preloader);
+  const { isOpenOrderModal } = useAppSelector((store: TStore) => store.order);
+  const { isOpened } = useAppSelector((store: TStore) => store.request);
+  const { isPreloaderActive } = useAppSelector(
+    (store: TStore) => store.preloader
+  );
 
   const closeOrderModal = (): void => {
     dispatch({ type: CLOSE_ORDER_MODAL });
@@ -68,13 +72,27 @@ const ModalSwitch = () => {
           <RestorePasswordPage />
         </Route>
 
-        <ProtectedRoute path="/profile">
+        <Route exact path="/profile">
           <ProfilePage />
-        </ProtectedRoute>
+        </Route>
 
         <Route exact path="/ingredients/:ingredientId">
           <IngredientPage />
         </Route>
+
+        <Route exact path="/feed">
+          <Feed />
+        </Route>
+        <Route exact path="/feed/:id">
+          12
+        </Route>
+
+        <ProtectedRoute exact path="/profile/orders">
+          <OrdersHistory />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/profile/orders/:id">
+          1
+        </ProtectedRoute>
 
         <Route exact path="/">
           <MainPage />
@@ -86,16 +104,25 @@ const ModalSwitch = () => {
       </Switch>
 
       {state?.background ? (
-        <Route exact path="/ingredients/:ingredientId">
-          <Modal
-            text="Детали ингредиента"
-            extraClassName="pb-15"
-            onClose={closeIngredientModal}
-            container={container}
-          >
-            <IngredientDetails hasHeading={false} />
-          </Modal>
-        </Route>
+        <Switch>
+          <Route exact path="/ingredients/:ingredientId">
+            <Modal
+              text="Детали ингредиента"
+              extraClassName="pb-15"
+              onClose={closeIngredientModal}
+              container={container}
+            >
+              <IngredientDetails hasHeading={false} />
+            </Modal>
+          </Route>
+
+          <Route exact path="/feed/:ingredientId">
+            1
+          </Route>
+          <Route exact path="/profile/orders/:ingredientId">
+            2
+          </Route>
+        </Switch>
       ) : null}
 
       {isOpenOrderModal ? (

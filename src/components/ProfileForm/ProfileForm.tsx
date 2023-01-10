@@ -7,18 +7,18 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useForm } from "../../hooks/useForm";
-import { useDispatch, useSelector } from "react-redux";
 import { changeUserInfo } from "../../services/asyncActions/user";
 import { TStore } from "../../types";
+import { useAppDispatch, useAppSelector } from "../../utils/constants";
 
 const ProfileForm: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { values, handleChange, setValues } = useForm({
     name: "",
     email: "",
     password: "",
   });
-  const { name, email } = useSelector((store: TStore) => store.user.user);
+  const { name, email } = useAppSelector((store: TStore) => store.user.user);
 
   useEffect(() => {
     setValues({ name, email });
@@ -26,7 +26,7 @@ const ProfileForm: FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    changeUserInfo(values)(dispatch);
+    dispatch(changeUserInfo(values));
   };
 
   const handleCancel = () => {
