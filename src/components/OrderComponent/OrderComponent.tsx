@@ -67,18 +67,17 @@ const OrderComponent: FC<TOrderComponentProps> = ({
                 type="big"
               />
             ))}
+
           {getIngredientsImages().length > 6 ? (
-            <div className={`${styles.orderIngredientImageContainer}`}>
-              <IngredientIcon
-                src={getIngredientsImages()[5]}
-                type="big"
-                opacity={true}
-                counter={{
-                  hasCounter: true,
-                  counterNumber: getIngredientsImages().length - 6,
-                }}
-              />
-            </div>
+            <IngredientIcon
+              src={getIngredientsImages()[5]}
+              type="big"
+              opacity={true}
+              counter={{
+                hasCounter: true,
+                counterNumber: getIngredientsImages().length - 6,
+              }}
+            />
           ) : null}
         </div>
         <div className={styles.orderPriceInfo}>
