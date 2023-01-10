@@ -1,4 +1,4 @@
-import store from "../services/store";
+import { store } from "../services/store";
 import React from "react";
 import * as H from "history";
 import { TForgotPassActions } from "../services/actions/forgot-pass";
@@ -114,9 +114,9 @@ export type TErrorData = {
 };
 
 export type TOrder = {
-  ingredients: Array<string>;
+  ingredients: string[];
   _id: string;
-  status: string;
+  status?: string;
   name: string;
   createdAt: string;
   updatedAt: string;
@@ -125,7 +125,7 @@ export type TOrder = {
 
 export type TWSData = {
   success: boolean;
-  orders: Array<TOrder>;
+  orders: TOrder[];
   total: 0;
   totalToday: 0;
 };

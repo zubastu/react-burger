@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { TConstructorIngredient, TIngredient, TStore } from "../../types";
 
-import burgerIngredientsStyles from "./BurgerConstructor.module.css";
+import styles from "./BurgerConstructor.module.css";
 import {
   Button,
   CurrencyIcon,
@@ -77,18 +77,15 @@ const BurgerConstructor = () => {
     !Boolean(selectedIngredients.length);
 
   return (
-    <section
-      ref={dropTarget}
-      className={`${burgerIngredientsStyles.container} `}
-    >
+    <section ref={dropTarget} className={`${styles.container} `}>
       <div
-        className={`${burgerIngredientsStyles.materials} ${
-          isHover && burgerIngredientsStyles.materials_active
+        className={`${styles.materials} ${
+          isHover && styles.materials_active
         } custom-scroll mt-25 pl-4 pr-2`}
       >
         <SelectedIngredients />
       </div>
-      <div className={`${burgerIngredientsStyles.total} mt-10`}>
+      <div className={`${styles.total} mt-10`}>
         <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
         <CurrencyIcon type="primary" />
         <Button
@@ -96,7 +93,7 @@ const BurgerConstructor = () => {
           htmlType={"button"}
           type="primary"
           size="medium"
-          extraClass={`${burgerIngredientsStyles.buyBtn} ml-10 mr-4`}
+          extraClass={`${styles.buyBtn} ml-10 mr-4`}
           onClick={postOrder}
         >
           Оформить заказ

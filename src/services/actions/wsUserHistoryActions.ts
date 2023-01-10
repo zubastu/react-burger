@@ -1,13 +1,10 @@
 import { TWSData } from "../../types";
 
-export const WS_USER_HISTORY_CONNECTION_SUCCESS: "WS_USER_HISTORY_CONNECTION_SUCCESS" =
+export const WS_USER_HISTORY_CONNECTION_SUCCESS =
   "WS_USER_HISTORY_CONNECTION_SUCCESS";
-export const WS_USER_HISTORY_CONNECTION_ERROR: "WS_CONNECTION_ERROR" =
-  "WS_CONNECTION_ERROR";
-export const WS_USER_HISTORY_CONNECTION_CLOSED: "WS_CONNECTION_CLOSED" =
-  "WS_CONNECTION_CLOSED";
-export const WS_GET_USER_HISTORY_ORDERS: "WS_GET_USER_ORDERS" =
-  "WS_GET_USER_ORDERS";
+export const WS_USER_HISTORY_CONNECTION_ERROR = "WS_CONNECTION_ERROR";
+export const WS_USER_HISTORY_CONNECTION_CLOSED = "WS_CONNECTION_CLOSED";
+export const WS_GET_USER_HISTORY_ORDERS = "WS_GET_USER_ORDERS";
 
 export interface IWSUserHistoryConnectionSuccess {
   readonly type: typeof WS_USER_HISTORY_CONNECTION_SUCCESS;
@@ -23,7 +20,7 @@ export interface IWSUserHistoryConnectionClosed {
 
 export interface IWSGetUserHistoryOrders {
   readonly type: typeof WS_GET_USER_HISTORY_ORDERS;
-  payload: Array<TWSData>;
+  payload: TWSData;
 }
 
 export type TWSUserHistoryActions =

@@ -32,7 +32,6 @@ export const postRegistrationDetails: AppThunk =
       })
       .catch((err) => {
         err.json().then((data: TErrorData) => {
-          console.log(data);
           dispatch({ type: ERROR_REGISTRATION });
           dispatch({ type: SHOW_REQUEST_ERROR_INFO, payload: data.message });
         });

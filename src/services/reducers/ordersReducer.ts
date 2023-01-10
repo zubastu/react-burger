@@ -45,7 +45,13 @@ export const ordersReducer = (
     case WS_GET_ORDERS:
       return {
         ...state,
-        data: action.payload,
+        data: {
+          ...state.data,
+          orders: action.payload.orders.reverse(),
+          success: action.payload.success,
+          total: action.payload.total,
+          totalToday: action.payload.totalToday,
+        },
       };
     default:
       return state;

@@ -14,7 +14,7 @@ export const fetchIngredients: AppThunk = () => (dispatch) => {
   dispatch({ type: START_INGREDIENTS_FETCH });
   dispatch({ type: PRELOADER_START });
   fetchGet()
-    .then((response: any) =>
+    .then((response) =>
       response && response.success
         ? dispatch({
             type: SUCCESS_INGREDIENTS_FETCH,
