@@ -13,7 +13,7 @@ export const getParsedOrderTime = (t: string) => {
   const dayFormat = (number: number) => {
     if (number > 10 && [11, 12, 13, 14].includes(number % 100)) return "дней";
     const lastNum = number % 10;
-    if (lastNum == 1) {
+    if (lastNum === 1) {
       return "день";
     }
     if ([2, 3, 4].includes(lastNum)) {
