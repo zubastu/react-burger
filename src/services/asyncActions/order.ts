@@ -32,11 +32,13 @@ export const getCurrentOrder: AppThunk =
   (orderNumber: string | number) => (dispatch) => {
     const { fetchGet } = api(`${ORDER_URL}/${orderNumber}`);
     dispatch({ type: GET_ORDER_START });
+    dispatch({ type: PRELOADER_START });
     fetchGet()
       .then((response) => {
         if (response && response.success) {
           dispatch({ type: GET_ORDER_SUCCESS, payload: response });
         }
       })
-      .catch(() => dispatch({ type: GET_ORDER_ERROR }));
+      .catch(() => dispatch({ type: GET_ORDER_ERROR }))
+      .finally(() => dispatch({ type: PRELOADER_STOP }));
   };
