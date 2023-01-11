@@ -50,7 +50,7 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    z-index: 2000;
+    z-index: 20000;
 }
 .preloader:before{
     position: absolute;
