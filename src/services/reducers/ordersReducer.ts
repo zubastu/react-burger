@@ -41,6 +41,10 @@ export const ordersReducer = (
       return {
         ...state,
         wsConnected: false,
+        data: {
+          ...state.data,
+          success: false,
+        },
       };
     case WS_GET_ORDERS:
       return {

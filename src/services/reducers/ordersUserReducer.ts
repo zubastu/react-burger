@@ -41,6 +41,10 @@ export const ordersUserReducer = (
       return {
         ...state,
         wsConnected: false,
+        data: {
+          ...state.data,
+          success: false,
+        },
       };
     case WS_GET_USER_HISTORY_ORDERS:
       return {

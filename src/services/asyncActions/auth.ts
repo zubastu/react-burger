@@ -50,13 +50,11 @@ export const checkAuth: AppThunk = () => (dispatch) => {
       .finally(() => dispatch({ type: PRELOADER_STOP }));
   }
   if (token) {
-    dispatch({ type: PRELOADER_START });
     fetchSecureGet()
       .then((response) => {
         dispatch({ type: LOGIN_CHECKED });
         dispatch({ type: GET_USER_INFO_SUCCESS, payload: response.user });
       })
-      .catch(() => dispatch({ type: GET_USER_INFO_ERROR }))
-      .finally(() => dispatch({ type: PRELOADER_STOP }));
+      .catch(() => dispatch({ type: GET_USER_INFO_ERROR }));
   }
 };
