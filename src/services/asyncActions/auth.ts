@@ -36,7 +36,7 @@ export const handleLogin: AppThunk = (data: TUserAuthData) => (dispatch) => {
     .finally(() => dispatch({ type: PRELOADER_STOP }));
 };
 
-export const checkAuth: AppThunk = (isLogged: boolean) => (dispatch) => {
+export const checkAuth: AppThunk = () => (dispatch) => {
   const refresh = getCookie("refreshToken");
   const token = getCookie("accessToken");
   if (!refresh) {
@@ -49,7 +49,7 @@ export const checkAuth: AppThunk = (isLogged: boolean) => (dispatch) => {
       .catch(() => dispatch({ type: LOGOUT }))
       .finally(() => dispatch({ type: PRELOADER_STOP }));
   }
-  if (!isLogged) {
+  if (token) {
     dispatch({ type: PRELOADER_START });
     fetchSecureGet()
       .then((response) => {

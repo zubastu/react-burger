@@ -16,9 +16,7 @@ const App: FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (!isLogged) {
-      dispatch(checkAuth(isLogged));
-    }
+    dispatch(checkAuth());
   }, [isLogged]);
 
   return (
