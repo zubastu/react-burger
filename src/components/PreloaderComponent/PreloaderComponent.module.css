@@ -9,6 +9,8 @@
     animation: 1s linear 0s normal none infinite running rotate;
     width: 300px;
     height: 300px;
+    box-shadow: 0px 0px 20px 16px #4C4CFF, 0px 0px 16px 16px #801AB3;
+    border-radius: 50%;
 }
 @keyframes rotate {
     0% {

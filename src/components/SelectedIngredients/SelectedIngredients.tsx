@@ -1,5 +1,6 @@
 import React, { FC, useCallback } from "react";
 import styles from "./SelectedIngredients.module.css";
+import emptyIngredientImage from "../../images/emptyIngredient.svg";
 import MaterialInCart from "../MaterialInCart/MaterialInCart";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { UPDATE_INGREDIENTS } from "../../services/actions/ingredients";
@@ -39,23 +40,41 @@ const SelectedIngredients: FC = () => {
             type="top"
           />
         </div>
-      ) : null}
-      {selectedIngredients.length > 0
-        ? selectedIngredients.map(
-            (item: TConstructorIngredient, index: number) => (
-              <MaterialInCart
-                image={item.image}
-                price={item.price}
-                name={item.name}
-                _id={item._id}
-                key={item.id}
-                product={item}
-                index={index}
-                moveIngredient={moveIngredient}
-              />
-            )
+      ) : (
+        <div className={`${styles.constructor} ml-8`}>
+          <ConstructorElement
+            thumbnail={emptyIngredientImage}
+            text="Перетащите булку"
+            price={0}
+            isLocked={true}
+            type="top"
+          />
+        </div>
+      )}
+      {selectedIngredients.length > 0 ? (
+        selectedIngredients.map(
+          (item: TConstructorIngredient, index: number) => (
+            <MaterialInCart
+              image={item.image}
+              price={item.price}
+              name={item.name}
+              _id={item._id}
+              key={item.id}
+              product={item}
+              index={index}
+              moveIngredient={moveIngredient}
+            />
           )
-        : null}
+        )
+      ) : (
+        <MaterialInCart
+          image={emptyIngredientImage}
+          price={0}
+          name="Перетащите ингредиент"
+          index={1}
+          isLocked={true}
+        />
+      )}
       {selectedBun.type ? (
         <div className={`${styles.constructor} ml-8`}>
           <ConstructorElement
@@ -66,7 +85,17 @@ const SelectedIngredients: FC = () => {
             type="bottom"
           />
         </div>
-      ) : null}
+      ) : (
+        <div className={`${styles.constructor} ml-8`}>
+          <ConstructorElement
+            thumbnail={emptyIngredientImage}
+            text="Перетащите булку"
+            price={0}
+            isLocked={true}
+            type="bottom"
+          />
+        </div>
+      )}
     </div>
   );
 };
