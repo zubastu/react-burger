@@ -13,10 +13,10 @@ const Orders = () => {
       {data.success
         ? data.orders.map((order) => (
             <Link
-              key={order._id}
+              key={order.number}
               className={styles.link}
               to={{
-                pathname: `/profile/orders/${order._id}`,
+                pathname: `/profile/orders/${order.number}`,
                 state: { background: location },
               }}
             >

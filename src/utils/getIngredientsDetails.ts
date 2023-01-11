@@ -1,5 +1,9 @@
 import { TIngredient } from "../types";
 
+type TSortedIngredient = {
+  [key: string]: number;
+};
+
 export const getIngredientsDetails = (
   ingredients: TIngredient[],
   ids: string[],
@@ -23,10 +27,6 @@ export const getIngredientsDetails = (
     }, 0);
   };
 
-  const getIngredientsImages = () => {
-    return getOrderIngredients().map((i) => i.image_large);
-  };
-
   const getOrderStatus = () =>
     status === "done"
       ? "Выполнен"
@@ -43,10 +43,44 @@ export const getIngredientsDetails = (
       return "text_color_error";
     }
   };
+  const getSortedIngredients = (arr: string[]) => {
+    return arr.reduce((target: TSortedIngredient, key) => {
+      target[key] = (target[key] || 0) + 1;
+      return target;
+    }, {});
+  };
+
+  const getSortedOrderIngredients = () => {
+    const items = getSortedIngredients(ids);
+    const result: {
+      image: string;
+      price: number;
+      quantity: number;
+      name: string;
+    }[] = [];
+    ingredients.forEach((i) => {
+      if (items[i._id]) {
+        result.push({
+          image: i.image_large,
+          price: i.price,
+          quantity: items[i._id],
+          name: i.name,
+        });
+      }
+    });
+    return result;
+  };
+
+  const getIngredientsImages = () => {
+    return getOrderIngredients().map((i) => i.image_large);
+  };
+
   return {
     getOrderPrice,
     getIngredientsImages,
     getOrderStatus,
     getOrderStatusColor,
+    getSortedIngredients,
+    getSortedOrderIngredients,
   };
 };

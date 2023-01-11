@@ -73,7 +73,7 @@ export type TOrderResponse = {
   order: {
     ingredients: TIngredient[];
     _id: string;
-    owner: {
+    owner?: {
       name: string;
       email: string;
       createdAt: string;
@@ -128,4 +128,21 @@ export type TWSData = {
   orders: TOrder[];
   total: 0;
   totalToday: 0;
+};
+
+export type TCurrentOrderResponse = {
+  success: boolean;
+  orders: TCurrentOrder[];
+};
+
+export type TCurrentOrder = {
+  _id: string;
+  ingredients: string[];
+  owner: string;
+  status: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  number: number;
+  __v: number;
 };

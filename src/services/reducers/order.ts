@@ -1,23 +1,43 @@
 import {
-  SUCCESS_ORDER_POST,
-  ERROR_ORDER_POST,
-  START_ORDER_POST,
   CLOSE_ORDER_MODAL,
+  ERROR_ORDER_POST,
+  GET_ORDER_ERROR,
+  GET_ORDER_START,
+  GET_ORDER_SUCCESS,
+  START_ORDER_POST,
+  SUCCESS_ORDER_POST,
   TOrderActions,
 } from "../actions/order";
-import { TOrderResponse } from "../../types";
+import { TCurrentOrderResponse, TOrderResponse } from "../../types";
 
 type TOrderReducerState = {
   isRequest: boolean;
   isRequestError: boolean;
   orderDetails: TOrderResponse;
   isOpenOrderModal: boolean;
+  currentOrder: TCurrentOrderResponse;
 };
 
 const initialState: TOrderReducerState = {
   isRequest: false,
   isRequestError: false,
   isOpenOrderModal: false,
+  currentOrder: {
+    success: false,
+    orders: [
+      {
+        _id: "",
+        ingredients: [],
+        owner: "",
+        status: "",
+        name: "",
+        createdAt: "",
+        updatedAt: "",
+        number: 0,
+        __v: 0,
+      },
+    ],
+  },
   orderDetails: {
     success: false,
     name: "",
@@ -69,6 +89,25 @@ export const orderReducer = (
       return {
         ...state,
         isOpenOrderModal: false,
+      };
+    case GET_ORDER_SUCCESS:
+      return {
+        ...state,
+        isRequestError: false,
+        isRequest: false,
+        currentOrder: action.payload,
+      };
+    case GET_ORDER_START:
+      return {
+        ...state,
+        isRequest: true,
+        isRequestError: false,
+      };
+    case GET_ORDER_ERROR:
+      return {
+        ...state,
+        isRequest: false,
+        isRequestError: true,
       };
     default:
       return state;

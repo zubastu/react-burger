@@ -12,6 +12,7 @@ export const REGISTER_URL = `${BASE_URL}api/auth/register`;
 export const LOGOUT_URL = `${BASE_URL}api/auth/logout`;
 export const REFRESH_TOKEN_URL = `${BASE_URL}api/auth/token`;
 export const USER_INFO_URL = `${BASE_URL}api/auth/user`;
+export const ORDER_URL = `${BASE_URL}api/orders`;
 
 export const WS_URL_ORDERS_ALL = "wss://norma.nomoreparties.space/orders/all";
 export const WS_URL_ORDERS_USER_HISTORY =

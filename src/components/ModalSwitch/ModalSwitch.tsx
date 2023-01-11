@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, useHistory, useLocation, Link } from "react-router-dom";
+import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import {
   Feed,
   ForgetPasswordPage,
@@ -39,6 +39,7 @@ const ModalSwitch = () => {
   const { isPreloaderActive } = useAppSelector(
     (store: TStore) => store.preloader
   );
+  const { currentOrder } = useAppSelector((store) => store.order);
 
   const closeOrderModal = (): void => {
     dispatch({ type: CLOSE_ORDER_MODAL });
@@ -85,7 +86,7 @@ const ModalSwitch = () => {
         <Route exact path="/feed">
           <Feed />
         </Route>
-        <Route exact path="/feed/:id">
+        <Route exact path="/feed/:orderNumber">
           <PageContentContainer customMargin="122px">
             <OrderInfo />
           </PageContentContainer>
@@ -95,7 +96,7 @@ const ModalSwitch = () => {
           <OrdersHistory />
         </ProtectedRoute>
 
-        <ProtectedRoute exact path="/profile/orders/:id">
+        <ProtectedRoute exact path="/profile/orders/:orderNumber">
           <PageContentContainer customMargin="122px">
             <OrderInfo />
           </PageContentContainer>
@@ -123,15 +124,25 @@ const ModalSwitch = () => {
             </Modal>
           </Route>
 
-          <Route exact path="/feed/:id">
-            <Modal container={container} onClose={() => history.goBack()}>
-              <OrderInfo />
+          <Route exact path="/feed/:orderNumber">
+            <Modal
+              container={container}
+              onClose={() => history.goBack()}
+              text={`#${currentOrder.success && currentOrder.orders[0].number}`}
+              extraClassName="pb-10"
+            >
+              <OrderInfo isModal={true} />
             </Modal>
           </Route>
 
-          <Route exact path="/profile/orders/:id">
-            <Modal container={container} onClose={() => history.goBack()}>
-              <OrderInfo />
+          <Route exact path="/profile/orders/:orderNumber">
+            <Modal
+              container={container}
+              onClose={() => history.goBack()}
+              text={`#${currentOrder.success && currentOrder.orders[0].number}`}
+              extraClassName="pb-10"
+            >
+              <OrderInfo isModal={true} />
             </Modal>
           </Route>
         </Switch>
@@ -152,6 +163,7 @@ const ModalSwitch = () => {
           text="Результат запроса"
           onClose={closeRequestModal}
           container={container}
+          extraClassName="pb-10"
         >
           <RequestInformation />
         </Modal>

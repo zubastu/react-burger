@@ -44,7 +44,7 @@ const Feed = () => {
               key={index}
               className={styles.link}
               to={{
-                pathname: `/feed/${order._id}`,
+                pathname: `/feed/${order.number}`,
                 state: { background: location },
               }}
             >
