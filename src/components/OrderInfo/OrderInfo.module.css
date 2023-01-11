@@ -19,7 +19,7 @@
     flex-direction: column;
     gap: 16px;
     height: 280px;
-    overflow-y: scroll;
+    overflow-y: auto;
     box-sizing: border-box;
 }
 .ingredient{
@@ -36,4 +36,5 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 9px;
 }
