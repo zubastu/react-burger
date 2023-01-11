@@ -26,7 +26,7 @@ const NavigationLink: React.FC<INavigationLinkProps> = ({
     >
       {children}
       <p
-        className={`text ${
+        className={`text text_type_main-default ${
           include
             ? pathname.includes(include)
               ? "text_color_primary"
