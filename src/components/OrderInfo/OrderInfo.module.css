@@ -1,0 +1,40 @@
+.container{
+    width: 100%;
+}
+.orderNumber{
+    text-align: center;
+}
+.orderNameContainer {
+    display: flex;
+}
+.orderName {
+    text-align: start;
+    width: 100%;
+    max-width: 640px;
+}
+.ingredientsList {
+    margin-top: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 280px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+.ingredient{
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.ingredientName {
+   width: 400px;
+}
+.orderPriceDetails {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 9px;
+}

@@ -5,10 +5,10 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
 import { OPEN_INGREDIENT_DETAILS } from "../../services/actions/ingredients";
 import { Link, useLocation } from "react-router-dom";
 import { TIngredient, TStore } from "../../types";
+import { useAppDispatch, useAppSelector } from "../../utils/constants";
 
 type TMaterialItemProps = {
   material: TIngredient;
@@ -16,8 +16,8 @@ type TMaterialItemProps = {
 
 const MaterialItem: FC<TMaterialItemProps> = ({ material }) => {
   const { name, image, price } = material;
-  const dispatch = useDispatch();
-  const { selectedIngredients, selectedBun } = useSelector(
+  const dispatch = useAppDispatch();
+  const { selectedIngredients, selectedBun } = useAppSelector(
     (store: TStore) => store.ingredients
   );
   const location = useLocation();
@@ -74,11 +74,5 @@ const MaterialItem: FC<TMaterialItemProps> = ({ material }) => {
     </Link>
   );
 };
-
-/*
-MaterialItem.propTypes = {
-  material: INGREDIENT_TYPES.isRequired,
-};
-*/
 
 export default MaterialItem;

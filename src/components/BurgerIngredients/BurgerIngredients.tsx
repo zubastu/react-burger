@@ -3,8 +3,8 @@ import styles from "./BurgerIngredients.module.css";
 import MaterialItem from "../MaterialItem/MaterialItem";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useObserver } from "../../hooks/useObserver";
-import { useSelector } from "react-redux";
 import { TStore, TIngredient } from "../../types";
+import { useAppSelector } from "../../utils/constants";
 
 const BurgerIngredients = () => {
   const sauceRef = useRef<HTMLDivElement>(null);
@@ -18,12 +18,12 @@ const BurgerIngredients = () => {
   const handleClick = (ref: RefObject<HTMLDivElement>): void =>
     ref.current?.scrollIntoView({ behavior: "smooth" });
 
-  const { bun, sauces, main } = useSelector(
+  const { bun, sauces, main } = useAppSelector(
     (store: TStore) => store.ingredients
   );
 
   return (
-    <section id="ingredients-container" className={`${styles.container} `}>
+    <section className={`${styles.container} `}>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
 
       <div style={{ display: "flex" }}>
@@ -80,6 +80,7 @@ const BurgerIngredients = () => {
         </h2>
         <div
           ref={mainRef}
+          id="ingredients-container"
           className={`${styles.material_container} pt-6 pl-4 pr-4`}
         >
           {main &&

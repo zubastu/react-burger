@@ -1,11 +1,12 @@
 import React, { FC } from "react";
 import styles from "./OrderDetails.module.css";
 import successImage from "../../images/done.svg";
-import { useSelector } from "react-redux";
+import errorImage from "../../images/error.svg";
 import { TStore } from "../../types";
+import { useAppSelector } from "../../utils/constants";
 
 const OrderDetails: FC = () => {
-  const { orderDetails } = useSelector((store: TStore) => store.order);
+  const { orderDetails } = useAppSelector((store: TStore) => store.order);
   const { name, order, success } = orderDetails;
   const { number } = order;
   return (
@@ -17,7 +18,7 @@ const OrderDetails: FC = () => {
         <p className="text text_type_main-medium mb-15">{name}</p>
         <img
           className={styles.image}
-          src={success && successImage}
+          src={success ? successImage : errorImage}
           alt={success ? "Успешно" : "Ошибка"}
         />
         {success && (

@@ -1,5 +1,7 @@
 import { getCookie } from "./cookie";
 import { REFRESH_TOKEN_URL } from "./constants";
+import { TRestorePassword } from "../services/asyncActions/restorePassword";
+import { TResetPassData } from "../services/asyncActions/resetPass";
 
 type TUserData = {
   name?: string;
@@ -7,11 +9,11 @@ type TUserData = {
   password?: string;
 };
 
-type TOrder = {
+export type TOrder = {
   ingredients: Array<string>;
 };
 
-type TAuthInfo = TUserData & { token?: string };
+export type TAuthInfo = TUserData & { token?: string };
 
 export const api = (url: string) => {
   const checkPromise = (promise: Promise<Response>) =>
@@ -56,7 +58,7 @@ export const api = (url: string) => {
     return checkPromise(promise);
   };
 
-  const fetchPost = (data: TAuthInfo) => {
+  const fetchPost = (data: TAuthInfo | TRestorePassword | TResetPassData) => {
     const promise = fetch(url, {
       method: "POST",
       headers,

@@ -4,10 +4,10 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./MaterialInCart.module.css";
-import { useDispatch } from "react-redux";
 import { DELETE_INGREDIENT } from "../../services/actions/ingredients";
 import { useDrag, useDrop } from "react-dnd";
 import { TConstructorIngredient } from "../../types";
+import { useAppDispatch } from "../../utils/constants";
 
 type TMaterial = TConstructorIngredient & { index: number };
 
@@ -15,10 +15,11 @@ type TMaterialInCartProps = {
   image: string;
   name: string;
   price: number;
-  _id: string;
-  product: TMaterial;
+  _id?: string;
+  product?: TConstructorIngredient;
   index: number;
-  moveIngredient: (ingredient: TMaterial, index: number) => void;
+  moveIngredient?: (ingredient: TMaterial, index: number) => void;
+  isLocked?: boolean;
 };
 
 const MaterialInCart: FC<TMaterialInCartProps> = ({
@@ -29,38 +30,39 @@ const MaterialInCart: FC<TMaterialInCartProps> = ({
   product,
   index,
   moveIngredient,
+  isLocked = false,
 }) => {
-  const ref = useRef(null);
-  const dispatch = useDispatch();
+  const ref = useRef<HTMLDivElement>(null);
+  const dispatch = useAppDispatch();
 
   const [{ handlerId }, dropTarget] = useDrop({
     accept: "selected-ingredient",
     collect: (monitor) => ({
       handlerId: monitor.getHandlerId(),
     }),
-    hover(ingredient, monitor) {
+    hover(ingredient: TMaterial, monitor) {
       if (!ref.current) {
         return;
       }
-      const dIndex = product.index;
+      const dIndex = product!.index;
 
       if (dIndex === index) {
         return;
       }
-      // @ts-ignore
-      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+
+      const hoverBoundingRect = ref.current.getBoundingClientRect();
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 
       const clientOffset = monitor.getClientOffset();
-      // @ts-ignore
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-      if (dIndex < index && hoverClientY < hoverMiddleY) {
+
+      const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
+      if (dIndex! < index && hoverClientY < hoverMiddleY) {
         return;
       }
-      // @ts-ignore
-      moveIngredient(ingredient, index);
-      // @ts-ignore
+
+      moveIngredient && moveIngredient(ingredient, index);
+
       ingredient.index = index;
     },
   });
@@ -75,27 +77,41 @@ const MaterialInCart: FC<TMaterialInCartProps> = ({
   drag(dropTarget(ref));
 
   const handleDelete = () => {
-    dispatch({ type: DELETE_INGREDIENT, payload: product.id });
+    dispatch({ type: DELETE_INGREDIENT, payload: product!.id });
   };
-
-  return (
-    <div
-      ref={ref}
-      data-handler-id={handlerId}
-      onDrop={(e) => e.preventDefault()}
-      className={styles.container}
-    >
-      <DragIcon type="primary" />
-      <ConstructorElement
-        isLocked={false}
-        handleClose={handleDelete}
-        extraClass={String(styles.constructor)}
-        thumbnail={image}
-        text={name}
-        price={price}
-      />
-    </div>
-  );
+  if (!isLocked) {
+    return (
+      <div
+        ref={ref}
+        data-handler-id={handlerId}
+        onDrop={(e) => e.preventDefault()}
+        className={styles.container}
+      >
+        <DragIcon type="primary" />
+        <ConstructorElement
+          isLocked={isLocked}
+          handleClose={handleDelete}
+          extraClass={String(styles.constructor)}
+          thumbnail={image}
+          text={name}
+          price={price}
+        />
+      </div>
+    );
+  } else {
+    return (
+      <div className={styles.container}>
+        <DragIcon type="primary" />
+        <ConstructorElement
+          isLocked={isLocked}
+          extraClass={String(styles.constructor)}
+          thumbnail={image}
+          text={name}
+          price={price}
+        />
+      </div>
+    );
+  }
 };
 
 export default MaterialInCart;

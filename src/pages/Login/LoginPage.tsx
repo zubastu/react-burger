@@ -1,27 +1,30 @@
 import React, { FC, useEffect } from "react";
 import PageContentContainer from "../../components/PageContentContainer/PageContentContainer";
 import LoginForm from "../../components/LoginForm/LoginForm";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { checkAuth } from "../../services/asyncActions/auth";
 import { getCookie } from "../../utils/cookie";
-import { TStore } from "../../types";
+import { TLocationState, TStore } from "../../types";
+import { useAppDispatch, useAppSelector } from "../../utils/constants";
 
 const LoginPage: FC = () => {
-  const { isLogged } = useSelector((store: TStore) => store.login);
-  const dispatch = useDispatch();
+  const { isLogged } = useAppSelector((store: TStore) => store.login);
+  const dispatch = useAppDispatch();
   const history = useHistory();
+  const location = useLocation<TLocationState>();
+  const redirectPathname = location.state?.from.pathname || "/";
 
   useEffect(() => {
     const token = getCookie("refreshToken");
-    !isLogged && token && checkAuth(isLogged)(dispatch);
+    !isLogged && token && dispatch(checkAuth(isLogged));
   }, []);
 
   useEffect(() => {
     if (isLogged) {
-      history.push("/");
+      history.push(redirectPathname);
     }
   }, [isLogged]);
+
   return (
     <PageContentContainer>
       <LoginForm />

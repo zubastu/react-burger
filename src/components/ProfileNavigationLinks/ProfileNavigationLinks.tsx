@@ -2,14 +2,17 @@ import React, { FC } from "react";
 import styles from "./ProfileNavigationLinks.module.css";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { deleteCookie } from "../../utils/cookie";
-import { useDispatch } from "react-redux";
 import { LOGOUT } from "../../services/actions/login";
 import { RESET_USER_INFO } from "../../services/actions/user";
 import { api } from "../../utils/api";
-import { LOGOUT_URL } from "../../utils/constants";
+import { LOGOUT_URL, useAppDispatch } from "../../utils/constants";
 
-const ProfileNavigationLinks: FC = () => {
-  const dispatch = useDispatch();
+type TProfileNavigationLinksProps = {
+  text: string;
+};
+
+const ProfileNavigationLinks: FC<TProfileNavigationLinksProps> = ({ text }) => {
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const { pathname } = location;
   const history = useHistory();
@@ -66,7 +69,7 @@ const ProfileNavigationLinks: FC = () => {
         </li>
       </ul>
       <p className={`${styles.text} text text_type_main-default mt-20`}>
-        В этом разделе вы можете изменить свои персональные данные
+        {text}
       </p>
     </nav>
   );
