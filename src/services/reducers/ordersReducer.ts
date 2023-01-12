@@ -2,8 +2,8 @@ import {
   TWSOrdersActions,
   WS_GET_ORDERS,
   WS_ORDERS_CONNECTION_ERROR,
-  WS_ORDERS_CONNECTION_SUCCESS,
-  WS_ORDERS_CONNECTION_CLOSED,
+  WS_ORDERS_CONNECTION_INIT,
+  WS_ORDERS_CONNECTION_CLOSE,
 } from "../actions/wsOrdersActions";
 import { TWSData } from "../../types";
 
@@ -27,7 +27,7 @@ export const ordersReducer = (
   action: TWSOrdersActions
 ) => {
   switch (action.type) {
-    case WS_ORDERS_CONNECTION_SUCCESS:
+    case WS_ORDERS_CONNECTION_INIT:
       return {
         ...state,
         wsConnected: true,
@@ -37,7 +37,7 @@ export const ordersReducer = (
         ...state,
         wsConnected: false,
       };
-    case WS_ORDERS_CONNECTION_CLOSED:
+    case WS_ORDERS_CONNECTION_CLOSE:
       return {
         ...state,
         wsConnected: false,

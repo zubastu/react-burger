@@ -1,7 +1,7 @@
 import {
-  WS_USER_HISTORY_CONNECTION_CLOSED,
+  WS_USER_HISTORY_CONNECTION_CLOSE,
   WS_USER_HISTORY_CONNECTION_ERROR,
-  WS_USER_HISTORY_CONNECTION_SUCCESS,
+  WS_USER_HISTORY_INIT,
   TWSUserHistoryActions,
   WS_GET_USER_HISTORY_ORDERS,
 } from "../actions/wsUserHistoryActions";
@@ -27,7 +27,7 @@ export const ordersUserReducer = (
   action: TWSUserHistoryActions
 ) => {
   switch (action.type) {
-    case WS_USER_HISTORY_CONNECTION_SUCCESS:
+    case WS_USER_HISTORY_INIT:
       return {
         ...state,
         wsConnected: true,
@@ -37,7 +37,7 @@ export const ordersUserReducer = (
         ...state,
         wsConnected: false,
       };
-    case WS_USER_HISTORY_CONNECTION_CLOSED:
+    case WS_USER_HISTORY_CONNECTION_CLOSE:
       return {
         ...state,
         wsConnected: false,

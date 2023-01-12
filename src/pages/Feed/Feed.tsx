@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import styles from "./Feed.module.css";
 import { useAppDispatch, useAppSelector } from "../../utils/constants";
 import {
-  WS_ORDERS_CONNECTION_CLOSED,
-  WS_ORDERS_CONNECTION_SUCCESS,
+  WS_ORDERS_CONNECTION_CLOSE,
+  WS_ORDERS_CONNECTION_INIT,
 } from "../../services/actions/wsOrdersActions";
 import OrderComponent from "../../components/OrderComponent/OrderComponent";
 import { TOrder } from "../../types";
@@ -15,9 +15,9 @@ const Feed = () => {
   const { data } = useAppSelector((store) => store.orders);
   const location = useLocation();
   useEffect(() => {
-    dispatch({ type: WS_ORDERS_CONNECTION_SUCCESS });
+    dispatch({ type: WS_ORDERS_CONNECTION_INIT });
     return () => {
-      dispatch({ type: WS_ORDERS_CONNECTION_CLOSED });
+      dispatch({ type: WS_ORDERS_CONNECTION_CLOSE });
     };
   }, []);
 

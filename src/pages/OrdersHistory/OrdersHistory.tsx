@@ -5,8 +5,8 @@ import ProfileNavigationLinks from "../../components/ProfileNavigationLinks/Prof
 import Orders from "../../components/Orders/Orders";
 import { useAppDispatch, useAppSelector } from "../../utils/constants";
 import {
-  WS_USER_HISTORY_CONNECTION_SUCCESS,
-  WS_USER_HISTORY_CONNECTION_CLOSED,
+  WS_USER_HISTORY_INIT,
+  WS_USER_HISTORY_CONNECTION_CLOSE,
 } from "../../services/actions/wsUserHistoryActions";
 import PreloaderComponent from "../../components/PreloaderComponent/PreloaderComponent";
 
@@ -14,9 +14,9 @@ const OrdersHistory = () => {
   const dispatch = useAppDispatch();
   const { data } = useAppSelector((store) => store.userOrders);
   useEffect(() => {
-    dispatch({ type: WS_USER_HISTORY_CONNECTION_SUCCESS });
+    dispatch({ type: WS_USER_HISTORY_INIT });
     return () => {
-      dispatch({ type: WS_USER_HISTORY_CONNECTION_CLOSED });
+      dispatch({ type: WS_USER_HISTORY_CONNECTION_CLOSE });
     };
   }, [dispatch]);
   if (data.success) {

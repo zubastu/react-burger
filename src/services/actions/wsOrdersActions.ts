@@ -1,12 +1,12 @@
 import { TWSData } from "../../types";
 
-export const WS_ORDERS_CONNECTION_SUCCESS = "WS_ORDERS_CONNECTION_SUCCESS";
+export const WS_ORDERS_CONNECTION_INIT = "WS_ORDERS_CONNECTION_INIT";
 export const WS_ORDERS_CONNECTION_ERROR = "WS_ORDERS_CONNECTION_ERROR";
-export const WS_ORDERS_CONNECTION_CLOSED = "WS_ORDERS_CONNECTION_CLOSED";
+export const WS_ORDERS_CONNECTION_CLOSE = "WS_ORDERS_CONNECTION_CLOSE";
 export const WS_GET_ORDERS = "WS_GET_ORDERS";
 
 export interface IWSConnectionSuccess {
-  readonly type: typeof WS_ORDERS_CONNECTION_SUCCESS;
+  readonly type: typeof WS_ORDERS_CONNECTION_INIT;
 }
 
 export interface IWSConnectionError {
@@ -14,7 +14,7 @@ export interface IWSConnectionError {
 }
 
 export interface IWSConnectionClosed {
-  readonly type: typeof WS_ORDERS_CONNECTION_CLOSED;
+  readonly type: typeof WS_ORDERS_CONNECTION_CLOSE;
 }
 
 export interface IWSGetOrders {
@@ -29,8 +29,8 @@ export type TWSOrdersActions =
   | IWSGetOrders;
 
 export const WSActionsOrdersAll = {
-  wsInit: WS_ORDERS_CONNECTION_SUCCESS,
-  disconnect: WS_ORDERS_CONNECTION_CLOSED,
+  wsInit: WS_ORDERS_CONNECTION_INIT,
+  disconnect: WS_ORDERS_CONNECTION_CLOSE,
   onError: WS_ORDERS_CONNECTION_ERROR,
   onMessage: WS_GET_ORDERS,
 };
