@@ -34,7 +34,6 @@ export const webSocketMiddleware = (
         action.payload &&
         socketId === action.payload.id
       ) {
-        console.log(`open ${action.payload?.id}`);
         socket = new WebSocket(action.payload.url);
 
         if (socket) {
@@ -55,7 +54,6 @@ export const webSocketMiddleware = (
         socket !== null &&
         socketId === action.payload?.id
       ) {
-        console.log(`close ${action.payload?.id}`);
         socket.close();
       }
 
