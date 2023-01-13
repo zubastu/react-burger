@@ -16,7 +16,7 @@ import PreloaderComponent from "../../components/PreloaderComponent/PreloaderCom
 
 const Feed = () => {
   const dispatch = useAppDispatch();
-  const { data } = useAppSelector((store) => store.orders);
+  const data = useAppSelector((store) => store.orders.data);
   const location = useLocation();
 
   useEffect(() => {

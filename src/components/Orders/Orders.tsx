@@ -5,7 +5,7 @@ import { useAppSelector } from "../../utils/constants";
 import { useLocation, Link } from "react-router-dom";
 
 const Orders = () => {
-  const { data } = useAppSelector((store) => store.userOrders);
+  const { data } = useAppSelector((store) => store.orders);
   const location = useLocation();
 
   return (

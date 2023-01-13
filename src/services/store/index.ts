@@ -12,7 +12,8 @@ const store = configureStore({
   devTools: true,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
-      webSocketMiddleware(WSActionsOrdersAll as WSActions)
+      webSocketMiddleware(WSActionsOrdersAll as WSActions, "feed"),
+      webSocketMiddleware(WSActionsOrdersAll as WSActions, "userHistory")
     ),
 });
 

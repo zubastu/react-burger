@@ -16,15 +16,25 @@ type TWSAction = {
   payload?: { url: string; id: string };
 };
 
-export const webSocketMiddleware = (actions: WSActions): Middleware => {
+export const webSocketMiddleware = (
+  actions: WSActions,
+  socketId: string
+): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, TStore>) => {
     let socket: WebSocket | null = null;
+
     return (next) => (action: TWSAction) => {
       const { dispatch } = store;
 
       const { wsInit, disconnect, onError, onMessage } = actions;
 
-      if (action.type === wsInit && socket === null && action.payload) {
+      if (
+        action.type === wsInit &&
+        socket === null &&
+        action.payload &&
+        socketId === action.payload.id
+      ) {
+        console.log(`open ${action.payload?.id}`);
         socket = new WebSocket(action.payload.url);
 
         if (socket) {
@@ -40,7 +50,12 @@ export const webSocketMiddleware = (actions: WSActions): Middleware => {
             socket = null;
           };
         }
-      } else if (action.type === disconnect && socket != null) {
+      } else if (
+        action.type === disconnect &&
+        socket !== null &&
+        socketId === action.payload?.id
+      ) {
+        console.log(`close ${action.payload?.id}`);
         socket.close();
       }
 
