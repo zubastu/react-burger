@@ -1,6 +1,5 @@
 import type { Middleware, MiddlewareAPI } from "redux";
 import type { TStore } from "../../types";
-import { getCookie } from "../../utils/cookie";
 import { store } from "../store";
 
 type AppDispatch = typeof store.dispatch;
@@ -17,26 +16,19 @@ type TWSAction = {
   payload?: string;
 };
 
-export const webSocketMiddleware = (
-  url: string,
-  actions: WSActions,
-  withToken: boolean
-): Middleware => {
+export const webSocketMiddleware = (actions: WSActions): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, TStore>) => {
     let socket: WebSocket | null = null;
     return (next) => (action: TWSAction) => {
       const { dispatch } = store;
+
       const { wsInit, disconnect, onError, onMessage } = actions;
 
-      if (action.type === wsInit && socket === null) {
-        socket = withToken
-          ? (socket = new WebSocket(
-              `${url}?token=${getCookie("accessToken")?.split("Bearer ")[1]}`
-            ))
-          : new WebSocket(url);
+      if (action.type === wsInit && socket === null && action.payload) {
+        socket = new WebSocket(action.payload);
 
         if (socket) {
-          socket.onerror = (event) => {
+          socket.onerror = () => {
             dispatch({ type: onError });
           };
 
@@ -44,7 +36,7 @@ export const webSocketMiddleware = (
             dispatch({ type: onMessage, payload: JSON.parse(event.data) });
           };
 
-          socket.onclose = (event) => {
+          socket.onclose = () => {
             socket = null;
           };
         }

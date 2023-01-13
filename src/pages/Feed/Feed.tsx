@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import styles from "./Feed.module.css";
-import { useAppDispatch, useAppSelector } from "../../utils/constants";
+import {
+  useAppDispatch,
+  useAppSelector,
+  WS_URL_ORDERS_ALL,
+} from "../../utils/constants";
 import {
   WS_ORDERS_CONNECTION_CLOSE,
   WS_ORDERS_CONNECTION_INIT,
@@ -14,12 +18,13 @@ const Feed = () => {
   const dispatch = useAppDispatch();
   const { data } = useAppSelector((store) => store.orders);
   const location = useLocation();
+
   useEffect(() => {
-    dispatch({ type: WS_ORDERS_CONNECTION_INIT });
+    dispatch({ type: WS_ORDERS_CONNECTION_INIT, payload: WS_URL_ORDERS_ALL });
     return () => {
       dispatch({ type: WS_ORDERS_CONNECTION_CLOSE });
     };
-  }, []);
+  }, [dispatch]);
 
   const getOrderNumbers = (orders: TOrder[]) => {
     const completedOrders: number[] = [];
