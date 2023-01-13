@@ -20,9 +20,12 @@ const Feed = () => {
   const location = useLocation();
 
   useEffect(() => {
-    dispatch({ type: WS_ORDERS_CONNECTION_INIT, payload: WS_URL_ORDERS_ALL });
+    dispatch({
+      type: WS_ORDERS_CONNECTION_INIT,
+      payload: { url: WS_URL_ORDERS_ALL, id: "feed" },
+    });
     return () => {
-      dispatch({ type: WS_ORDERS_CONNECTION_CLOSE });
+      dispatch({ type: WS_ORDERS_CONNECTION_CLOSE, payload: { id: "feed" } });
     };
   }, [dispatch]);
 

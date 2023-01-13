@@ -13,7 +13,7 @@ export type WSActions = {
 
 type TWSAction = {
   type: string;
-  payload?: string;
+  payload?: { url: string; id: string };
 };
 
 export const webSocketMiddleware = (actions: WSActions): Middleware => {
@@ -25,7 +25,7 @@ export const webSocketMiddleware = (actions: WSActions): Middleware => {
       const { wsInit, disconnect, onError, onMessage } = actions;
 
       if (action.type === wsInit && socket === null && action.payload) {
-        socket = new WebSocket(action.payload);
+        socket = new WebSocket(action.payload.url);
 
         if (socket) {
           socket.onerror = () => {

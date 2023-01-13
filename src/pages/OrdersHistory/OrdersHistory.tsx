@@ -8,25 +8,33 @@ import {
   useAppSelector,
   WS_URL_ORDERS_USER_HISTORY,
 } from "../../utils/constants";
-import {
-  WS_USER_HISTORY_INIT,
-  WS_USER_HISTORY_CONNECTION_CLOSE,
-} from "../../services/actions/wsUserHistoryActions";
+
 import PreloaderComponent from "../../components/PreloaderComponent/PreloaderComponent";
 import { getCookie } from "../../utils/cookie";
+import {
+  WS_ORDERS_CONNECTION_CLOSE,
+  WS_ORDERS_CONNECTION_INIT,
+} from "../../services/actions/wsOrdersActions";
 
 const OrdersHistory = () => {
   const dispatch = useAppDispatch();
-  const { data } = useAppSelector((store) => store.userOrders);
+  const { data } = useAppSelector((store) => store.orders);
+
   useEffect(() => {
     dispatch({
-      type: WS_USER_HISTORY_INIT,
-      payload: `${WS_URL_ORDERS_USER_HISTORY}?token=${
-        getCookie("accessToken")?.split("Bearer ")[1]
-      }`,
+      type: WS_ORDERS_CONNECTION_INIT,
+      payload: {
+        url: `${WS_URL_ORDERS_USER_HISTORY}?token=${
+          getCookie("accessToken")?.split("Bearer ")[1]
+        }`,
+        id: "userHistory",
+      },
     });
     return () => {
-      dispatch({ type: WS_USER_HISTORY_CONNECTION_CLOSE });
+      dispatch({
+        type: WS_ORDERS_CONNECTION_CLOSE,
+        payload: { id: "userHistory" },
+      });
     };
   }, [dispatch]);
   if (data.success) {
