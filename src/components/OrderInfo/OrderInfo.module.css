@@ -6,6 +6,7 @@
 }
 .orderNameContainer {
     display: flex;
+    align-items: center;
 }
 .orderName {
     text-align: start;
