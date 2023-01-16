@@ -13,7 +13,7 @@ const ForgetPasswordPage: FC = () => {
     if (hasRequest) {
       history.push("/reset-password");
     }
-  }, [hasRequest]);
+  }, [hasRequest, history]);
 
   return (
     <PageContentContainer>

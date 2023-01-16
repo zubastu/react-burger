@@ -28,7 +28,7 @@ const ForgotPassForm: FC = () => {
     if (isLogged) {
       history.push("/profile");
     }
-  }, [isLogged]);
+  }, [isLogged, history]);
 
   return (
     <form noValidate onSubmit={handleSubmit} className={styles.form}>

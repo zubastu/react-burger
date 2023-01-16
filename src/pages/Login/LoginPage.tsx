@@ -17,13 +17,13 @@ const LoginPage: FC = () => {
   useEffect(() => {
     const token = getCookie("refreshToken");
     !isLogged && token && dispatch(checkAuth(isLogged));
-  }, []);
+  }, [dispatch, isLogged]);
 
   useEffect(() => {
     if (isLogged) {
       history.push(redirectPathname);
     }
-  }, [isLogged]);
+  }, [isLogged, history, redirectPathname]);
 
   return (
     <PageContentContainer>

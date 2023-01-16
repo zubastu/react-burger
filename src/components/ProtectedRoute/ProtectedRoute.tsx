@@ -12,7 +12,7 @@ const ProtectedRoute: FC<TProtectedRouteProps> = ({ children, ...rest }) => {
 
   useEffect(() => {
     dispatch(checkAuth());
-  }, [isLogged]);
+  }, [isLogged, dispatch]);
   return (
     <Route
       {...rest}

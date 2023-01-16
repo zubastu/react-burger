@@ -22,7 +22,7 @@ const ProfileForm: FC = () => {
 
   useEffect(() => {
     setValues({ name, email });
-  }, [name, email]);
+  }, [name, email, setValues]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

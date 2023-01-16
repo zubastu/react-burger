@@ -31,7 +31,7 @@ const RestorePassForm: FC = () => {
     } else if (isLogged) {
       history.push("/profile");
     }
-  }, [hasRequest, isLogged]);
+  }, [hasRequest, isLogged, history]);
 
   return (
     <form noValidate onSubmit={handleSubmit} className={styles.form}>

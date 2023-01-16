@@ -17,7 +17,7 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(checkAuth());
-  }, [isLogged]);
+  }, [isLogged, dispatch]);
 
   return (
     <div className={styles.app}>

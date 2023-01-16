@@ -18,17 +18,17 @@ const RegisterPage: FC = () => {
       history.push("/login");
       dispatch({ type: RESET_REGISTRATION });
     }
-  }, [hasRequest]);
+  }, [hasRequest, dispatch, history]);
 
   useEffect(() => {
     !isLogged && dispatch(checkAuth(isLogged));
-  }, []);
+  }, [isLogged, dispatch]);
 
   useEffect(() => {
     if (isLogged) {
       history.push("/");
     }
-  }, [isLogged]);
+  }, [isLogged, history]);
   return (
     <PageContentContainer>
       <RegistrationForm />
