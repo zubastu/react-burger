@@ -13,7 +13,7 @@ export type TUserInfoReducer = {
   user: TUser;
 };
 
-const initialState: TUserInfoReducer = {
+export const initialState: TUserInfoReducer = {
   isRequest: false,
   isError: false,
   user: {

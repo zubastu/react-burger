@@ -8,7 +8,7 @@ export type TPreloaderReducer = {
   isPreloaderActive: boolean;
 };
 
-const initialState: TPreloaderReducer = {
+export const initialState: TPreloaderReducer = {
   isPreloaderActive: false,
 };
 

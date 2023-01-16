@@ -12,7 +12,7 @@ export type TRegistrationReducer = {
   hasRequest: boolean;
 };
 
-const initialState: TRegistrationReducer = {
+export const initialState: TRegistrationReducer = {
   isRequest: false,
   isError: false,
   hasRequest: false,
