@@ -18,3 +18,7 @@
 ### `React` + `Type Script` `CSS Modules` `Redux`
 
 [Ссылка](https://zubastu.github.io/react-burger/#/) на рабочий прототип.
+
+## Тестировние проекта: 
+
+### `Jest`, `Cypress`
