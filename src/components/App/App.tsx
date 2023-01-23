@@ -4,12 +4,11 @@ import styles from "./App.module.css";
 import { fetchIngredients } from "../../services/asyncActions/ingredients";
 import ModalSwitch from "../ModalSwitch/ModalSwitch";
 import { checkAuth } from "../../services/asyncActions/auth";
-import { TStore } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../utils/constants";
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
-  const { isLogged } = useAppSelector((store: TStore) => store.login);
+  const { isLogged } = useAppSelector((store) => store.login);
 
   useEffect(() => {
     dispatch(fetchIngredients());

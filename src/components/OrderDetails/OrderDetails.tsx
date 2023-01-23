@@ -2,11 +2,10 @@ import React, { FC } from "react";
 import styles from "./OrderDetails.module.css";
 import successImage from "../../images/done.svg";
 import errorImage from "../../images/error.svg";
-import { TStore } from "../../types";
 import { useAppSelector } from "../../utils/constants";
 
 const OrderDetails: FC = () => {
-  const { orderDetails } = useAppSelector((store: TStore) => store.order);
+  const { orderDetails } = useAppSelector((store) => store.order);
   const { name, order, success } = orderDetails;
   const { number } = order;
   return (

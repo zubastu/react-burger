@@ -4,13 +4,12 @@ import RegistrationForm from "../../components/RegistrationForm/RegistrationForm
 import { useHistory } from "react-router-dom";
 import { checkAuth } from "../../services/asyncActions/auth";
 import { RESET_REGISTRATION } from "../../services/actions/register";
-import { TStore } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../utils/constants";
 
 const RegisterPage: FC = () => {
   const dispatch = useAppDispatch();
-  const { isLogged } = useAppSelector((store: TStore) => store.login);
-  const { hasRequest } = useAppSelector((store: TStore) => store.register);
+  const { isLogged } = useAppSelector((store) => store.login);
+  const { hasRequest } = useAppSelector((store) => store.register);
   const history = useHistory();
 
   useEffect(() => {

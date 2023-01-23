@@ -7,7 +7,7 @@ import {
 import { useDrag } from "react-dnd";
 import { OPEN_INGREDIENT_DETAILS } from "../../services/actions/ingredients";
 import { Link, useLocation } from "react-router-dom";
-import { TIngredient, TStore } from "../../types";
+import { TIngredient } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../utils/constants";
 
 type TMaterialItemProps = {
@@ -18,7 +18,7 @@ const MaterialItem: FC<TMaterialItemProps> = ({ material }) => {
   const { name, image, price } = material;
   const dispatch = useAppDispatch();
   const { selectedIngredients, selectedBun } = useAppSelector(
-    (store: TStore) => store.ingredients
+    (store) => store.ingredients
   );
   const location = useLocation();
 

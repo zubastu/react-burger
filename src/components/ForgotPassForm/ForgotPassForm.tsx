@@ -9,7 +9,6 @@ import FormNavigationElement from "../FormNavigationElement/FormNavigationElemen
 import { useForm } from "../../hooks/useForm";
 import { useHistory } from "react-router-dom";
 import { restorePassword } from "../../services/asyncActions/restorePassword";
-import { TStore } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../utils/constants";
 
 const ForgotPassForm: FC = () => {
@@ -17,7 +16,7 @@ const ForgotPassForm: FC = () => {
   const { values, handleChange, isValid } = useForm({ email: "" });
 
   const history = useHistory();
-  const { isLogged } = useAppSelector((store: TStore) => store.login);
+  const { isLogged } = useAppSelector((store) => store.login);
 
   const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();

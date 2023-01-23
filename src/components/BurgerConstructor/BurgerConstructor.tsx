@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { TConstructorIngredient, TIngredient, TStore } from "../../types";
+import { TConstructorIngredient, TIngredient } from "../../types";
 
 import styles from "./BurgerConstructor.module.css";
 import {
@@ -17,11 +17,11 @@ import { useAppDispatch, useAppSelector } from "../../utils/constants";
 const BurgerConstructor = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
-  const { isRequest } = useAppSelector((store: TStore) => store.order);
+  const { isRequest } = useAppSelector((store) => store.order);
   const { selectedIngredients, selectedBun } = useAppSelector(
-    (store: TStore) => store.ingredients
+    (store) => store.ingredients
   );
-  const { isLogged } = useAppSelector((store: TStore) => store.login);
+  const { isLogged } = useAppSelector((store) => store.login);
 
   const addIngredient = (
     ingredient: TIngredient | TConstructorIngredient

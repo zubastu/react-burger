@@ -10,15 +10,14 @@ import FormNavigationElement from "../FormNavigationElement/FormNavigationElemen
 import { useForm } from "../../hooks/useForm";
 import { useHistory } from "react-router-dom";
 import { resetPasswordPost } from "../../services/asyncActions/resetPass";
-import { TStore } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../utils/constants";
 
 const RestorePassForm: FC = () => {
   const dispatch = useAppDispatch();
   const { values, handleChange, isValid } = useForm({ token: "" });
-  const { hasRequest } = useAppSelector((store: TStore) => store.resetPassword);
+  const { hasRequest } = useAppSelector((store) => store.resetPassword);
   const history = useHistory();
-  const { isLogged } = useAppSelector((store: TStore) => store.login);
+  const { isLogged } = useAppSelector((store) => store.login);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

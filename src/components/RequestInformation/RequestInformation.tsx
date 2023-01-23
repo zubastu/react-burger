@@ -2,12 +2,11 @@ import React, { FC } from "react";
 import styles from "./RequestInformation.module.css";
 import successImage from "../../images/done.svg";
 import errorImage from "../../images/error.svg";
-import { TStore } from "../../types";
 import { useAppSelector } from "../../utils/constants";
 
 const RequestInformation: FC = () => {
   const { isError, textInfo = "testTextInfo" } = useAppSelector(
-    (store: TStore) => store.request
+    (store) => store.request
   );
   const image = isError ? errorImage : successImage;
 

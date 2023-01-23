@@ -1,7 +1,6 @@
 import styles from "./IngredientDetails.module.css";
 import React, { FC } from "react";
 import { useParams } from "react-router-dom";
-import { TStore } from "../../types";
 import { useAppSelector } from "../../utils/constants";
 
 type TIngredientDetailsProps = {
@@ -14,7 +13,7 @@ interface IIngredientDetailsParams {
 const IngredientDetails: FC<TIngredientDetailsProps> = ({ hasHeading }) => {
   const { ingredientId } = useParams<IIngredientDetailsParams>();
 
-  const { ingredients } = useAppSelector((store: TStore) => store.ingredients);
+  const { ingredients } = useAppSelector((store) => store.ingredients);
   const ingredient = ingredients.find(({ _id }) => ingredientId === _id);
 
   return (
