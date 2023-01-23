@@ -135,7 +135,7 @@ const ModalSwitch = () => {
             </Modal>
           </Route>
 
-          <Route exact path="/profile/orders/:orderNumber">
+          <ProtectedRoute path="/profile/orders/:orderNumber">
             <Modal
               container={container}
               onClose={() => history.goBack()}
@@ -144,7 +144,7 @@ const ModalSwitch = () => {
             >
               <OrderInfo isModal={true} />
             </Modal>
-          </Route>
+          </ProtectedRoute>
         </Switch>
       ) : null}
 

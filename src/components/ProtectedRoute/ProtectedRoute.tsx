@@ -8,11 +8,12 @@ type TProtectedRouteProps = RouteProps & { children?: TChildrenNode };
 
 const ProtectedRoute: FC<TProtectedRouteProps> = ({ children, ...rest }) => {
   const { isLogged } = useAppSelector((store: TStore) => store.login);
-  const dispatch = useAppDispatch();
 
+  const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(checkAuth());
   }, [isLogged, dispatch]);
+
   return (
     <Route
       {...rest}
