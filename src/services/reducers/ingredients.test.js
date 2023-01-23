@@ -12,6 +12,20 @@ import {
 } from "../actions/ingredients";
 
 import { initialState, ingredientsReducer as reducer } from "./ingredients";
+const ingredient = {
+  _id: "",
+  name: "",
+  type: "",
+  proteins: 0,
+  fat: 0,
+  carbohydrates: 0,
+  calories: 0,
+  price: 0,
+  image: "",
+  image_mobile: "",
+  image_large: "",
+  __v: 0,
+};
 
 describe("Тест Редьюсера ingredients", () => {
   it("should ERROR_INGREDIENTS_FETCH", () => {
@@ -72,20 +86,7 @@ describe("Тест Редьюсера ingredients", () => {
     expect(reducer(initialState, { type: CLOSE_INGREDIENT_DETAILS })).toEqual({
       ...initialState,
       isModalIngredientOpen: false,
-      selectedIngredient: {
-        _id: "",
-        name: "",
-        type: "",
-        proteins: 0,
-        fat: 0,
-        carbohydrates: 0,
-        calories: 0,
-        price: 0,
-        image: "",
-        image_mobile: "",
-        image_large: "",
-        __v: 0,
-      },
+      selectedIngredient: ingredient,
     });
   });
 
@@ -131,21 +132,7 @@ describe("Тест Редьюсера ingredients", () => {
     expect(reducer(initialState, { type: RESET_INGREDIENTS })).toEqual({
       ...initialState,
       selectedIngredients: [],
-      selectedBun: {
-        _id: "",
-        id: "",
-        name: "",
-        type: "",
-        proteins: 0,
-        fat: 0,
-        carbohydrates: 0,
-        calories: 0,
-        price: 0,
-        image: "",
-        image_mobile: "",
-        image_large: "",
-        __v: 0,
-      },
+      selectedBun: { ...ingredient, id: "" },
     });
   });
 });
