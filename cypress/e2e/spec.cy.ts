@@ -2,20 +2,20 @@
 describe("service is available", () => {
   it("should be available on localhost:3000", () => {
     cy.viewport(1440, 842);
-    cy.visit("http://localhost:3000");
+    cy.visit("/");
   });
 });
 describe("Burger Constructor and login works", () => {
   it("Open ingredient modal, close by escape", () => {
     cy.viewport(1440, 842);
-    cy.visit("http://localhost:3000");
+    cy.visit("/");
     cy.get("p").contains("Краторная булка N-200i").click({ force: true });
     cy.get("body").type("{esc}");
   });
 
   it("should login, create order", () => {
     cy.viewport(1440, 842);
-    cy.visit("http://localhost:3000/login");
+    cy.visit("/login");
     cy.get('input[name="email"]').type("testtest@test.test");
     cy.get('input[name="password"]').type("testtest");
     cy.get("button").contains("Войти").click();
