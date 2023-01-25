@@ -12,7 +12,7 @@ export type TOrdersReducer = {
   data: TWSData;
 };
 
-const initialState: TOrdersReducer = {
+export const initialState: TOrdersReducer = {
   wsConnected: false,
   data: {
     success: false,

@@ -12,7 +12,6 @@ import { TRequestInformationActions } from "../services/actions/requestInformati
 import { TRestorePasswordActions } from "../services/actions/restore-pass";
 import { TUserActions } from "../services/actions/user";
 import { TWSOrdersActions } from "../services/actions/wsOrdersActions";
-import { TWSUserHistoryActions } from "../services/actions/wsUserHistoryActions";
 
 export type TModalState = {
   background?: H.Location;
@@ -105,8 +104,7 @@ export type TApplicationActions =
   | TRequestInformationActions
   | TRestorePasswordActions
   | TUserActions
-  | TWSOrdersActions
-  | TWSUserHistoryActions;
+  | TWSOrdersActions;
 
 export type TErrorData = {
   success: boolean;

@@ -14,7 +14,7 @@ type TLoginReducer = {
   isLogged: boolean;
 };
 
-const initialState: TLoginReducer = {
+export const initialState: TLoginReducer = {
   isRequest: false,
   isError: false,
   isLogged: false,

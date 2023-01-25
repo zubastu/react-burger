@@ -11,7 +11,7 @@ export type TRequestInformationReducer = {
   textInfo: string;
 };
 
-const initialState: TRequestInformationReducer = {
+export const initialState: TRequestInformationReducer = {
   isOpened: false,
   isError: false,
   textInfo: "",

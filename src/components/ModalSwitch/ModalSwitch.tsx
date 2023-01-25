@@ -22,7 +22,7 @@ import AppHeader from "../AppHeader/AppHeader";
 import RequestInformation from "../RequestInformation/RequestInformation";
 import { CLOSE_REQUEST_INFO } from "../../services/actions/requestInformation";
 import Preloader from "../Preloader/Preloader";
-import { TStore, TModalState } from "../../types";
+import { TModalState } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../utils/constants";
 import OrderInfo from "../OrderInfo/OrderInfo";
 import PageContentContainer from "../PageContentContainer/PageContentContainer";
@@ -34,11 +34,9 @@ const ModalSwitch = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
 
-  const { isOpenOrderModal } = useAppSelector((store: TStore) => store.order);
-  const { isOpened } = useAppSelector((store: TStore) => store.request);
-  const { isPreloaderActive } = useAppSelector(
-    (store: TStore) => store.preloader
-  );
+  const { isOpenOrderModal } = useAppSelector((store) => store.order);
+  const { isOpened } = useAppSelector((store) => store.request);
+  const { isPreloaderActive } = useAppSelector((store) => store.preloader);
   const { currentOrder } = useAppSelector((store) => store.order);
 
   const closeOrderModal = (): void => {
@@ -135,7 +133,7 @@ const ModalSwitch = () => {
             </Modal>
           </Route>
 
-          <Route exact path="/profile/orders/:orderNumber">
+          <ProtectedRoute path="/profile/orders/:orderNumber">
             <Modal
               container={container}
               onClose={() => history.goBack()}
@@ -144,7 +142,7 @@ const ModalSwitch = () => {
             >
               <OrderInfo isModal={true} />
             </Modal>
-          </Route>
+          </ProtectedRoute>
         </Switch>
       ) : null}
 

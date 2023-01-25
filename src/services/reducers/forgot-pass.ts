@@ -10,7 +10,7 @@ type TForgetPasswordReducer = {
   isError: boolean;
 };
 
-const initialState: TForgetPasswordReducer = {
+export const initialState: TForgetPasswordReducer = {
   isRequest: false,
   isError: false,
 };

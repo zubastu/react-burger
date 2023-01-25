@@ -27,7 +27,7 @@ type TIngredientsReducer = {
   selectedBun: TConstructorIngredient;
 };
 
-const initialState: TIngredientsReducer = {
+export const initialState: TIngredientsReducer = {
   ingredients: [],
   bun: [],
   sauces: [],

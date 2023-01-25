@@ -8,7 +8,6 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useForm } from "../../hooks/useForm";
 import { changeUserInfo } from "../../services/asyncActions/user";
-import { TStore } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../utils/constants";
 
 const ProfileForm: FC = () => {
@@ -18,11 +17,11 @@ const ProfileForm: FC = () => {
     email: "",
     password: "",
   });
-  const { name, email } = useAppSelector((store: TStore) => store.user.user);
+  const { name, email } = useAppSelector((store) => store.user.user);
 
   useEffect(() => {
     setValues({ name, email });
-  }, [name, email]);
+  }, [name, email, setValues]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

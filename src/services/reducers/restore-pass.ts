@@ -12,7 +12,7 @@ export type TRestorePasswordReducer = {
   hasRequest: boolean;
 };
 
-const initialState: TRestorePasswordReducer = {
+export const initialState: TRestorePasswordReducer = {
   isRequest: false,
   isError: false,
   hasRequest: false,

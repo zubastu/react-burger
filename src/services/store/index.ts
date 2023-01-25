@@ -5,7 +5,6 @@ import {
   WSActions,
 } from "../middlewares/webSocketMiddleware";
 
-import { WSActionsOrdersUserHistory } from "../actions/wsUserHistoryActions";
 import { WSActionsOrdersAll } from "../actions/wsOrdersActions";
 
 const store = configureStore({
@@ -13,8 +12,8 @@ const store = configureStore({
   devTools: true,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
-      webSocketMiddleware(WSActionsOrdersAll as WSActions),
-      webSocketMiddleware(WSActionsOrdersUserHistory as WSActions)
+      webSocketMiddleware(WSActionsOrdersAll as WSActions, "feed"),
+      webSocketMiddleware(WSActionsOrdersAll as WSActions, "userHistory")
     ),
 });
 

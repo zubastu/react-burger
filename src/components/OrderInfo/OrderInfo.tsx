@@ -20,7 +20,7 @@ const OrderInfo: FC<TOrderInfoProps> = ({ isModal = false }) => {
   const { orderNumber } = useParams<{ orderNumber: string }>();
   useEffect(() => {
     dispatch(getCurrentOrder(orderNumber));
-  }, [dispatch]);
+  }, [dispatch, orderNumber]);
 
   const orderIds = currentOrder.orders[0].ingredients;
   const orderName = currentOrder.orders[0].name;

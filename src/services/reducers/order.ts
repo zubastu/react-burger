@@ -18,7 +18,7 @@ type TOrderReducerState = {
   currentOrder: TCurrentOrderResponse;
 };
 
-const initialState: TOrderReducerState = {
+export const initialState: TOrderReducerState = {
   isRequest: false,
   isRequestError: false,
   isOpenOrderModal: false,

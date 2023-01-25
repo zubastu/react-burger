@@ -11,7 +11,7 @@ export type TRefreshTokenReducer = {
   isError: boolean;
 };
 
-const initialState: TRefreshTokenReducer = {
+export const initialState: TRefreshTokenReducer = {
   isRequest: false,
   isError: false,
 };

@@ -4,12 +4,12 @@ import emptyIngredientImage from "../../images/emptyIngredient.svg";
 import MaterialInCart from "../MaterialInCart/MaterialInCart";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { UPDATE_INGREDIENTS } from "../../services/actions/ingredients";
-import { TConstructorIngredient, TStore } from "../../types";
+import { TConstructorIngredient } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../utils/constants";
 
 const SelectedIngredients: FC = () => {
   const { selectedIngredients, selectedBun } = useAppSelector(
-    (store: TStore) => store.ingredients
+    (store) => store.ingredients
   );
   const dispatch = useAppDispatch();
 
