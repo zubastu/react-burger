@@ -30,7 +30,7 @@ const AppHeader: FC = () => {
             />
           </NavigationLink>
         </div>
-        <Link to="/" className={styles.nav__item}>
+        <Link to="/" className={styles.nav__item} data-testid="logo">
           <Logo />
         </Link>
         {isLogged ? (
