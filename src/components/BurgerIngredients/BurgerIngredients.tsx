@@ -24,7 +24,7 @@ const BurgerIngredients = () => {
     <section className={`${styles.container} `}>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
 
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex" }} data-testid="tabs">
         <Tab
           value="one"
           active={observerBun.intersecting}

@@ -12,7 +12,13 @@ const ModalHeader: FC<TModalHeaderProps> = ({ onClose, text = null }) => {
   return (
     <div className={styles.header}>
       <h2 className="text text_type_main-large">{text}</h2>
-      <CloseIcon type="primary" onClick={() => onClose()} />
+      <button
+        className={styles.button}
+        onClick={() => onClose()}
+        data-testid="close"
+      >
+        <CloseIcon type="primary" />
+      </button>
     </div>
   );
 };
