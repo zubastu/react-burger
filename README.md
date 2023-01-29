@@ -17,7 +17,7 @@
 
 ### `React` + `Type Script` `CSS Modules` `Redux`
 
-[Ссылка](https://zubastu.github.io/react-burger/#/) на рабочий прототип.
+[Ссылка](https://ilya-makhin.ru/) на рабочий прототип.
 
 ## Тестировние проекта: 
 

@@ -30,10 +30,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy-gh": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress:open": "cypress open cache clear"
+    "cypress:open": "cypress open cache clear",
+    "deploy-vm": "npm run build && scp -r ./build/* zubastu:/var/www/ilya-makhin.ru/"
   },
   "eslintConfig": {
     "extends": [
