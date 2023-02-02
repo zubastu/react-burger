@@ -34,7 +34,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cypress:open": "cypress open cache clear",
-    "deploy-vm": "npm run build && scp -r ./build/* zubastu:/var/www/ilya-makhin.ru/"
+    "deploy-vm": "npm run build && scp -r ./build/* zubastu:/var/www/burger/"
   },
   "eslintConfig": {
     "extends": [

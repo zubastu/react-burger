@@ -11,6 +11,7 @@ import NavigationLink from "../NavigationLink/NavigationLink";
 import { Link, useLocation } from "react-router-dom";
 import { TIsLogged, TPathnameString } from "../../types";
 import { useAppSelector } from "../../utils/constants";
+import logoSmall from "../../images/logoSmall.svg";
 
 const AppHeader: FC = () => {
   const location = useLocation();
@@ -30,7 +31,7 @@ const AppHeader: FC = () => {
             />
           </NavigationLink>
         </div>
-        <Link to="/" className={styles.nav__item} data-testid="logo">
+        <Link to="/" className={styles.nav__itemCenter} data-testid="logo">
           <Logo />
         </Link>
         {isLogged ? (
@@ -54,6 +55,17 @@ const AppHeader: FC = () => {
             </NavigationLink>
           </div>
         )}
+      </nav>
+
+      <nav className={styles.nav_small}>
+        <Link to="/" className={styles.nav_small__item} data-testid="logo">
+          <img
+            className={styles.headerLogoImage}
+            src={logoSmall}
+            alt="Логотип"
+          />
+        </Link>
+        <button className={styles.headerModalButton}></button>
       </nav>
     </header>
   );
