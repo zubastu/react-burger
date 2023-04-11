@@ -41,3 +41,34 @@
     text-decoration: none;
     color: inherit;
 }
+.addIngredientButton {
+    display: none;
+    background: inherit;
+    border: none;
+    color: #4C4CFF;
+}
+@media screen and (max-width: 1150px) {
+    .material {
+        max-height: 230px;
+    }
+    .addIngredientButton{
+        display: block;
+        padding: 15px;
+    }
+}
+@media screen and (max-width: 610px) {
+
+}
+
+@media screen and (max-width: 470px) {
+
+}
+
+@media screen and (max-width: 320px) {
+    .material{
+        max-width: 144px;
+    }
+    .materialImage{
+        max-height: 72px;
+    }
+}

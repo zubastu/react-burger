@@ -10,13 +10,20 @@ import {
 import NavigationLink from "../NavigationLink/NavigationLink";
 import { Link, useLocation } from "react-router-dom";
 import { TIsLogged, TPathnameString } from "../../types";
-import { useAppSelector } from "../../utils/constants";
+import { useAppSelector, useAppDispatch } from "../../utils/constants";
 import logoSmall from "../../images/logoSmall.svg";
+import { MOBILE_MODAL_OPEN } from "../../services/actions/mobileNavigationModal";
 
 const AppHeader: FC = () => {
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const { pathname }: TPathnameString = location;
   const { isLogged }: TIsLogged = useAppSelector((store) => store.login);
+
+  const openMobileModal = () => {
+    dispatch({ type: MOBILE_MODAL_OPEN });
+  };
+
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -65,7 +72,10 @@ const AppHeader: FC = () => {
             alt="Логотип"
           />
         </Link>
-        <button className={styles.headerModalButton}></button>
+        <button
+          className={styles.headerModalButton}
+          onClick={openMobileModal}
+        ></button>
       </nav>
     </header>
   );

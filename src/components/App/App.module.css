@@ -9,6 +9,7 @@
   box-sizing: border-box;
   height: 100vh;
   min-width: 320px;
+  width: 100%;
 }
 
 @media screen and (max-width: 1150px) {

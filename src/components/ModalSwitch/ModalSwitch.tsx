@@ -26,6 +26,8 @@ import { TModalState } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../utils/constants";
 import OrderInfo from "../OrderInfo/OrderInfo";
 import PageContentContainer from "../PageContentContainer/PageContentContainer";
+import NavigationPopup from "../NavigationModal/NavigationPopup";
+import { MOBILE_MODAL_CLOSE } from "../../services/actions/mobileNavigationModal";
 
 const container = document.getElementById("react-modals") as HTMLElement;
 
@@ -38,6 +40,7 @@ const ModalSwitch = () => {
   const { isOpened } = useAppSelector((store) => store.request);
   const { isPreloaderActive } = useAppSelector((store) => store.preloader);
   const { currentOrder } = useAppSelector((store) => store.order);
+  const { isMobileModalOpen } = useAppSelector((store) => store.mobileModal);
 
   const closeOrderModal = (): void => {
     dispatch({ type: CLOSE_ORDER_MODAL });
@@ -50,6 +53,10 @@ const ModalSwitch = () => {
 
   const closeRequestModal = (): void => {
     dispatch({ type: CLOSE_REQUEST_INFO });
+  };
+
+  const closeMobileModal = (): void => {
+    dispatch({ type: MOBILE_MODAL_CLOSE });
   };
 
   const state = location.state as TModalState;
@@ -155,6 +162,11 @@ const ModalSwitch = () => {
           <OrderDetails />
         </Modal>
       ) : null}
+
+      <NavigationPopup
+        menuActive={isMobileModalOpen}
+        closeMobileModal={closeMobileModal}
+      />
 
       {isOpened ? (
         <Modal

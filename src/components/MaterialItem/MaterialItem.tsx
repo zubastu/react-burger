@@ -5,7 +5,11 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
-import { OPEN_INGREDIENT_DETAILS } from "../../services/actions/ingredients";
+import {
+  ADD_INGREDIENT,
+  OPEN_INGREDIENT_DETAILS,
+  SELECT_BUN,
+} from "../../services/actions/ingredients";
 import { Link, useLocation } from "react-router-dom";
 import { TIngredient } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../utils/constants";
@@ -45,6 +49,21 @@ const MaterialItem: FC<TMaterialItemProps> = ({ material }) => {
     return materialsArr.length;
   };
 
+  const addIngredient = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    if (material.type === "bun") {
+      dispatch({
+        type: SELECT_BUN,
+        payload: material,
+      });
+    } else {
+      dispatch({
+        type: ADD_INGREDIENT,
+        payload: material,
+      });
+    }
+  };
+
   return (
     <Link
       className={styles.link}
@@ -61,7 +80,13 @@ const MaterialItem: FC<TMaterialItemProps> = ({ material }) => {
             extraClass={styles.material__counter}
           />
         )}
-        <img src={image} alt={name} ref={dragPreviewRef} />
+        <img
+          className={styles.materialImage}
+          src={image}
+          alt={name}
+          ref={dragPreviewRef}
+        />
+
         <div className={`${styles.material__price} mt-1 mb-1`}>
           <p className="text text_type_digits-default">{price}</p>
           <CurrencyIcon type="primary" />
@@ -70,6 +95,13 @@ const MaterialItem: FC<TMaterialItemProps> = ({ material }) => {
         <p className={`${styles.material__name} text text_type_main-small`}>
           {name}
         </p>
+        <button
+          className={styles.addIngredientButton}
+          onClick={addIngredient}
+          type="button"
+        >
+          Добавить
+        </button>
       </div>
     </Link>
   );

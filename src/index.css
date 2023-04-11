@@ -16,3 +16,8 @@
     transition: opacity .3s ease-out;
 }
 */
+.react-app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

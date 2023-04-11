@@ -12,6 +12,7 @@ import { requestInformationReducer } from "./requestInformation";
 import { preloaderReducer } from "./preloader";
 import { TApplicationActions, TStore } from "../../types";
 import { ordersReducer } from "./ordersReducer";
+import { mobileModalReducer } from "./mobileModal";
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -25,6 +26,7 @@ export const rootReducer = combineReducers({
   request: requestInformationReducer,
   preloader: preloaderReducer,
   orders: ordersReducer,
+  mobileModal: mobileModalReducer,
 });
 
 export type AppThunk<TReturn = void> = ActionCreator<

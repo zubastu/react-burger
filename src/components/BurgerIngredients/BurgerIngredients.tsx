@@ -1,10 +1,11 @@
 import React, { useRef, RefObject } from "react";
 import styles from "./BurgerIngredients.module.css";
 import MaterialItem from "../MaterialItem/MaterialItem";
-import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+
 import { useObserver } from "../../hooks/useObserver";
 import { TIngredient } from "../../types";
 import { useAppSelector } from "../../utils/constants";
+import { Tab } from "../MyTab/MyTab";
 
 const BurgerIngredients = () => {
   const sauceRef = useRef<HTMLDivElement>(null);
@@ -22,9 +23,11 @@ const BurgerIngredients = () => {
 
   return (
     <section className={`${styles.container} `}>
-      <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
-
-      <div style={{ display: "flex" }} data-testid="tabs">
+      <h1 className={`text text_type_main-large mt-10 mb-5 ${styles.heading}`}>
+        Соберите бургер
+      </h1>
+      <></>
+      <div className={styles.tabs} data-testid="tabs">
         <Tab
           value="one"
           active={observerBun.intersecting}
