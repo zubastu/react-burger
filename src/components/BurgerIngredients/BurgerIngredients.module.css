@@ -6,6 +6,7 @@
     min-width: 300px;
     box-sizing: border-box;
     width: 100%;
+    position: relative;
 }
 .scroll {
     overflow-x: hidden;
@@ -25,6 +26,9 @@
 }
 
 @media screen and (max-width: 1140px) {
+    .container {
+        height: calc(100% - 100px );
+    }
     .heading{
         font-size: 28px;
         line-height: 32px;

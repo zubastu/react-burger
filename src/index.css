@@ -1,23 +1,17 @@
+.body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    box-sizing: border-box;
+}
+.react-app {
+    height: 100%;
+    box-sizing: border-box;
+}
+
 .react-modals{
     position: absolute;
     top: 0;
     left: 0;
     box-sizing: border-box;
- /*   width: 100vw;
-    height: 100vh;
-    z-index: -100000;
-    opacity: 0;
-    transition: opacity .3s ease-out;*/
-}
-/*
-.react-modals:has(> div){
-    z-index: 1;
-    opacity: 1;
-    transition: opacity .3s ease-out;
-}
-*/
-.react-app {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }

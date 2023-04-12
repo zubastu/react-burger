@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./ModalSwitch.module.css";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import {
   Feed,
@@ -61,7 +62,7 @@ const ModalSwitch = () => {
 
   const state = location.state as TModalState;
   return (
-    <>
+    <div className={styles.container}>
       <AppHeader />
       <Switch location={state?.background || location}>
         <Route path="/login">
@@ -180,7 +181,7 @@ const ModalSwitch = () => {
       ) : null}
 
       {isPreloaderActive ? <Preloader /> : null}
-    </>
+    </div>
   );
 };
 
