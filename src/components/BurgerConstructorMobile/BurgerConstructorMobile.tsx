@@ -1,4 +1,4 @@
-import React, { Component, FC } from "react";
+import React, { FC } from "react";
 import styles from "./styles.module.css";
 import { TConstructorIngredient } from "../../types";
 
@@ -46,18 +46,16 @@ const BurgerConstructorMobile: FC<IPropsInterface> = ({
         ) : null}
         {selectedIngredients &&
           selectedIngredients.length > 0 &&
-          selectedIngredients.map(
-            (item: TConstructorIngredient, index: number) => (
-              <IngredientItemMobile
-                image={item.image_mobile}
-                price={item.price}
-                name={item.name}
-                _id={item._id}
-                key={item.id}
-                product={item}
-              />
-            )
-          )}
+          selectedIngredients.map((item: TConstructorIngredient) => (
+            <IngredientItemMobile
+              image={item.image_mobile}
+              price={item.price}
+              name={item.name}
+              _id={item._id}
+              key={item.id}
+              product={item}
+            />
+          ))}
         {selectedBun.type ? (
           <IngredientItemMobile
             image={selectedBun.image_mobile}
