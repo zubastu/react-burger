@@ -46,21 +46,24 @@
   transform: translateX(100%);
   transition: .4s;
   position: relative;
+
+
 }
 .navigationPopup__links_type_active{
   transform: translateX(0);
 }
 .navigationPopup__link{
   text-decoration: none;
-  color: #000000;
   cursor: pointer;
+  font-family: 'JetBrains Mono', sans-serif;
+  font-style: normal;
   font-size: 18px;
-  font-weight: 500;
   line-height: 22px;
   min-height: 26px;
+  color: #F2F2F3;
 }
 .navigationPopup__link_type_active{
-  border-bottom: 2px solid #000000;
+  border-bottom: 2px solid #F2F2F3;
 }
 .navigationPopup__link_type_account{
   height: 32px;

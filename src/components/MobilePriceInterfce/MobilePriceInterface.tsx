@@ -5,7 +5,9 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { TIngredient } from "../../types";
-import { useAppSelector } from "../../utils/constants";
+import { useAppDispatch, useAppSelector } from "../../utils/constants";
+import { postOrderDetails } from "../../services/asyncActions/order";
+import { useHistory } from "react-router-dom";
 
 enum ComponentTypes {
   ingredients = "ingredients",
@@ -14,13 +16,17 @@ enum ComponentTypes {
 
 type TMobilePriceInterface = {
   componentType: string;
-  setCurrentComponent: React.Dispatch<React.SetStateAction<ComponentTypes>>;
+  setCurrentComponent: (value: ComponentTypes) => void;
 };
 
 const MobilePriceInterface: FC<TMobilePriceInterface> = ({
   componentType,
   setCurrentComponent,
 }) => {
+  const history = useHistory();
+  const dispatch = useAppDispatch();
+  const { isRequest } = useAppSelector((store) => store.order);
+  const { isLogged } = useAppSelector((store) => store.login);
   const { selectedIngredients, selectedBun } = useAppSelector(
     (store) => store.ingredients
   );
@@ -34,14 +40,34 @@ const MobilePriceInterface: FC<TMobilePriceInterface> = ({
     [selectedIngredients, selectedBun]
   );
 
+  const postOrder = (): void => {
+    if (isLogged) {
+      const productIds: Array<string> = selectedIngredients.map(
+        (i: TIngredient) => i._id
+      );
+
+      const productData: { ingredients: Array<string> } = {
+        ingredients: [selectedBun._id, ...productIds, selectedBun._id],
+      };
+      dispatch(postOrderDetails(productData));
+    } else {
+      history.push("/login");
+    }
+  };
+
   const switchComponent = () => {
     if (componentType === ComponentTypes.constructor) {
-      setCurrentComponent(ComponentTypes.ingredients);
+      postOrder();
     }
     if (componentType === ComponentTypes.ingredients) {
       setCurrentComponent(ComponentTypes.constructor);
     }
   };
+
+  const isDisabled: boolean =
+    isRequest ||
+    !Boolean(selectedBun.type) ||
+    !Boolean(selectedIngredients.length);
   return (
     <div className={styles.orderDetailsMobile}>
       <div className={styles.priceContainer}>
@@ -50,14 +76,16 @@ const MobilePriceInterface: FC<TMobilePriceInterface> = ({
       </div>
 
       <Button
-        disabled={false}
+        disabled={isDisabled}
         htmlType={"button"}
         type="primary"
         size="medium"
         extraClass={styles.orderButton}
         onClick={switchComponent}
       >
-        Смотреть заказ
+        {componentType === ComponentTypes.constructor
+          ? "Оформить заказ"
+          : "Смотреть заказ"}
       </Button>
     </div>
   );

@@ -41,3 +41,8 @@
     height: 32px;
     width: 32px;
 }
+@media screen and (max-width: 1150px) {
+    .total{
+        display: none;
+    }
+}

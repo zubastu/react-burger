@@ -1,15 +1,16 @@
 import {
-  ERROR_INGREDIENTS_FETCH,
-  SUCCESS_INGREDIENTS_FETCH,
-  START_INGREDIENTS_FETCH,
-  OPEN_INGREDIENT_DETAILS,
-  CLOSE_INGREDIENT_DETAILS,
   ADD_INGREDIENT,
-  SELECT_BUN,
+  CLOSE_INGREDIENT_DETAILS,
   DELETE_INGREDIENT,
-  UPDATE_INGREDIENTS,
+  ERROR_INGREDIENTS_FETCH,
+  OPEN_INGREDIENT_DETAILS,
+  RESET_BUN,
   RESET_INGREDIENTS,
+  SELECT_BUN,
+  START_INGREDIENTS_FETCH,
+  SUCCESS_INGREDIENTS_FETCH,
   TIngredientsActions,
+  UPDATE_INGREDIENTS,
 } from "../actions/ingredients";
 import { TYPE_BUN, TYPE_MAIN, TYPE_SAUCE } from "../../utils/constants";
 import { TConstructorIngredient, TIngredient } from "../../types";
@@ -144,6 +145,25 @@ export const ingredientsReducer = (
       return {
         ...state,
         selectedIngredients: [],
+        selectedBun: {
+          _id: "",
+          id: "",
+          name: "",
+          type: "",
+          proteins: 0,
+          fat: 0,
+          carbohydrates: 0,
+          calories: 0,
+          price: 0,
+          image: "",
+          image_mobile: "",
+          image_large: "",
+          __v: 0,
+        },
+      };
+    case RESET_BUN:
+      return {
+        ...state,
         selectedBun: {
           _id: "",
           id: "",

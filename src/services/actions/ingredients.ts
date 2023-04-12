@@ -15,6 +15,7 @@ export const SELECT_BUN: "SELECT_BUN" = "SELECT_BUN";
 export const DELETE_INGREDIENT: "DELETE_INGREDIENT" = "DELETE_INGREDIENT";
 export const UPDATE_INGREDIENTS: "UPDATE_INGREDIENTS" = "UPDATE_INGREDIENTS";
 export const RESET_INGREDIENTS: "RESET_INGREDIENTS" = "RESET_INGREDIENTS";
+export const RESET_BUN: "RESET_BUN" = "RESET_BUN";
 
 export interface IStartIngredientsFetch {
   readonly type: typeof START_INGREDIENTS_FETCH;
@@ -56,6 +57,10 @@ export interface IResetIngredients {
   readonly type: typeof RESET_INGREDIENTS;
 }
 
+export interface IResetBun {
+  readonly type: typeof RESET_BUN;
+}
+
 export type TIngredientsActions =
   | IStartIngredientsFetch
   | ISuccessIngredientsFetch
@@ -66,4 +71,5 @@ export type TIngredientsActions =
   | ISelectBun
   | IDeleteIngredient
   | IUpdateIngredients
-  | IResetIngredients;
+  | IResetIngredients
+  | IResetBun;

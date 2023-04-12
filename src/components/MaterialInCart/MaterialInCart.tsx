@@ -18,8 +18,8 @@ type TMaterialInCartProps = {
   _id?: string;
   product?: TConstructorIngredient;
   index: number;
-  moveIngredient?: (ingredient: TMaterial, index: number) => void;
   isLocked?: boolean;
+  moveIngredient?: (ingredient: TMaterial, index: number) => void;
 };
 
 const MaterialInCart: FC<TMaterialInCartProps> = ({

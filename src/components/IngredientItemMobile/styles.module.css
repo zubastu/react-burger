@@ -1,0 +1,27 @@
+.ingredientItem{
+    padding: 16px 8px;
+    background: #131316;
+    box-shadow: inset 0px -1px 0px #2F2F37;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: space-between;
+}
+.ingredientItemImage {
+    width: 52px;
+    height: 40px;
+    object-fit: cover;
+}
+.ingredientItemName {
+    max-width: 165px;
+    width: 100%;
+}
+.ingredientItemPriceContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+.ingredientItemPrice{
+    display: flex;
+}

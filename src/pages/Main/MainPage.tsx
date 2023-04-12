@@ -3,6 +3,7 @@ import Main from "../../components/Main/Main";
 import BurgerIngredients from "../../components/BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../../components/BurgerConstructor/BurgerConstructor";
 import MobilePriceInterface from "../../components/MobilePriceInterfce/MobilePriceInterface";
+import BurgerConstructorMobile from "../../components/BurgerConstructorMobile/BurgerConstructorMobile";
 enum ComponentTypes {
   ingredients = "ingredients",
   constructor = "constructor",
@@ -17,6 +18,9 @@ const MainPage: FC = () => {
     setTimeout(() => {
       setWidth(window.innerWidth);
     }, 500);
+  };
+  const handleSwitchComponent = (value: ComponentTypes) => {
+    setCurrentComponent(value);
   };
   useEffect(() => {
     window.addEventListener("resize", setWindowSize);
@@ -41,11 +45,14 @@ const MainPage: FC = () => {
           <BurgerIngredients />
         ) : null}
         {currentComponent === ComponentTypes.constructor ? (
-          <BurgerConstructor />
+          <BurgerConstructorMobile
+            componentType={currentComponent}
+            setCurrentComponent={handleSwitchComponent}
+          />
         ) : null}
         <MobilePriceInterface
           componentType={currentComponent}
-          setCurrentComponent={setCurrentComponent}
+          setCurrentComponent={handleSwitchComponent}
         />
       </Main>
     );
