@@ -17,7 +17,6 @@
         justify-content: space-between;
         gap: 0;
         height: 100%;
-        border: 1px solid green;
     }
 }
 @media screen and (max-width: 610px) {

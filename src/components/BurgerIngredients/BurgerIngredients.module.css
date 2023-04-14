@@ -30,7 +30,6 @@
     .scroll {
         overflow-x: hidden;
         overflow-y: scroll;
-        min-height: 200px;
     }
     .container {
         height:100%;
@@ -58,8 +57,16 @@
 }
 
 @media screen and (max-width: 520px) {
+    .heading{
+        font-size: 28px;
+        line-height: 32px;
+        text-align: center;
+        margin: 10px 0 5px 0;
+    }
     .scroll{
-        max-height: 280px;
+        min-height: 100px;
+        max-height: 58vh;
+        margin: 10px 0 0 0;
     }
     .material_container{
         gap: 16px;

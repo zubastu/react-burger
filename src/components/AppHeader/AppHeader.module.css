@@ -55,3 +55,9 @@
         display: flex;
     }
 }
+
+@media screen and (max-width: 520px) {
+    .header {
+        min-height: 64px;
+    }
+}
