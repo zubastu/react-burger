@@ -8,9 +8,8 @@ export const useObserver = (ref: RefObject<HTMLElement>) => {
       new IntersectionObserver(
         ([entry]) => setIntersecting(entry.isIntersecting),
         {
-          root: document.getElementById("ingredients-container"),
           rootMargin: "0px 0px -40% 0px",
-          threshold: 0.19,
+          threshold: 0.14,
         }
       ),
     []

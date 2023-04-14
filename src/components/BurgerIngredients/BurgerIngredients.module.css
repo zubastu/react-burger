@@ -11,7 +11,7 @@
 .scroll {
     overflow-x: hidden;
     overflow-y: scroll;
-    height: 100%;
+    max-height: 65vh;
 }
 .material_container {
     display: grid;
@@ -26,8 +26,13 @@
 }
 
 @media screen and (max-width: 1140px) {
+    .scroll {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        max-height: 57vh;
+    }
     .container {
-        height: calc(100% - 100px );
+        height:100%;
     }
     .heading{
         font-size: 28px;
@@ -51,7 +56,11 @@
 
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 520px) {
+    .scroll{
+        box-sizing: border-box;
+        max-height: 55vh;
+    }
     .material_container{
         gap: 16px;
         padding: 16px 0 0 0;

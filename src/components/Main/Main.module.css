@@ -6,7 +6,8 @@
     justify-content: center;
     width: 100%;
     gap: 40px;
-    max-height: calc(100vh - 88px);
+    height: 100%;
+    box-sizing: border-box;
 
 }
 @media screen and (max-width: 1140px) {
