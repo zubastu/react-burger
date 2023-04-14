@@ -24,7 +24,6 @@ const MainPage: FC = () => {
   };
   useEffect(() => {
     window.addEventListener("resize", setWindowSize);
-    console.log(width);
     return () => {
       window.removeEventListener("resize", setWindowSize);
     };

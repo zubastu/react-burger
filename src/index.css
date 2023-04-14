@@ -2,10 +2,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    border: 1px solid red;
+    height: 100vh;
 }
 .react-app {
-    height: 100vh;
     box-sizing: border-box;
+    height: 100%;
 }
 
 .react-modals{
