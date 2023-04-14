@@ -32,7 +32,7 @@ const IngredientItemMobile: FC<TIngredientItemMobileProps> = ({
     if (product?.type === "bun") {
       dispatch({ type: RESET_BUN });
     } else {
-      dispatch({ type: DELETE_INGREDIENT, payload: product!.id });
+      dispatch({ type: DELETE_INGREDIENT, payload: product!._id });
     }
   };
   return (
