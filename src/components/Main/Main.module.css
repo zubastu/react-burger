@@ -16,6 +16,7 @@
         align-items: center;
         justify-content: space-between;
         gap: 0;
+        height: 100vh;
     }
 }
 @media screen and (max-width: 610px) {
@@ -29,5 +30,6 @@
 @media screen and (max-width: 520px) {
     .main {
         justify-content: space-between;
+        min-height: 30vh;
     }
 }
