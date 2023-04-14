@@ -56,18 +56,8 @@
         padding: 15px;
     }
 }
-@media screen and (max-width: 610px) {
 
-}
-
-@media screen and (max-width: 470px) {
-
-}
-
-@media screen and (max-width: 320px) {
-    .material{
-        max-width: 144px;
-    }
+@media screen and (max-width: 538px) {
     .materialImage{
         max-height: 72px;
     }

@@ -51,7 +51,7 @@
 
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 420px) {
     .material_container{
         gap: 16px;
         padding: 16px 0 0 0;
