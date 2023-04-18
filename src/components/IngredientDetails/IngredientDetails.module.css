@@ -33,3 +33,23 @@
 .heading {
     text-align: center;
 }
+@media screen and (max-width: 560px) {
+    .content{
+        max-width: 300px;
+        box-sizing: border-box;
+    }
+    .image {
+        max-width: 300px;
+        max-height: 240px;
+        object-fit: cover;
+    }
+    .list {
+        column-gap: 10px;
+    }
+    .ingredientProp{
+        font-size: 10px;
+    }
+    .ingredientPropCounter {
+
+    }
+}

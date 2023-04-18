@@ -28,6 +28,8 @@
 .ingredientsContainer {
     box-sizing: border-box;
     overflow-y: auto;
+    width: 70%;
+    max-width: 500px;
 }
 @media screen and (max-width: 1140px) {
     .container {
@@ -35,10 +37,16 @@
         align-items: center;
         gap: 0;
         min-height: 100%;
+        width: 100%;
     }
 }
 @media screen and (max-width: 610px) {
     .container {
         height: calc(100% - 64px);
+    }
+}
+@media screen and (max-width: 500px) {
+    .ingredientsContainer {
+        width: 100%;
     }
 }

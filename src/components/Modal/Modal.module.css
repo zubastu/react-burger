@@ -64,3 +64,11 @@
     opacity: 0;
     transition: opacity 300ms ease-out;
 }
+
+@media screen and (max-width: 728px) {
+    .modal {
+        min-width:100%;
+        max-width: 100%;
+        padding: 20px;
+    }
+}

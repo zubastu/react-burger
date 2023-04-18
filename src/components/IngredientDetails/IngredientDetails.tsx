@@ -21,7 +21,7 @@ const IngredientDetails: FC<TIngredientDetailsProps> = ({ hasHeading }) => {
       {ingredient ? (
         <div className={styles.content}>
           {hasHeading ? (
-            <h2 className="text text_type_main-large">Детали ингредиента</h2>
+            <h2 className={`text ${styles.headText}`}>Детали ингредиента</h2>
           ) : null}
           <img
             className={`${styles.image} mb-4`}
@@ -33,34 +33,50 @@ const IngredientDetails: FC<TIngredientDetailsProps> = ({ hasHeading }) => {
           </h3>
           <ul className={styles.list}>
             <li className={styles.list__item}>
-              <p className="text text_type_main-small text_color_inactive">
+              <p
+                className={`text text_type_main-small text_color_inactive ${styles.ingredientProp}`}
+              >
                 Калории,ккал
               </p>
-              <p className="text text text_type_digits-default text_color_inactive">
+              <p
+                className={`text text text_type_digits-default text_color_inactive ${styles.ingredientPropCounter}`}
+              >
                 {ingredient.calories}
               </p>
             </li>
             <li className={styles.list__item}>
-              <p className="text text_type_main-small text_color_inactive">
+              <p
+                className={`text text_type_main-small text_color_inactive ${styles.ingredientProp}`}
+              >
                 Белки, г
               </p>
-              <p className="text text text_type_digits-default text_color_inactive">
+              <p
+                className={`text text text_type_digits-default text_color_inactive ${styles.ingredientPropCounter}`}
+              >
                 {ingredient.proteins}
               </p>
             </li>
             <li className={styles.list__item}>
-              <p className="text text_type_main-small text_color_inactive">
+              <p
+                className={`text text_type_main-small text_color_inactive ${styles.ingredientProp}`}
+              >
                 Жиры, г
               </p>
-              <p className="text text text_type_digits-default text_color_inactive">
+              <p
+                className={`text text text_type_digits-default text_color_inactive ${styles.ingredientPropCounter}`}
+              >
                 {ingredient.fat}
               </p>
             </li>
             <li className={styles.list__item}>
-              <p className="text text_type_main-small text_color_inactive">
+              <p
+                className={`text text_type_main-small text_color_inactive ${styles.ingredientProp}`}
+              >
                 Углеводы, г
               </p>
-              <p className="text text text_type_digits-default text_color_inactive">
+              <p
+                className={`text text text_type_digits-default text_color_inactive ${styles.ingredientPropCounter}`}
+              >
                 {ingredient.carbohydrates}
               </p>
             </li>

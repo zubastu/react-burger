@@ -17,3 +17,9 @@
     opacity: .6;
     transition: opacity .5s ease;
 }
+
+@media screen and (max-width: 560px) {
+    .heading {
+        font-size: 22px;
+    }
+}

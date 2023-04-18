@@ -11,7 +11,7 @@ type TModalHeaderProps = {
 const ModalHeader: FC<TModalHeaderProps> = ({ onClose, text = null }) => {
   return (
     <div className={styles.header}>
-      <h2 className="text text_type_main-large">{text}</h2>
+      <h2 className={`text text_type_main-large ${styles.heading}`}>{text}</h2>
       <button
         className={styles.button}
         onClick={() => onClose()}
