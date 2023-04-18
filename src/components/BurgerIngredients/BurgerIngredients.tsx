@@ -22,11 +22,10 @@ const BurgerIngredients = () => {
   const { bun, sauces, main } = useAppSelector((store) => store.ingredients);
 
   return (
-    <section className={`${styles.container} `}>
+    <section className={`${styles.container}`}>
       <h1 className={`text text_type_main-large mt-10 mb-5 ${styles.heading}`}>
         Соберите бургер
       </h1>
-      <></>
       <div className={styles.tabs} data-testid="tabs">
         <Tab
           value="one"

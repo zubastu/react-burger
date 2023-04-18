@@ -6,9 +6,8 @@
     justify-content: center;
     width: 100%;
     gap: 40px;
-    max-height: 100%;
     box-sizing: border-box;
-
+    height: calc(100% - 88px);
 }
 @media screen and (max-width: 1140px) {
     .main {
@@ -16,11 +15,13 @@
         align-items: center;
         justify-content: space-between;
         gap: 0;
-        height: 100%;
+        height: calc(100% - 172px);
     }
 }
 @media screen and (max-width: 610px) {
-
+    .main {
+        height: calc(100% - 152px);
+    }
 }
 
 @media screen and (max-width: 470px) {
