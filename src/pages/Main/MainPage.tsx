@@ -12,7 +12,7 @@ enum ComponentTypes {
 const MainPage: FC = () => {
   const [width, setWidth] = useState(window.innerWidth);
   const [currentComponent, setCurrentComponent] = useState(
-    ComponentTypes.constructor
+    ComponentTypes.ingredients
   );
   const setWindowSize = () => {
     setTimeout(() => {

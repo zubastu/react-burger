@@ -42,7 +42,7 @@
 }
 @media screen and (max-width: 610px) {
     .container {
-        height: calc(100% - 64px);
+        min-height: calc(100% - 60px);
     }
 }
 @media screen and (max-width: 500px) {
