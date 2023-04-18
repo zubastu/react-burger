@@ -29,3 +29,16 @@
     box-sizing: border-box;
     overflow-y: auto;
 }
+@media screen and (max-width: 1140px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        min-height: 100%;
+    }
+}
+@media screen and (max-width: 610px) {
+    .container {
+        height: calc(100% - 64px);
+    }
+}

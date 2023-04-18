@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     height: 100vh;
+    overflow-y: hidden;
 }
 .react-app {
     box-sizing: border-box;

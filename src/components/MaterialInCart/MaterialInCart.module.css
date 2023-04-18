@@ -1,8 +1,10 @@
 .constructor{
-    max-height: 80px;
+    max-height: 90px;
     box-sizing: border-box;
     max-width: 536px;
     cursor: grab;
+    display: flex;
+    min-height: 90px;
 }
 .container {
     display: flex;

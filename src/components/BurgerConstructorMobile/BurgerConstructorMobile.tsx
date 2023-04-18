@@ -40,7 +40,6 @@ const BurgerConstructorMobile: FC<IPropsInterface> = ({
             price={selectedBun.price}
             name={selectedBun.name + "(верх)"}
             _id={selectedBun._id}
-            key={selectedBun.id}
             product={selectedBun}
           />
         ) : null}
@@ -62,7 +61,6 @@ const BurgerConstructorMobile: FC<IPropsInterface> = ({
             price={selectedBun.price}
             name={selectedBun.name + "(низ)"}
             _id={selectedBun._id}
-            key={selectedBun.id}
             product={selectedBun}
           />
         ) : null}

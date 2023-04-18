@@ -13,6 +13,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { TIngredient } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../utils/constants";
+import { v4 as uuidv4 } from "uuid";
 
 type TMaterialItemProps = {
   material: TIngredient;
@@ -59,7 +60,7 @@ const MaterialItem: FC<TMaterialItemProps> = ({ material }) => {
     } else {
       dispatch({
         type: ADD_INGREDIENT,
-        payload: material,
+        payload: { ...material, id: uuidv4() },
       });
     }
   };

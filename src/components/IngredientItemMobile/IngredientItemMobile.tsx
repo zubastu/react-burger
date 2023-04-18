@@ -32,9 +32,10 @@ const IngredientItemMobile: FC<TIngredientItemMobileProps> = ({
     if (product?.type === "bun") {
       dispatch({ type: RESET_BUN });
     } else {
-      dispatch({ type: DELETE_INGREDIENT, payload: product!._id });
+      dispatch({ type: DELETE_INGREDIENT, payload: product!.id });
     }
   };
+  console.log(product!.id);
   return (
     <div className={styles.ingredientItem}>
       <img src={image} className={styles.ingredientItemImage} />
