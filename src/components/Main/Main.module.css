@@ -7,7 +7,7 @@
     width: 100%;
     gap: 40px;
     box-sizing: border-box;
-    height: calc(100% - 88px);
+    height: calc(100% - 172px);
 }
 @media screen and (max-width: 1140px) {
     .main {
