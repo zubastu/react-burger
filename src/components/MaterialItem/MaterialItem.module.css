@@ -1,5 +1,5 @@
 .material {
-    max-height: 208px;
+    max-height: 270px;
     max-width: 272px;
     box-sizing: border-box;
     display: flex;
@@ -42,10 +42,11 @@
     color: inherit;
 }
 .addIngredientButton {
-    display: none;
+    display: block;
     background: inherit;
-    border: none;
     color: #4C4CFF;
+    padding: 15px;
+    border: none;
 }
 @media screen and (max-width: 1150px) {
     .material {
