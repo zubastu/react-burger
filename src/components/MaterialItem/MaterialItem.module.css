@@ -42,7 +42,7 @@
     color: inherit;
 }
 .addIngredientButton {
-    display: block;
+    display: none;
     background: inherit;
     color: #4C4CFF;
     padding: 15px;

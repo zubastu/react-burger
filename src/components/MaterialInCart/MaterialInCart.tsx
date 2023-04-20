@@ -69,7 +69,7 @@ const MaterialInCart: FC<TMaterialInCartProps> = ({
 
   const [, drag] = useDrag({
     type: "selected-ingredient",
-    item: { index },
+    item: { index, image },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
