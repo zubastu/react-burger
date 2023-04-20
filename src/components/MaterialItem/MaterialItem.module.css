@@ -46,7 +46,9 @@
     background: inherit;
     color: #4C4CFF;
     padding: 15px;
-    border: none;
+    border: 1px solid;
+    border-radius: 25px;
+
 }
 @media screen and (max-width: 1150px) {
     .material {
