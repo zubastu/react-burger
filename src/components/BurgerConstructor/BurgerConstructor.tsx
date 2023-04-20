@@ -85,7 +85,7 @@ const BurgerConstructor = () => {
       >
         <SelectedIngredients />
       </div>
-      <div className={`${styles.total} mt-10`}>
+      <div className={`${styles.total}`}>
         <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
         <CurrencyIcon type="primary" />
         <Button

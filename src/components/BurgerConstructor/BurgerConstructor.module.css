@@ -7,8 +7,9 @@
     max-width: 600px;
     min-width: 300px;
     width: 100%;
-    max-height: 100%;
-    min-height: 100%;
+    max-height: calc(100% - 64px);
+    flex: 1 1 auto;
+    height: 100%;
 }
 
 .materials{
@@ -31,7 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-bottom: 54px;
+    margin: 20px 0 0 0;
 }
 .buyBtn {
     min-height: 64px;
