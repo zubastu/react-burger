@@ -70,7 +70,7 @@ const SelectedIngredients: FC = () => {
         <MaterialInCart
           image={emptyIngredientImage}
           price={0}
-          name="Перетащите ингредиент"
+          name="Перетащите ингредиенты"
           index={1}
           isLocked={true}
         />
