@@ -14,6 +14,7 @@ import { Link, useLocation } from "react-router-dom";
 import { TIngredient } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../utils/constants";
 import { v4 as uuidv4 } from "uuid";
+import { useWindowSize } from "../../utils/useWindowSize";
 
 type TMaterialItemProps = {
   material: TIngredient;
@@ -26,6 +27,7 @@ const MaterialItem: FC<TMaterialItemProps> = ({ material }) => {
     (store) => store.ingredients
   );
   const location = useLocation();
+  const { width } = useWindowSize();
 
   const [, dragRef, dragPreviewRef] = useDrag({
     type: "ingredient",
@@ -33,6 +35,9 @@ const MaterialItem: FC<TMaterialItemProps> = ({ material }) => {
     collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0.5 : 1,
     }),
+    canDrag: () => {
+      return width >= 1140;
+    },
   });
 
   const handleClick = () => {

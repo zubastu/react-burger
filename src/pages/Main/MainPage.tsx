@@ -4,30 +4,22 @@ import BurgerIngredients from "../../components/BurgerIngredients/BurgerIngredie
 import BurgerConstructor from "../../components/BurgerConstructor/BurgerConstructor";
 import MobilePriceInterface from "../../components/MobilePriceInterfce/MobilePriceInterface";
 import BurgerConstructorMobile from "../../components/BurgerConstructorMobile/BurgerConstructorMobile";
+import { useWindowSize } from "../../utils/useWindowSize";
 enum ComponentTypes {
   ingredients = "ingredients",
   constructor = "constructor",
 }
 
 const MainPage: FC = () => {
-  const [width, setWidth] = useState(window.innerWidth);
   const [currentComponent, setCurrentComponent] = useState(
     ComponentTypes.ingredients
   );
-  const setWindowSize = () => {
-    setTimeout(() => {
-      setWidth(window.innerWidth);
-    }, 500);
-  };
+
+  const { width } = useWindowSize();
+
   const handleSwitchComponent = (value: ComponentTypes) => {
     setCurrentComponent(value);
   };
-  useEffect(() => {
-    window.addEventListener("resize", setWindowSize);
-    return () => {
-      window.removeEventListener("resize", setWindowSize);
-    };
-  }, [width]);
 
   const isMediumSize = width <= 1140;
   if (!isMediumSize) {
