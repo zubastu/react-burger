@@ -24,3 +24,12 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+let vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty("--vh", `${vh}px`);
+(function init100vh() {
+  function setHeight() {
+    let vh = window.innerHeight * 0.01;
+    document.body.style.setProperty("--vh", `${vh}px`);
+  }
+  setHeight();
+})();

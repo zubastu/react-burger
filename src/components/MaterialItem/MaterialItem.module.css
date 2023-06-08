@@ -54,14 +54,17 @@
     .material {
         max-height: 230px;
     }
-    .addIngredientButton{
+    .addIngredientButton {
         display: block;
         padding: 15px;
     }
 }
 
 @media screen and (max-width: 538px) {
-    .materialImage{
+    .materialImage {
         max-height: 72px;
+    }
+    .material__name {
+        font-size: 10px;
     }
 }
