@@ -1,12 +1,12 @@
 .orderDetailsMobile {
     width: 100%;
     background: #1C1C21;
-    border-radius: 15px 15px 0px 0px;
+    border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     box-sizing: border-box;
-    padding: 16px 8px;
+    padding: 10px 5px;
     gap: 15px;
 }
 .orderButton{
@@ -16,7 +16,7 @@
     font-size: 14px;
     line-height: 20px;
     max-width: 196px;
-    padding: 16px 25px;
+    padding: 18px;
 }
 .priceContainer {
     display: flex;
