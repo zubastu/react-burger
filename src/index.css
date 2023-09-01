@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    height: calc(100vh - 60px);
+    height: 100dvh;
     overflow: hidden;
 }
 .react-app {
@@ -17,10 +17,4 @@
     top: 0;
     left: 0;
     box-sizing: border-box;
-}
-@media screen and (max-width: 538px) {
-    .body {
-        height: 100vh;
-        height: calc(var(--vh, 1vh) * 100);
-    }
 }
