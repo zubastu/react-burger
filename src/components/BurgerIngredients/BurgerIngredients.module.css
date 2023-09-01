@@ -7,7 +7,6 @@
     box-sizing: border-box;
     width: 100%;
     position: relative;
-    max-height: 85vh;
 }
 .scroll {
     overflow-x: hidden;
@@ -53,10 +52,6 @@
     }
 }
 
-@media screen and (max-width: 470px) {
-
-}
-
 @media screen and (max-width: 520px) {
     .heading{
         font-size: 28px;
@@ -66,7 +61,6 @@
     }
     .scroll{
         min-height: 100px;
-        max-height: 58vh;
         margin: 10px 0 0 0;
     }
     .material_container{

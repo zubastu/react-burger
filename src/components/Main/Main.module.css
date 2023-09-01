@@ -7,7 +7,8 @@
     width: 100%;
     gap: 40px;
     box-sizing: border-box;
-    height: calc(100% - 172px);
+    height: 90%;
+    padding: 15px;
 }
 @media screen and (max-width: 1140px) {
     .main {
@@ -15,14 +16,9 @@
         align-items: center;
         justify-content: space-between;
         gap: 0;
-        height: calc(100% - 172px);
     }
 }
-@media screen and (max-width: 610px) {
-    .main {
-        height: calc(100% - 148px);
-    }
-}
+
 
 @media screen and (max-width: 470px) {
 
