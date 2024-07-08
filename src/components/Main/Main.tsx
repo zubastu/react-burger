@@ -1,40 +1,25 @@
-import React, { CSSProperties, FC } from "react";
+import React, { FC } from "react";
 import styles from "./Main.module.css";
 import { DndProvider } from "react-dnd";
 import { TouchBackend } from "react-dnd-touch-backend";
-import { usePreview } from "react-dnd-preview";
+import {HTML5Backend} from "react-dnd-html5-backend";
 
-import { TChildrenNode, TConstructorIngredient } from "../../types";
+
+import { TChildrenNode } from "../../types";
+import {useWindowSize} from '../../utils/useWindowSize';
 
 type TMain = {
   children: TChildrenNode;
 };
-type TPreview = {
-  display: boolean;
-  itemType: string;
-  item: TConstructorIngredient;
-  style: CSSProperties;
-};
+
 
 const Main: FC<TMain> = ({ children }) => {
-  const MyPreview = () => {
-    const { display, item, style } = usePreview() as TPreview;
-    if (!display) {
-      return null;
-    }
-    return (
-      <img
-        className={styles.image}
-        src={item.image}
-        style={style}
-        alt="image"
-      />
-    );
-  };
+  const { width } = useWindowSize();
+  const isMediumSize = width <= 1140;
+
   return (
-    <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true }}>
+    <DndProvider backend={isMediumSize ? TouchBackend : HTML5Backend }>
       <main className={styles.main}>{children}</main>
-      <MyPreview />
     </DndProvider>
   );
 };

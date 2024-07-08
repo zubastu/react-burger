@@ -40,6 +40,7 @@ const BurgerConstructor = () => {
   const [{ isHover }, dropTarget] = useDrop({
     accept: "ingredient",
     drop(ingredient: TIngredient) {
+      console.log('drop')
       addIngredient(ingredient);
     },
     collect: (monitor) => ({
